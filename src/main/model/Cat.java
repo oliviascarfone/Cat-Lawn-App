@@ -14,8 +14,10 @@ public class Cat {
             "Common", "Kibble", "Spring");
     private final Cat sushi = new Cat("Sushi", "Siamese", "Point",
             "Common", "Kibble", "Ribbon");
-    private final Cat mimi = new Cat("Mimi", "Shorthair", "black", "Uncommon",
+    private final Cat mimi = new Cat("Mimi", "Shorthair", "Black", "Uncommon",
             "Tuna", "Mouse");
+    private final Cat roddick = new Cat("Roddick","Longhair", "Ginger", "Uncommon",
+            "salmon", "Brush");
 
     public Cat(String name, String breed, String coat, String rarityLevel,
                String foodPreference, String toyPreference) {
@@ -26,6 +28,8 @@ public class Cat {
         this.foodPreference = foodPreference;
         this.toyPreference = toyPreference;
     }
+
+
 
     public String getName() {
         return name;
@@ -41,6 +45,14 @@ public class Cat {
 
     public String getRarityLevel() {
         return rarityLevel;
+    }
+
+    public String getFoodPreference() {
+        return foodPreference;
+    }
+
+    public String getToyPreference() {
+        return toyPreference;
     }
 
 

@@ -1,5 +1,9 @@
 package ui;
 
+import model.Inventory;
+import model.Yard;
+
+import java.util.Locale;
 import java.util.Scanner;
 
 //ideas taken from AccountNotRobust program
@@ -7,6 +11,8 @@ public class CatLawnApp {
     boolean keepGoing = true;
     String command = null;
     Scanner input;
+    Yard yard = new Yard();
+    Inventory inventory = new Inventory();
 
     public CatLawnApp() {
         runCatLawnApp();
@@ -33,8 +39,6 @@ public class CatLawnApp {
     }
 
 
-
-
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
@@ -49,9 +53,9 @@ public class CatLawnApp {
     // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("c")) {
-            catsInYard();
+            System.out.println(yard.catsInYard());
         } else if (command.equals("i")) {
-            itemsInYard();
+            System.out.println(yard.itemsInYard());
         } else if (command.equals("s")) {
             buyItems();
         } else if (command.equals("q")) {
@@ -60,6 +64,7 @@ public class CatLawnApp {
             System.out.println("Invalid selection, please try another menu option");
         }
     }
-
-
 }
+
+
+

@@ -20,6 +20,9 @@ public class InventoryEntry {
         return item;
     }
 
+    //REQUIRES: quantity is non-negative
+    //MODIFIES: this
+    //EFFECTS: adds to the quantity of the inventory entry
     public void addQuantity(int quantity) {
         this.quantity += quantity;
     }

@@ -15,7 +15,6 @@ public class InventoryEntryTest {
     void runBefore() {
         testItemFood = new Food("food", 0);
         testItemToy = new Toy("toy", 0);
-
         testInventoryEntry1 = new InventoryEntry(testItemFood, 1);
         testInventoryEntry2 = new InventoryEntry(testItemToy, 2);
 
@@ -25,6 +24,12 @@ public class InventoryEntryTest {
     @Test
     void testConstructor() {
         assertEquals(testInventoryEntry1.getItem().getName(), "food");
+    }
+    @Test
+    void testAddQuantity() {
+        testInventoryEntry1.addQuantity(2);
+        assertEquals(testInventoryEntry1.getQuantity(), 3);
+
     }
 
 }

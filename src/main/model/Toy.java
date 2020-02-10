@@ -1,8 +1,7 @@
 package model;
 
+//represents a toy, with a name and a cost
 public class Toy extends Item {
-    protected String name;
-    protected int cost;
 
 //    protected final Item ribbon = new Toy("Ribbon", 0);
 //    protected final Item spring = new Toy("Spring", 0);

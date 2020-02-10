@@ -26,19 +26,20 @@ public class Inventory {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds item of given quantity to the inventory. If item is already in the inventory increase the quantity
-    //           of existing entry. Item is purchased only if sufficient funds.
+    // EFFECTS: returns true and adds item of given quantity to the inventory if there are sufficient funds
+    // If item is already in the inventory increase the quantity of existing entry.
+    // Item is purchased only if sufficient funds, produces false if not enough funds
 
-    public void buyItem(Item item, int quantity) {
+    public boolean buyItem(Item item, int quantity) {
         int indicator = 0;
-        if (item.getCost() * quantity < balance) {
+        if ((item.getCost() * quantity) <= balance) {
+            balance = (balance - (item.getCost() * quantity));
 
             for (int i = 0; i < inventory.size(); i++) {
                 String eachItemName = inventory.get(i).getItem().getName();
                 if (eachItemName == item.getName()) {
                     indicator += 1;
                     inventory.get(i).addQuantity(quantity);
-                    this.balance -= item.getCost() * quantity;
 
                 }
             }
@@ -47,6 +48,9 @@ public class Inventory {
                 inventory.add(boughtItem);
 
             }
+            return true;
+        } else {
+            return false;
         }
     }
 

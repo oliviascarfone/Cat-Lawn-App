@@ -10,14 +10,14 @@ public class Cat {
     private String foodPreference;
     private String toyPreference;
 
-    private final Cat moki = new Cat("Moki", "Ragdoll", "Point",
-            "Common", "Kibble", "Spring");
-    private final Cat sushi = new Cat("Sushi", "Siamese", "Point",
-            "Common", "Kibble", "Ribbon");
-    private final Cat mimi = new Cat("Mimi", "Shorthair", "Black", "Uncommon",
-            "Tuna", "Mouse");
-    private final Cat roddick = new Cat("Roddick","Longhair", "Ginger", "Uncommon",
-            "salmon", "Brush");
+    //final Cat moki = new Cat("Moki", "Ragdoll", "Point",
+    //        "Common", "Kibble", "Spring");
+//    private final Cat sushi = new Cat("Sushi", "Siamese", "Point",
+//            "Common", "Kibble", "Ribbon");
+//    private final Cat mimi = new Cat("Mimi", "Shorthair", "Black", "Uncommon",
+//            "Tuna", "Mouse");
+//    private final Cat roddick = new Cat("Roddick","Longhair", "Ginger", "Uncommon",
+//            "salmon", "Brush");
 
     public Cat(String name, String breed, String coat, String rarityLevel,
                String foodPreference, String toyPreference) {
@@ -53,6 +53,10 @@ public class Cat {
     public String getToyPreference() {
         return toyPreference;
     }
+
+
+
+
 
 
 

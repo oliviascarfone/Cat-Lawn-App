@@ -1,18 +1,17 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 //represents an inventory for storing money and purchased items
 //used information from A2-GroceryBill lab
 public class Inventory {
     private int balance;
-    public ArrayList<InventoryEntry> inventory;
+    public ArrayList<InventoryEntry> inventoryList;
     private static final int MAX_INVENTORY_SIZE = 5;
 
     //EFFECTS: creates an empty inventory with no items and no money
     public Inventory() {
-        inventory = new ArrayList<>();
+        inventoryList = new ArrayList<>();
         balance = 0;
 
     }
@@ -35,17 +34,17 @@ public class Inventory {
         if ((item.getCost() * quantity) <= balance) {
             balance = (balance - (item.getCost() * quantity));
 
-            for (int i = 0; i < inventory.size(); i++) {
-                String eachItemName = inventory.get(i).getItem().getName();
+            for (int i = 0; i < inventoryList.size(); i++) {
+                String eachItemName = inventoryList.get(i).getItem().getName();
                 if (eachItemName == item.getName()) {
                     indicator += 1;
-                    inventory.get(i).addQuantity(quantity);
+                    inventoryList.get(i).addQuantity(quantity);
 
                 }
             }
             if (indicator == 0) {
                 InventoryEntry boughtItem = new InventoryEntry(item, quantity);
-                inventory.add(boughtItem);
+                inventoryList.add(boughtItem);
 
             }
             return true;
@@ -57,13 +56,11 @@ public class Inventory {
     //EFFECTS: shows all items in your inventory
     public String checkInventoryItems() {
         String inventoryToString = "";
-        if (inventory.size() > 0) {
-            for (int i = 0; i < inventory.size(); i++) {
-                String eachItem = inventory.get(i).getItem().getName();
-
+        if (inventoryList.size() > 0) {
+            for (int i = 0; i < inventoryList.size(); i++) {
+                String eachItem = inventoryList.get(i).getItem().getName();
                 inventoryToString += (String.format("%s is in your inventory!\n",
                         eachItem));
-
             }
             return inventoryToString;
         } else {

@@ -75,7 +75,11 @@ public class Yard {
         }
     }
 
-    public void addCatToYard(Item item) {
+    public void addCatToYard() {
+        if (food.size() > 1) {
+
+
+        }
 
 
     }

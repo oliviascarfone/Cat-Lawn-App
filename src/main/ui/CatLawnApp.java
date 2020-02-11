@@ -2,7 +2,6 @@ package ui;
 
 import model.*;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 //ideas taken from AccountNotRobust program
@@ -12,8 +11,8 @@ public class CatLawnApp {
     Scanner input;
     Yard yard = new Yard();
     Inventory inventory = new Inventory();
-    Item kibble = new Food("kibble", 0);
-    Item string = new Toy("string", 0);
+    Item kibble = new Food("Kibble", 0);
+    Item string = new Toy("String", 0);
 
     public CatLawnApp() {
         runCatLawnApp();
@@ -75,22 +74,21 @@ public class CatLawnApp {
     private void placeItemsInYard() {
         String selectedItemName;
         Item selectedItem;
-        if (inventory.inventory.size() == 0) {
+        if (inventory.inventoryList.size() == 0) {
             System.out.println("You have nothing to place! Try buying something first");
             return;
         } else {
             System.out.println("type the name of the item you want to place");
             Scanner newscan = new Scanner(System.in);
             String option = newscan.nextLine();
-            for (int i = 0; inventory.inventory.size() > i; i++) {
-                selectedItem = inventory.inventory.get(i).getItem();
-                selectedItemName = inventory.inventory.get(i).getItem().getName();
+            for (int i = 0; inventory.inventoryList.size() > i; i++) {
+                selectedItem = inventory.inventoryList.get(i).getItem();
+                selectedItemName = inventory.inventoryList.get(i).getItem().getName();
                 if (selectedItemName.equals(option)) {
-                    int amount = inventory.inventory.get(i).getQuantity();
-                    inventory.inventory.get(i).setQuantity(amount - 1);
-                    yard.addItemToYard(selectedItem);
+                    int amount = inventory.inventoryList.get(i).getQuantity();
+                    inventory.inventoryList.get(i).setQuantity(amount--);
                     System.out.println("placed " + selectedItemName);
-                    return;
+                    yard.addItemToYard(selectedItem);
                 } else {
                     System.out.println("item not found, check your inventory and try again");
                 }
@@ -111,8 +109,6 @@ public class CatLawnApp {
     public void shopItems() {
         String choice = "";
 
-
-
         while (! (choice.equals("bf")) || (choice.equals("bt"))) {
             System.out.println("\tbf-> buy food");
             System.out.println("\tbt-> buy toys");
@@ -131,10 +127,7 @@ public class CatLawnApp {
 
         }
     }
-        //use if statements
-        //System.out.println("\tf-> buy food");
-        //System.out.println("\tt-> buy toys");
-        //shop toys --> list of toys
+
 
 
     public void showItemsInYard() {
@@ -146,7 +139,7 @@ public class CatLawnApp {
             selection = input.next();
             selection = selection.toLowerCase();
 
-            if (command.equals("f")) {
+            if (selection.equals("f")) {
                 System.out.println(yard.itemsInYard(yard.food));
             } else {
                 System.out.println(yard.itemsInYard(yard.toys));

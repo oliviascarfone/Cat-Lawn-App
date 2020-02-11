@@ -1,7 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
+
+//used https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java to do random functionality
 public class GameCats {
     ArrayList<Cat> commonGameCats;
     ArrayList<Cat> uncommonGameCats;
@@ -34,7 +37,17 @@ public class GameCats {
 
 
     }
+
+    //EFFECT: randomly generates a cat from a given list
+    public Cat generateCommonCat() {
+        int random = ThreadLocalRandom.current().nextInt(0, commonGameCats.size());
+        return commonGameCats.get(random);
+        
+    }
+
+
 }
+
 
 
 

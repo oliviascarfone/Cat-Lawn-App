@@ -27,14 +27,14 @@ public class InventoryTest {
 
     @Test
     void testConstructor(){
-        assertEquals(testInventory.inventory, new ArrayList<>());
-        assertEquals(testInventory.inventory.size(), 0);
+        assertEquals(testInventory.inventoryList, new ArrayList<>());
+        assertEquals(testInventory.inventoryList.size(), 0);
     }
 
     @Test
     void buyOneItemNoMoneyTest(){
         assertFalse(testInventory.buyItem(testItemFood, 2));
-        assertEquals(testInventory.inventory.size(), 0);
+        assertEquals(testInventory.inventoryList.size(), 0);
 
     }
     @Test
@@ -49,9 +49,19 @@ public class InventoryTest {
         testInventory.setBalance(10);
         assertTrue(testInventory.buyItem(testItemFood, 1));
         assertTrue(testInventory.buyItem(testItemToy, 4));
-        assertEquals(testInventory.inventory.size(), 2);
+        assertEquals(testInventory.inventoryList.size(), 2);
 
     }
+
+    @Test
+    void buySameItems(){
+        testInventory.setBalance(100);
+        testInventory.buyItem(testItemToy, 1);
+        testInventory.buyItem(testItemFood, 2);
+        testInventory.buyItem(testItemToy, 2);
+        assertEquals(testInventory.inventoryList.size(), 2);
+    }
+
     @Test
     void checkBalanceTest(){
         testInventory.setBalance(20);
@@ -60,6 +70,18 @@ public class InventoryTest {
         assertEquals(testInventory.getBalance(), 18);
         testInventory.buyItem(testItemToy, 1);
         assertEquals(testInventory.getBalance(), 17);
+
+    }
+
+    @Test
+    void checkInventoryItemsTest(){
+        testInventory.inventoryList.add(testInventoryEntry);
+        testInventory.inventoryList.add(new InventoryEntry(testItemToy, 3));
+        assertEquals(testInventory.checkInventoryItems(), "food is in your inventory!\n" +
+                "toy is in your inventory!\n");
+
+
+
 
     }
 

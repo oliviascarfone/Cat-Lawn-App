@@ -49,6 +49,7 @@ class MyYardTest {
         assertEquals(testYard.food.size(), 1);
         testYard.addItemToYard(testToy);
         assertEquals(testYard.toys.size(), 1);
+        assertEquals(testYard.toys.get(0), testToy);
 
 
     }

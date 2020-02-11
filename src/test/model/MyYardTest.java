@@ -31,7 +31,8 @@ class MyYardTest {
     @Test
     void testConstructor(){
         assertEquals(testYard.cats.size(), 0);
-        assertEquals(testYard.items.size(), 0);
+        assertEquals(testYard.food.size(), 0);
+        assertEquals(testYard.toys.size(), 0);
 
 
     }
@@ -45,7 +46,9 @@ class MyYardTest {
     @Test
     void testAddItemsToYard(){
         testYard.addItemToYard(testFood);
-        assertEquals(testYard.items.size(), 1);
+        assertEquals(testYard.food.size(), 1);
+        testYard.addItemToYard(testToy);
+        assertEquals(testYard.toys.size(), 1);
 
 
     }

@@ -16,6 +16,10 @@ public class InventoryEntry {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public Item getItem() {
         return item;
     }

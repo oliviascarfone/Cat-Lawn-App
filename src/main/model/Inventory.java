@@ -7,7 +7,7 @@ import java.util.LinkedList;
 //used information from A2-GroceryBill lab
 public class Inventory {
     private int balance;
-    protected ArrayList<InventoryEntry> inventory;
+    public ArrayList<InventoryEntry> inventory;
     private static final int MAX_INVENTORY_SIZE = 5;
 
     //EFFECTS: creates an empty inventory with no items and no money
@@ -71,6 +71,14 @@ public class Inventory {
             return inventoryToString;
         }
     }
+
+    public void addInventoryItemToYard(Item item) {
+
+
+    }
+
+
+
 }
 
 

@@ -55,6 +55,7 @@ public class CatLawnApp {
     // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("c")) {
+            yard.addCatToYard();
             System.out.println(yard.catsInYard());
         } else if (command.equals("y")) {
             showItemsInYard();

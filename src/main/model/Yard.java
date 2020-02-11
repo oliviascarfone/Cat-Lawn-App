@@ -3,12 +3,17 @@ package model;
 
 import java.util.ArrayList;
 
+
+
+
 //Represents a backyard that contains cats and placed items
 //Used ideas from A2 - Grocery Bill lab
 public class Yard {
     public ArrayList<Cat> cats;
     public ArrayList<Item> food;
     public ArrayList<Item> toys;
+    GameCats commonCats = new GameCats();
+    GameCats uncommonCats = new GameCats();
 
 
 
@@ -17,6 +22,7 @@ public class Yard {
         cats = new ArrayList<>();
         food = new ArrayList<>();
         toys = new ArrayList<>();
+
 
 
     }
@@ -64,7 +70,7 @@ public class Yard {
             for (int i = 0; i < itemType.size(); i++) {
                 String eachItem = itemType.get(i).getName();
 
-                itemsToString += (String.format("You have placed  %s in your lawn!\n",
+                itemsToString += (String.format("You have placed  %s in your yard!\n",
                         eachItem));
 
             }
@@ -76,9 +82,13 @@ public class Yard {
     }
 
     public void addCatToYard() {
-        if (food.size() > 1) {
-
-
+        commonCats.listCommonCats();
+        uncommonCats.listCommonCats();
+        if (food.size() >= 1) {
+            cats.add(commonCats.generateCommonCat());
+        }
+        if (toys.size() >= 1) {
+            cats.add(uncommonCats.generateUncommonCat());
         }
 
 

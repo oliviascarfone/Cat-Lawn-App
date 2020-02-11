@@ -14,6 +14,8 @@ public class Yard {
     public ArrayList<Item> toys;
     GameCats commonCats = new GameCats();
     GameCats uncommonCats = new GameCats();
+    int newFoodTracker;
+    int newToyTracker;
 
 
 
@@ -22,6 +24,8 @@ public class Yard {
         cats = new ArrayList<>();
         food = new ArrayList<>();
         toys = new ArrayList<>();
+        commonCats.listCommonCats();
+        uncommonCats.listUncommonCats();
 
 
 
@@ -48,13 +52,15 @@ public class Yard {
 
 
     //REQUIRES: Must have a non-empty Inventory
-    //MODIFIES: this, Inventory
+    //MODIFIES: this
     //EFFECTS: adds an item from the inventory to the yard
     public void addItemToYard(Item item) {
         if (item.getClass() == Food.class) {
             food.add(item);
+            newFoodTracker++;
         } else {
             toys.add(item);
+            newToyTracker++;
         }
 
 
@@ -82,16 +88,22 @@ public class Yard {
     }
 
     public void addCatToYard() {
-        commonCats.listCommonCats();
-        uncommonCats.listCommonCats();
+        Cat cc;
+        Cat uc;
         if (food.size() >= 1) {
-            cats.add(commonCats.generateCommonCat());
+            cc = commonCats.generateCommonCat();
+            if (!cats.contains(cc)) {
+                cats.add(cc);
+            }
         }
         if (toys.size() >= 1) {
-            cats.add(uncommonCats.generateUncommonCat());
+            uc = uncommonCats.generateUncommonCat();
+            if (!cats.contains(uc)) {
+                cats.add(uc);
+            }
+
+
         }
-
-
     }
 
 

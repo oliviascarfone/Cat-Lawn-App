@@ -59,8 +59,9 @@ public class Inventory {
         if (inventoryList.size() > 0) {
             for (int i = 0; i < inventoryList.size(); i++) {
                 String eachItem = inventoryList.get(i).getItem().getName();
-                inventoryToString += (String.format("%s is in your inventory!\n",
-                        eachItem));
+                int eachItemQuantity = inventoryList.get(i).getQuantity();
+                inventoryToString += (String.format("%s (x%s) is in your inventory!\n",
+                        eachItem, eachItemQuantity));
             }
             return inventoryToString;
         } else {
@@ -69,14 +70,45 @@ public class Inventory {
         }
     }
 
-    public void addInventoryItemToYard(Item item) {
 
+
+    //REQUIRES: non-empty Inventory and Inventory contains the parameter item
+    //MODIFIES: Inventory
+    //EFFECTS: Removes a quantity from the inventory, removes entry if quantity is zero.
+    public void removeItemFromInventory(Item item) {
+        int amount;
+
+        for (int i = 0; inventoryList.size() > i; i++) {
+            if (inventoryList.get(i).getItem().equals(item)) {
+                amount = inventoryList.get(i).getQuantity();
+                inventoryList.get(i).setQuantity(--amount);
+                if (inventoryList.get(i).getQuantity() == 0) {
+                    inventoryList.remove(i);
+                }
+
+            }
+        }
 
     }
 
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

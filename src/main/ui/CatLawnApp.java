@@ -78,7 +78,7 @@ public class CatLawnApp {
         if (inventory.inventoryList.size() == 0) {
             System.out.println("You have nothing to place! Try buying something first");
             return;
-        } else {
+        } else if (inventory.inventoryList.size() > 0) {
             System.out.println("type the name of the item you want to place");
             Scanner newscan = new Scanner(System.in);
             String option = newscan.nextLine();
@@ -86,26 +86,18 @@ public class CatLawnApp {
                 selectedItem = inventory.inventoryList.get(i).getItem();
                 selectedItemName = inventory.inventoryList.get(i).getItem().getName();
                 if (selectedItemName.equals(option)) {
-                    int amount = inventory.inventoryList.get(i).getQuantity();
-                    inventory.inventoryList.get(i).setQuantity(amount--);
+                    inventory.removeItemFromInventory(selectedItem);
+                 //   int amount = inventory.inventoryList.get(i).getQuantity();
+                //    inventory.inventoryList.get(i).setQuantity(--amount);
                     System.out.println("placed " + selectedItemName);
                     yard.addItemToYard(selectedItem);
-                } else {
-                    System.out.println("item not found, check your inventory and try again");
+                    return;
                 }
             }
-
-
-
-
-
-
-
+            System.out.println("item not found, please check inventory and try again");
         }
 
-
     }
-
 
     public void shopItems() {
         String choice = "";

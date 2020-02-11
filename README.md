@@ -27,6 +27,7 @@ be played casually and has no learning curve or heavy time committents
 
 - As a user, I want to see the cat(s) in my yard 
 - As a user, I want to be able to see my inventory 
-- As a user, I want to be able to buy items and add them to my inventory and yard 
-- As a user, I want to be able to see what a specific cat likes to eat/play with
+- As a user, I want to be able to buy items  
+- As a user, I want to be able to place items from my inventory into my yard
+
 

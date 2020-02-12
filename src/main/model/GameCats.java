@@ -24,15 +24,25 @@ public class GameCats {
                 "Common", "Kibble", "Spring");
         Cat sushi = new Cat("Sushi", "Siamese", "Point",
                 "Common", "Kibble", "Ribbon");
+        Cat evie = new Cat("Evie", "Longhair", "White", "Common",
+                "Kibble", "String");
+        Cat luna = new Cat("Luna", "Shorthair", "Point", "Common",
+                "Kibble", "Brush");
+        Cat jiji = new Cat("Jiji", "Shorthair", "Black", "Common",
+                "Kibble", "Spring");
         commonGameCats.add(moki);
         commonGameCats.add(sushi);
+        commonGameCats.add(evie);
+        commonGameCats.add(luna);
+        commonGameCats.add(jiji);
+
     }
 
     public void listUncommonCats() {
         Cat mimi = new Cat("Mimi", "Shorthair", "Black", "Uncommon",
                 "Tuna", "Mouse");
         Cat roddick = new Cat("Roddick","Longhair", "Ginger", "Uncommon",
-                        "salmon", "Brush");
+                        "Salmon", "Brush");
         Cat sesame = new Cat("Sesame","Longhair", "Grey", "Uncommon",
                 "Kibble", "Mouse");
         uncommonGameCats.add(mimi);

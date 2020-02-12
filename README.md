@@ -19,7 +19,7 @@ Why is this project of interest to you?
 - I am someone who like to play games, but I don't have the time
 to play anything intense during the semester. This is a game that can
 be played casually and has no learning curve
-- I also really like cats
+- I also really like cats.
 
 #Phase 1
 

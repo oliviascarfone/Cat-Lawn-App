@@ -72,6 +72,7 @@ public class CatLawnApp {
         }
     }
 
+    //EFFECTS: places items from the inventory into the yard
     private void placeItemsInYard() {
         String selectedItemName;
         Item selectedItem;
@@ -97,6 +98,8 @@ public class CatLawnApp {
 
     }
 
+    //MODIFIES: Inventory
+    //EFFECTS: purchase an item and ad it to inventory
     public void shopItems() {
         String choice = "";
 
@@ -121,6 +124,8 @@ public class CatLawnApp {
 
 
 
+
+    //EFFECTS: shows the current items placed in the yard
     public void showItemsInYard() {
         String selection = "";
 

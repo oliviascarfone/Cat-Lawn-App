@@ -19,6 +19,9 @@ public class GameCats {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: Creates list of Common Cats in the game
+
     public void listCommonCats() {
         Cat moki = new Cat("Moki", "Ragdoll", "Point",
                 "Common", "Kibble", "Spring");
@@ -38,6 +41,9 @@ public class GameCats {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: creates list of Uncommon Cats found in the game
+
     public void listUncommonCats() {
         Cat mimi = new Cat("Mimi", "Shorthair", "Black", "Uncommon",
                 "Tuna", "Mouse");
@@ -49,15 +55,17 @@ public class GameCats {
         uncommonGameCats.add(roddick);
         uncommonGameCats.add(sesame);
 
-
     }
 
-    //EFFECT: randomly generates a cat
+    //REQUIRES: list of common cats is not empty
+    //EFFECT: randomly generates a common cat
     public Cat generateCommonCat() {
         int r = random.nextInt(commonGameCats.size());
         return commonGameCats.get(r);
     }
 
+    //REQUIRES: list of uncommon cats is not empty
+    //EFFECT: randomly generates an uncommon cat
     public Cat generateUncommonCat() {
         int x = random.nextInt(uncommonGameCats.size());
         return uncommonGameCats.get(x);

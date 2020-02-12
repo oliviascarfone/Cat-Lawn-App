@@ -19,7 +19,7 @@ public class Yard {
 
 
 
-    //EFFECTS: constructs a yard instance with no cats or items
+    //EFFECTS: constructs a yard instance with no cats or items.
     public Yard() {
         cats = new ArrayList<>();
         food = new ArrayList<>();
@@ -87,18 +87,21 @@ public class Yard {
         }
     }
 
+    //REQUIRES: GameCats lists are not empty
+    //MODIFIES: this
+    //EFFECTS: adds a cat to the yard, either common or uncommon cat depending on the item placed
     public void addCatToYard() {
         Cat cc;
         Cat uc;
         if (food.size() >= 1) {
             cc = commonCats.generateCommonCat();
-            if (!cats.contains(cc) && (food.size() > cats.size())) {
+            if ((!cats.contains(cc)) && (food.size() > cats.size())) {
                 cats.add(cc);
             }
         }
         if (toys.size() >= 1) {
             uc = uncommonCats.generateUncommonCat();
-            if (!cats.contains(uc) && (toys.size() > cats.size())) {
+            if ((!cats.contains(uc)) && (toys.size() >= cats.size())) {
                 cats.add(uc);
             }
 

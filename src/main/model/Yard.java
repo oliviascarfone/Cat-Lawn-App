@@ -104,7 +104,6 @@ public class Yard {
             if ((!cats.contains(uc)) && (toys.size() >= cats.size())) {
                 cats.add(uc);
             }
-
         }
     }
 

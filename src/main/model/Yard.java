@@ -92,13 +92,13 @@ public class Yard {
         Cat uc;
         if (food.size() >= 1) {
             cc = commonCats.generateCommonCat();
-            if (!cats.contains(cc)) {
+            if (!cats.contains(cc) && (food.size() > cats.size())) {
                 cats.add(cc);
             }
         }
         if (toys.size() >= 1) {
             uc = uncommonCats.generateUncommonCat();
-            if (!cats.contains(uc)) {
+            if (!cats.contains(uc) && (toys.size() > cats.size())) {
                 cats.add(uc);
             }
 

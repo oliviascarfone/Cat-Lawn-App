@@ -13,6 +13,7 @@ public class InventoryTest {
     Item testItemFood;
     Item testItemToy;
     InventoryEntry testInventoryEntry;
+    InventoryEntry testInventoryEntry1;
 
 
     @BeforeEach
@@ -21,6 +22,7 @@ public class InventoryTest {
         testItemToy = new Toy("toy", 1);
         testInventory = new Inventory();
         testInventoryEntry = new InventoryEntry(testItemFood, 2);
+        testInventoryEntry1= new InventoryEntry(testItemToy, 1);
 
 
     }
@@ -77,11 +79,32 @@ public class InventoryTest {
     void checkInventoryItemsTest(){
         testInventory.inventoryList.add(testInventoryEntry);
         testInventory.inventoryList.add(new InventoryEntry(testItemToy, 3));
-        assertEquals(testInventory.checkInventoryItems(), "food is in your inventory!\n" +
-                "toy is in your inventory!\n");
+        assertEquals(testInventory.checkInventoryItems(), "food (x2) is in your inventory!\n" +
+                "toy (x3) is in your inventory!\n");
 
+    }
 
+    @Test
+    void checkInventoryItemsWithNoItems() {
+        assertEquals(testInventory.checkInventoryItems(), "There is nothing in your inventory!");
+    }
 
+    @Test
+    void removeItemFromInventoryTest() {
+        testInventory.inventoryList.add(testInventoryEntry);
+        testInventory.removeItemFromInventory(testItemFood);
+        assertEquals(testInventory.inventoryList.size(), 1);
+        testInventory.removeItemFromInventory(testItemFood);
+        assertEquals(testInventory.inventoryList.size(), 0);
+
+    }
+
+    @Test
+    void removeItemFromInventoryWithMultipleItemTypesTest() {
+        testInventory.inventoryList.add(testInventoryEntry);
+        testInventory.inventoryList.add(testInventoryEntry1);
+        testInventory.removeItemFromInventory(testItemToy);
+        assertEquals(testInventory.inventoryList.size(), 1);
 
     }
 

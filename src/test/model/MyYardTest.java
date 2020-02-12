@@ -2,6 +2,7 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 
 import java.util.ArrayList;
 
@@ -62,7 +63,56 @@ class MyYardTest {
 
 
     }
+    @Test
+    void testNoItemsInYard(){
+        assertEquals(testYard.itemsInYard(testFoodList), "There are none placed in your yard!");
+        assertEquals(testYard.itemsInYard(testToysList), "There are none placed in your yard!");
 
+    }
+
+    @Test
+    void testOneItemInYard(){
+        testFoodList.add(testFood);
+        assertEquals(testYard.itemsInYard(testFoodList), "You have placed food in your yard!\n");
+
+    }
+
+    @Test
+    void testMultipleItemsInYard() {
+        testFoodList.add(testFood);
+        testToysList.add(testToy);
+        assertEquals(testYard.itemsInYard(testToysList),"You have placed toy in your yard!\n");
+        assertEquals(testYard.itemsInYard(testFoodList),"You have placed food in your yard!\n");
+    }
+
+    @Test
+    void addCatToLawnNoItemsTest(){
+        testYard.addCatToYard();
+        assertEquals(testYard.cats.size(), 0);
+    }
+    @Test
+    void addCatsToLawnOneToyTest(){
+        testYard.toys.add(testToy);
+        testYard.addCatToYard();
+        assertEquals(testYard.cats.size(), 1);
+    }
+
+    @Test
+    void addCatsToLawnOneFoodTest() {
+        testYard.food.add(testFood);
+        testYard.addCatToYard();
+        assertEquals(testYard.cats.size(), 1);
+
+    }
+
+    @Test
+    void addCatsToLawnFoodAndToyTest() {
+        testYard.food.add(testFood);
+        testYard.toys.add(testToy);
+        testYard.addCatToYard();
+        assertEquals(testYard.cats.size(), 2);
+
+    }
 
 
 

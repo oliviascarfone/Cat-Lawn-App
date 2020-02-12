@@ -25,12 +25,19 @@ public class InventoryEntryTest {
     void testConstructor() {
         assertEquals(testInventoryEntry1.getItem().getName(), "food");
     }
+
     @Test
     void testAddQuantity() {
         testInventoryEntry1.addQuantity(2);
         assertEquals(testInventoryEntry1.getQuantity(), 3);
 
     }
+    @Test
+    void setInventoryTest() {
+        testInventoryEntry1.setQuantity(4);
+        assertEquals(testInventoryEntry1.getQuantity(), 4);
+    }
+
 
 }
 

@@ -76,7 +76,7 @@ public class Yard {
             for (int i = 0; i < itemType.size(); i++) {
                 String eachItem = itemType.get(i).getName();
 
-                itemsToString += (String.format("You have placed  %s in your yard!\n",
+                itemsToString += (String.format("You have placed %s in your yard!\n",
                         eachItem));
 
             }

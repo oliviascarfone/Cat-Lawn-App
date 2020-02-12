@@ -87,8 +87,6 @@ public class CatLawnApp {
                 selectedItemName = inventory.inventoryList.get(i).getItem().getName();
                 if (selectedItemName.equals(option)) {
                     inventory.removeItemFromInventory(selectedItem);
-                 //   int amount = inventory.inventoryList.get(i).getQuantity();
-                //    inventory.inventoryList.get(i).setQuantity(--amount);
                     System.out.println("placed " + selectedItemName);
                     yard.addItemToYard(selectedItem);
                     return;

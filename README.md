@@ -25,8 +25,8 @@ be played casually and has no learning curve
 
 ##User Stories
 
-- As a user, I want to see the cat(s) in my yard 
-- As a user, I want to be able to see my inventory 
+- As a user, I want to see the names of the cat(s) in my yard 
+- As a user, I want to be able to see items in my inventory that I can use to decorate my lawn
 - As a user, I want to be able to buy items  
 - As a user, I want to be able to place items from my inventory into my yard
 

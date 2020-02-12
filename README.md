@@ -14,7 +14,6 @@ What will the application do?
 Who will use it?
 - anyone, this is an easy game designed to relieve stress
 
-
 Why is this project of interest to you?
 - I am someone who like to play games, but I don't have the time
 to play anything intense during the semester. This is a game that can

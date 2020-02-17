@@ -11,11 +11,15 @@ public class CatLawnApp {
     Scanner input;
     Yard yard = new Yard();
     Inventory inventory = new Inventory();
-    Item kibble = new Food("Kibble", 0);
-    Item string = new Toy("String", 0);
+    GameItems gameItems = new GameItems();
+
+
+
 
     public CatLawnApp() {
         runCatLawnApp();
+        gameItems.listToys();
+        gameItems.listFood();
     }
 
     //EFFECTS: processes user input
@@ -99,28 +103,92 @@ public class CatLawnApp {
     }
 
     //MODIFIES: Inventory
-    //EFFECTS: purchase an item and ad it to inventory
+    //EFFECTS: purchase an item and add it to inventory
     public void shopItems() {
         String choice = "";
 
+        System.out.println("Would you like to purchase food or toys?");
         while (! (choice.equals("bf")) || (choice.equals("bt"))) {
             System.out.println("\tbf-> buy food");
             System.out.println("\tbt-> buy toys");
             choice = input.next();
             choice = choice.toLowerCase();
             if (choice.equals("bf")) {
-                System.out.println("bought food!");
-                inventory.buyItem(kibble, 1);
+                buyFood();
                 return;
             }
             if (choice.equals("bt")) {
-                System.out.println("bought toy!");
-                inventory.buyItem(string, 1);
+                buyToys();
                 return;
+
+
             }
 
         }
     }
+
+    public void buyFood() {
+        Food selectedFoodToPurchase;
+        String selectedFoodToPurchaseName;
+        String choice;
+        //gameItems.listFood();
+        System.out.println(gameItems.showAllFood());
+        System.out.println("What would you like to purchase?");
+        Scanner input = new Scanner(System.in);
+        choice = input.nextLine();
+        for (int i = 0; gameItems.allFood.size() > i; i++) {
+            selectedFoodToPurchase = gameItems.allFood.get(i);
+            selectedFoodToPurchaseName = gameItems.allFood.get(i).getName();
+            if (selectedFoodToPurchaseName.equals(choice)) {
+                if (inventory.buyItem(selectedFoodToPurchase, 1)) {
+                    System.out.println("Purchase Successful!");
+                    return;
+                } else {
+                    System.out.println("Insufficient funds!");
+                    return;
+                }
+            }
+
+        }
+        System.out.println("Item not found, please try again");
+
+    }
+
+
+
+
+
+
+    public void buyToys() {
+        Toy selectedToyToPurchase;
+        String selectedToyToPurchaseName;
+        String choice;
+       // gameItems.listToys();
+        System.out.println(gameItems.showAllToys());
+        System.out.println("What would you like to purchase?");
+        Scanner input = new Scanner(System.in);
+        choice = input.nextLine();
+        for (int i = 0; gameItems.allToys.size() > i; i++) {
+            selectedToyToPurchase = gameItems.allToys.get(i);
+            selectedToyToPurchaseName = gameItems.allToys.get(i).getName();
+            if (selectedToyToPurchaseName.equals(choice)) {
+                if (inventory.buyItem(selectedToyToPurchase, 1)) {
+                    System.out.println("Purchase Successful!");
+                    return;
+                } else {
+                    System.out.println("Insufficient funds!");
+                    return;
+                }
+            }
+
+        }
+        System.out.println("Item not found, please try again");
+
+    }
+
+
+
+
 
 
 

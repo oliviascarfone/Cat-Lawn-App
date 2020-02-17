@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+
+
 //used https://www.educative.io/edpresso/how-to-generate-random-numbers-in-java and
 // https://stackoverflow.com/questions/5887709/getting-random-numbers-in-java
 // to do random functionality
+
+//represents all available cats in the game
 public class GameCats {
     ArrayList<Cat> commonGameCats;
     ArrayList<Cat> uncommonGameCats;
@@ -33,11 +37,17 @@ public class GameCats {
                 "Kibble", "Brush");
         Cat jiji = new Cat("Jiji", "Shorthair", "Black", "Common",
                 "Kibble", "Spring");
+        Cat nala = new Cat("Nala", "Shorthair", "Black", "Common",
+                "Kibble", "Mouse");
+        Cat milo = new Cat("Milo", "Munchkin", "Grey", "Common",
+                "Tuna", "Spring");
         commonGameCats.add(moki);
         commonGameCats.add(sushi);
         commonGameCats.add(evie);
         commonGameCats.add(luna);
         commonGameCats.add(jiji);
+        commonGameCats.add(nala);
+        commonGameCats.add(milo);
 
     }
 
@@ -51,9 +61,12 @@ public class GameCats {
                         "Salmon", "Brush");
         Cat sesame = new Cat("Sesame","Longhair", "Grey", "Uncommon",
                 "Kibble", "Mouse");
+        Cat kiwi = new Cat("Kiwi","Shorthair", "Black", "Uncommon",
+                "Kibble", "Spring");
         uncommonGameCats.add(mimi);
         uncommonGameCats.add(roddick);
         uncommonGameCats.add(sesame);
+        uncommonGameCats.add(kiwi);
 
     }
 

@@ -14,8 +14,6 @@ public class CatLawnApp {
     GameItems gameItems = new GameItems();
 
 
-
-
     public CatLawnApp() {
         runCatLawnApp();
         gameItems.listToys();
@@ -26,6 +24,8 @@ public class CatLawnApp {
     private void runCatLawnApp() {
         input = new Scanner(System.in);
         command = input.nextLine();
+
+
 
         while (keepGoing) {
             displayMenu();
@@ -76,6 +76,9 @@ public class CatLawnApp {
             System.out.println("Invalid selection, please try another menu option");
         }
     }
+
+
+
 
     //EFFECTS: places items from the inventory into the yard
     private void placeItemsInYard() {

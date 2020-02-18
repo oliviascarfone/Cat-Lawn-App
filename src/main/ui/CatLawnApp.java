@@ -65,6 +65,7 @@ public class CatLawnApp {
             showItemsInYard();
         } else if (command.equals("i")) {
             System.out.println(inventory.checkInventoryItems());
+            System.out.println("You have $" + inventory.getBalance());
         } else if (command.equals("p")) {
             placeItemsInYard();
         } else if (command.equals("s")) {

@@ -13,8 +13,8 @@ public class Yard {
     public ArrayList<Item> food;
     public ArrayList<Item> toys;
     GameCats gameCats = new GameCats();
-    int newFoodTracker;
-    int newToyTracker;
+
+
 
 
 
@@ -57,10 +57,10 @@ public class Yard {
     public void addItemToYard(Item item) {
         if (item.getClass() == Food.class) {
             food.add(item);
-            newFoodTracker++;
+
         } else {
             toys.add(item);
-            newToyTracker++;
+
         }
 
 
@@ -97,12 +97,18 @@ public class Yard {
             cc = gameCats.generateCommonCat();
             if ((!cats.contains(cc)) && (food.size() > cats.size())) {
                 cats.add(cc);
+
+
+
+
+
             }
         }
         if (toys.size() >= 1) {
             uc = gameCats.generateUncommonCat();
             if ((!cats.contains(uc)) && (toys.size() >= cats.size())) {
                 cats.add(uc);
+
             }
         }
     }

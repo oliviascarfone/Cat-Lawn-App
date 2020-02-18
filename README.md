@@ -29,5 +29,12 @@ be played casually and has no learning curve
 - As a user, I want to be able to buy items  
 - As a user, I want to be able to place items from my inventory into my yard
 
+#Phase 2
+
+##User Stories
+
+-As a user, I want to be able to save my game progress, including items and cats in my yard, as well as items in my inventory
+-As a user, I want to be able to load past game data and progress from there
+
 
 

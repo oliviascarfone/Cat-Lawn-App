@@ -1,11 +1,16 @@
 package ui;
 
 import model.*;
+import persistance.Writer;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 //ideas taken from AccountNotRobust program
 public class CatLawnApp {
+    private static final String GAME_FILE = "./data/game.txt";
     boolean keepGoing = true;
     String command = null;
     Scanner input;
@@ -51,6 +56,7 @@ public class CatLawnApp {
         System.out.println("\ti -> check my inventory");
         System.out.println("\tp -> place items in yard");
         System.out.println("\ts -> shop for items");
+        System.out.println("\tsave -> save game");
         System.out.println("\tq -> quit");
 
     }
@@ -70,8 +76,8 @@ public class CatLawnApp {
             placeItemsInYard();
         } else if (command.equals("s")) {
             shopItems();
-        } else if (command.equals("q")) {
-            System.out.println("goodbye!");
+        } else if (command.equals("save")) {
+            saveGame();
         } else {
             System.out.println("Invalid selection, please try another menu option");
         }
@@ -135,7 +141,6 @@ public class CatLawnApp {
         Food selectedFoodToPurchase;
         String selectedFoodToPurchaseName;
         String choice;
-        //gameItems.listFood();
         System.out.println(gameItems.showAllFood());
         System.out.println("What would you like to purchase?");
         Scanner input = new Scanner(System.in);
@@ -167,7 +172,6 @@ public class CatLawnApp {
         Toy selectedToyToPurchase;
         String selectedToyToPurchaseName;
         String choice;
-       // gameItems.listToys();
         System.out.println(gameItems.showAllToys());
         System.out.println("What would you like to purchase?");
         Scanner input = new Scanner(System.in);
@@ -214,6 +218,24 @@ public class CatLawnApp {
             }
             return;
         }
+    }
+
+
+    //EFFECTS: saves the state of the Cat Lawn Yard and Inventory to GAME_FILE
+    private void saveGame() {
+        try {
+            Writer writer = new Writer(new File(GAME_FILE));
+            writer.write(yard);
+            writer.write(inventory);
+            writer.close();
+            System.out.println("Game data saved to" + GAME_FILE);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Problem saving game data");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

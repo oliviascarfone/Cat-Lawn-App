@@ -1,10 +1,15 @@
 package model;
 
+import com.sun.tools.classfile.ConstantPool;
+import persistance.Reader;
+import persistance.Saveable;
+
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 //represents an inventory for storing money and purchased items
 //used information from A2-GroceryBill lab
-public class Inventory {
+public class Inventory implements Saveable {
     private int balance;
     public ArrayList<InventoryEntry> inventoryList;
     private static final int MAX_INVENTORY_SIZE = 5;
@@ -91,6 +96,16 @@ public class Inventory {
 
     }
 
+    @Override
+    public void save(PrintWriter printWriter) {
+        printWriter.print(balance);
+        printWriter.print(Reader.DELIMITER);
+        printWriter.print(inventoryList);
+        printWriter.print(Reader.DELIMITER);
+
+
+
+    }
 }
 
 

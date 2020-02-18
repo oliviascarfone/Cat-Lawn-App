@@ -1,6 +1,10 @@
 package model;
 
 
+import persistance.Reader;
+import persistance.Saveable;
+
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
@@ -8,7 +12,7 @@ import java.util.ArrayList;
 
 //Represents a backyard that contains cats and placed items
 //Used ideas from A2 - Grocery Bill lab
-public class Yard {
+public class Yard implements Saveable {
     public ArrayList<Cat> cats;
     public ArrayList<Item> food;
     public ArrayList<Item> toys;
@@ -114,6 +118,19 @@ public class Yard {
     }
 
 
+    @Override
+    public void save(PrintWriter printWriter) {
+        printWriter.print(cats);
+        printWriter.print(Reader.DELIMITER);
+        printWriter.print(food);
+        printWriter.print(Reader.DELIMITER);
+        printWriter.print(toys);
+        printWriter.print(Reader.DELIMITER);
+
+
+
+
+    }
 }
 
 

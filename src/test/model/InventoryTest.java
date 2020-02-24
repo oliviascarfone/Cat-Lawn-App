@@ -108,6 +108,13 @@ public class InventoryTest {
 
     }
 
+    @Test
+    void testInventoryAndQuantity() {
+        testInventory.inventoryList.add(testInventoryEntry1);
+        testInventory.inventoryList.add(testInventoryEntry);
+        assertEquals("toy:1,food:2", testInventory.inventoryEntryQuantityNames());
+    }
+
 
 
 

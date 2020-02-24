@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 //represents an inventory for storing money and purchased items
 //used information from A2-GroceryBill lab
-public class Inventory implements Saveable {
-    private int balance;
+public class Inventory {
+    public int balance;
     public ArrayList<InventoryEntry> inventoryList;
     private static final int MAX_INVENTORY_SIZE = 5;
 
@@ -19,6 +19,15 @@ public class Inventory implements Saveable {
         inventoryList = new ArrayList<>();
         balance = 0;
 
+    }
+
+
+
+    //
+    //EFFECTS: creates an Inventory from saved data
+    public Inventory(ArrayList<InventoryEntry> inventoryList, int balance) {
+        this.inventoryList = inventoryList;
+        this.balance = balance;
     }
 
     public int getBalance() {
@@ -96,17 +105,37 @@ public class Inventory implements Saveable {
 
     }
 
-    @Override
-    public void save(PrintWriter printWriter) {
-        printWriter.print(balance);
-        printWriter.print(Reader.DELIMITER);
-        printWriter.print(inventoryList);
-        printWriter.print(Reader.DELIMITER);
+    //EFFECTS: returns inventory entry names and quantity in the inventory
+    public String inventoryEntryQuantityNames() {
+        String inventoryEntryQuantityNames = "";
+        for (int i = 0; i < inventoryList.size(); i++) {
+            String inventoryEntryName = inventoryList.get(i).getItem().getName();
+            int inventoryEntryQuantity = inventoryList.get(i).getQuantity();
+            if (i != (inventoryList.size() - 1)) {
+                inventoryEntryQuantityNames += String.format("%s:%s" + ",",
+                        inventoryEntryName, inventoryEntryQuantity);
 
-
-
+            } else {
+                inventoryEntryQuantityNames += String.format("%s:%s",
+                        inventoryEntryName, inventoryEntryQuantity);
+            }
+        }
+        return inventoryEntryQuantityNames;
     }
+
+
+
+//    @Override
+//    public void save(PrintWriter printWriter) {
+//        printWriter.print(balance);
+//        printWriter.print(Reader.DELIMITER);
+//        printWriter.print(inventoryEntryQuantityNames());
+//        printWriter.print(Reader.DELIMITER);
+
+
+
 }
+
 
 
 

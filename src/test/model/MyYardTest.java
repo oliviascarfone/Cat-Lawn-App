@@ -14,6 +14,8 @@ class MyYardTest {
     ArrayList<Item> testFoodList;
     ArrayList<Item> testToysList;
     Cat testCat;
+    Cat testCat1;
+    Cat testCat2;
     Item testToy;
     Item testFood;
 
@@ -27,6 +29,11 @@ class MyYardTest {
                 "foodpref", "toypref");
         testToy = new Toy("toy", 1);
         testFood = new Food("food", 2);
+        testCat1 = new Cat("Moki", "Ragdoll", "Point",
+                "Common", "Kibble", "Spring");
+        testCat2 = new Cat("Kiwi","Shorthair", "Black", "Uncommon",
+                "Kibble", "Spring");
+
     }
 
     @Test
@@ -114,8 +121,31 @@ class MyYardTest {
 
     }
 
+//    @Test
+//    void testFoodNames() {
+//        testYard.food.add(testFood);
+//        testYard.food.add(testFood);
+//        testYard.food.add(testFood);
+//        assertEquals("food,food,food", testYard.foodNames());
+//    }
+//
 
+    @Test
+    void testJSONArrayToString() {
+        testYard.cats.add(testCat1);
+        testYard.cats.add(testCat2);
+        assertEquals(testYard.saveCats(),
+                "");
+    }
 
+    @Test
+    void testJSONObjectToString() {
+        testYard.cats.add(testCat1);
+        testYard.cats.add(testCat2);
+        testYard.food.add(testFood);
+        assertEquals(testYard.saveYard(), "");
+
+    }
 
 
 }

@@ -3,6 +3,7 @@ package ui;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.*;
+import persistance.JsonWriter;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -91,7 +92,7 @@ public class CatLawnApp {
         } else if (command.equals("shop")) {
             shopItems();
         } else if (command.equals("save")) {
-            saveGame();
+            JsonWriter.saveGame(yard);
         } else {
             System.out.println("Invalid selection, please try another menu option");
         }
@@ -219,26 +220,26 @@ public class CatLawnApp {
     }
 
 
-    //EFFECTS: saves the state of the Cat Lawn Yard and Inventory to YARD_FILE and INVENTORY_FILE,
-    //         respectively
-    private void saveGame() {
-        JsonObject jsonObjectYard = saveYard();
-        //JsonObject jsonObjectInventory = saveInventory();
-        try {
-            FileWriter fileWriter = new FileWriter(YARD_FILE);
-            fileWriter.write(jsonObjectYard.toString());
-            fileWriter.close();
-            System.out.println("Successfully saved yard data!");
-//            FileWriter fileWriter1 = new FileWriter(INVENTORY_FILE);
-//            fileWriter1.write(jsonObjectInventory.toString());
-//            fileWriter1.close();
-            System.out.println("Successfully saved inventory data!");
-        } catch (FileNotFoundException e) {
-            System.out.println("Problem saving game data");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    //EFFECTS: saves the state of the Cat Lawn Yard and Inventory to YARD_FILE and INVENTORY_FILE,
+//    //         respectively
+//    private void saveGame() {
+//        JsonObject jsonObjectYard = saveYard();
+//        //JsonObject jsonObjectInventory = saveInventory();
+//        try {
+//            FileWriter fileWriter = new FileWriter(YARD_FILE);
+//            fileWriter.write(jsonObjectYard.toString());
+//            fileWriter.close();
+//            System.out.println("Successfully saved yard data!");
+////            FileWriter fileWriter1 = new FileWriter(INVENTORY_FILE);
+////            fileWriter1.write(jsonObjectInventory.toString());
+////            fileWriter1.close();
+//            System.out.println("Successfully saved inventory data!");
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Problem saving game data");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public JsonObject saveYard() {
         yardJson = new JsonObject();

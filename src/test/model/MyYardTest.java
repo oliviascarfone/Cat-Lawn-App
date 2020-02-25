@@ -121,31 +121,6 @@ class MyYardTest {
 
     }
 
-//    @Test
-//    void testFoodNames() {
-//        testYard.food.add(testFood);
-//        testYard.food.add(testFood);
-//        testYard.food.add(testFood);
-//        assertEquals("food,food,food", testYard.foodNames());
-//    }
-//
-
-    @Test
-    void testJSONArrayToString() {
-        testYard.cats.add(testCat1);
-        testYard.cats.add(testCat2);
-        assertEquals(testYard.saveCats(),
-                "");
-    }
-
-    @Test
-    void testJSONObjectToString() {
-        testYard.cats.add(testCat1);
-        testYard.cats.add(testCat2);
-        testYard.food.add(testFood);
-        assertEquals(testYard.saveYard(), "");
-
-    }
 
 
 }

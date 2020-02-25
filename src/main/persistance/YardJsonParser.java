@@ -1,30 +1,30 @@
 package persistance;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import model.Item;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 
 public class YardJsonParser {
-    ArrayList<Cat> cats;
-    ArrayList<Item> food;
-    ArrayList<Item> toys;
+    JsonParser parser;
 
 
-    public class Cat {
-        String name;
-        String breed;
-        String coat;
-        String rarityLevel;
-        String foodPreference;
-        String toyPreference;
+    YardJsonParser(){
+
+
     }
 
-    public class Item {
-        String name;
-        int cost;
-    }
 
-    
+
+
+
+
+
+
 
 
 }

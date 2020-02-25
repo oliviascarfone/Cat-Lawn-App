@@ -1,10 +1,5 @@
 package model;
 
-import com.sun.tools.classfile.ConstantPool;
-import persistance.Reader;
-import persistance.Saveable;
-
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 //represents an inventory for storing money and purchased items

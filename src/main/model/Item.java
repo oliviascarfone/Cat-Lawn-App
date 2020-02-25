@@ -10,6 +10,11 @@ public abstract class Item {
     public Item() {
     }
 
+    public Item(String name, int cost) {
+        this.name = name;
+        this.cost = cost;
+    }
+
 
     public String getName() {
         return name;

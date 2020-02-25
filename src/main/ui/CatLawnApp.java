@@ -1,27 +1,21 @@
 package ui;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.internal.$Gson$Preconditions;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import model.*;
-import persistance.Reader;
-import persistance.Saveable;
-import persistance.Writer;
-import persistance.YardJsonParser;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import java.lang.reflect.Type;
 
 //ideas taken from AccountNotRobust program
 //https://futurestud.io/tutorials/gson-mapping-of-nested-objects - this and the other gson tutorials
 // I used for Phase 2
+//https://www.leveluplunch.com/java/examples/convert-json-array-to-arraylist-gson/
 public class CatLawnApp {
-    private static final String YARD_FILE = "./data/yard.txt";
-    private static final String INVENTORY_FILE = "./data/inventory.txt";
+    private static final String YARD_FILE = "./data/yard.json";
+    private static final String INVENTORY_FILE = "./data/inventory.json";
     boolean keepGoing = true;
     String command = null;
     Scanner input;
@@ -31,6 +25,9 @@ public class CatLawnApp {
     GameCats gameCats = new GameCats();
     JsonObject yardJson;
     JsonObject inventoryJson;
+    ArrayList<Cat> cats;
+    ArrayList<Item> foods;
+    ArrayList<Item> toys;
 
 
     public CatLawnApp() {
@@ -46,7 +43,7 @@ public class CatLawnApp {
         input = new Scanner(System.in);
         command = input.nextLine();
 
-        //loadGame();
+        loadGame();
 
 
         while (keepGoing) {
@@ -145,10 +142,7 @@ public class CatLawnApp {
             if (choice.equals("toys")) {
                 buyToys();
                 return;
-
-
             }
-
         }
     }
 
@@ -172,7 +166,6 @@ public class CatLawnApp {
                     return;
                 }
             }
-
         }
         System.out.println("Item not found, please try again");
 
@@ -230,15 +223,15 @@ public class CatLawnApp {
     //         respectively
     private void saveGame() {
         JsonObject jsonObjectYard = saveYard();
-        JsonObject jsonObjectInventory = saveInventory();
+        //JsonObject jsonObjectInventory = saveInventory();
         try {
             FileWriter fileWriter = new FileWriter(YARD_FILE);
             fileWriter.write(jsonObjectYard.toString());
             fileWriter.close();
             System.out.println("Successfully saved yard data!");
-            FileWriter fileWriter1 = new FileWriter(INVENTORY_FILE);
-            fileWriter1.write(jsonObjectInventory.toString());
-            fileWriter1.close();
+//            FileWriter fileWriter1 = new FileWriter(INVENTORY_FILE);
+//            fileWriter1.write(jsonObjectInventory.toString());
+//            fileWriter1.close();
             System.out.println("Successfully saved inventory data!");
         } catch (FileNotFoundException e) {
             System.out.println("Problem saving game data");
@@ -247,25 +240,6 @@ public class CatLawnApp {
         }
     }
 
-
-//        try {
-//            Writer writer = new Writer(new File(YARD_FILE));
-//            String jsonToString = yardJson.toString();
-//            writer.write(jsonToString);
-//            writer.close();
-//            System.out.println("Yard data saved to" + YARD_FILE);
-////            Writer writer1 = new Writer(new File(INVENTORY_FILE));
-////            writer1.write(inventory);
-////            writer1.close();
-////            System.out.println("Inventory data saved to" + INVENTORY_FILE);
-//
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Problem saving game data");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-
-
     public JsonObject saveYard() {
         yardJson = new JsonObject();
         yardJson.add("cats", saveCats());
@@ -273,35 +247,39 @@ public class CatLawnApp {
         yardJson.add("toys", saveToys());
 
         return yardJson;
-
     }
 
-    public JsonObject saveInventory() {
-        inventoryJson = new JsonObject();
-        inventoryJson.addProperty("balance", inventory.getBalance());
-        inventoryJson.add("inventoryList", saveInventoryList());
+//    public JsonObject saveInventory() {
+//        inventoryJson = new JsonObject();
+//        inventoryJson.addProperty("balance", inventory.getBalance());
+//        inventoryJson.add("inventoryList", saveInventoryList());
+//
+//        return inventoryJson;
+//    }
 
-        return inventoryJson;
-    }
-
-    public JsonArray saveInventoryList() {
-        JsonArray saveInventoryList = new JsonArray();
-        for (InventoryEntry i : inventory.inventoryList) {
-            Gson gson = new Gson();
-            String saveInventoryEntry = gson.toJson(i);
-            saveInventoryList.add(saveInventoryEntry);
-        }
-        return saveInventoryList;
-    }
+//    public JsonArray saveInventoryList() {
+//        JsonArray saveInventoryList = new JsonArray();
+//        for (InventoryEntry i : inventory.inventoryList) {
+//            Gson gson = new Gson();
+//            String saveInventoryEntry = gson.toJson(i);
+//            saveInventoryList.add(saveInventoryEntry);
+//        }
+//        return saveInventoryList;
+//    }
 
 
     //EFFECTS: saves the cats in the yard into an array of JSON objects
     public JsonArray saveCats() {
         JsonArray saveCats = new JsonArray();
         for (Cat cat : yard.cats) {
-            Gson gson = new Gson();
-            String saveCat = gson.toJson(cat);
-            saveCats.add(saveCat);
+            JsonObject catJson = new JsonObject();
+            catJson.addProperty("name", cat.getName());
+            catJson.addProperty("breed", cat.getBreed());
+            catJson.addProperty("coat", cat.getCoat());
+            catJson.addProperty("rarity", cat.getRarityLevel());
+            catJson.addProperty("foodpref", cat.getFoodPreference());
+            catJson.addProperty("toypref", cat.getToyPreference());
+            saveCats.add(catJson);
         }
 
         return saveCats;
@@ -311,10 +289,10 @@ public class CatLawnApp {
     public JsonArray saveFood() {
         JsonArray saveFoods = new JsonArray();
         for (Item food : yard.food) {
-            Gson gson = new Gson();
-            String saveFood = gson.toJson(food);
-            saveFoods.add(saveFood);
-
+            JsonObject foodJson = new JsonObject();
+            foodJson.addProperty("name", food.getName());
+            foodJson.addProperty("cost", food.getCost());
+            saveFoods.add(foodJson);
         }
 
         return saveFoods;
@@ -324,9 +302,10 @@ public class CatLawnApp {
     public JsonArray saveToys() {
         JsonArray saveToys = new JsonArray();
         for (Item toy : yard.toys) {
-            Gson gson = new Gson();
-            String saveToy = gson.toJson(toy);
-            saveToys.add(saveToy);
+            JsonObject toyJson = new JsonObject();
+            toyJson.addProperty("name", toy.getName());
+            toyJson.addProperty("cost", toy.getCost());
+            saveToys.add(toyJson);
 
         }
 
@@ -334,59 +313,57 @@ public class CatLawnApp {
     }
 
 
-//        try {
-//            Writer writer = new Writer(new File(YARD_FILE));
-//            writer.write(yard);
-//            writer.close();
-//            System.out.println("Yard data saved to" + YARD_FILE);
-//            Writer writer1 = new Writer(new File(INVENTORY_FILE));
-//            writer1.write(inventory);
-//            writer1.close();
-//            System.out.println("Inventory data saved to" + INVENTORY_FILE);
-//
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Problem saving game data");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
-//    // MODIFIES: this
-//    // EFFECTS: loads game from YARD_FILE and INVENTORY_FILE, if that file exists;
-//    //otherwise initializes CatLawn with default values
-//    private void loadGame() {
-//        try {
-//            Yard yards = Reader.readYardData(new File(YARD_FILE), gameItems, gameCats);
-//            List<Inventory> inventories = Reader.readInventoryData(new File(INVENTORY_FILE));
-//
-//
-//        } catch (IOException e) {
-//            init();
-//        }
-//    }
-//
-//    private void init() {
-//        inventory = new Inventory();
-//        yard = new Yard();
-//    }
+    public void loadGame() {
+        loadYard();
+    }
+        //loadInventory();
 
 
-//    public void loadGame() {
-//        loadYard();
-//        //loadInventory();
-//
-//    }
+    public void loadYard() {
+        JsonParser parser = new JsonParser();
+        try (FileReader reader = new FileReader(YARD_FILE)) {
+            JsonObject result = parser.parse(reader).getAsJsonObject();
+            JsonArray loadedCats = result.getAsJsonArray("cats");
+            makeCatsList(loadedCats);
+            JsonArray loadedFood = result.getAsJsonArray("food");
+            makeFoodList(loadedFood);
+            JsonArray loadedToys = result.getAsJsonArray("toys");
+            makeToyList(loadedToys);
+            makeYard();
 
-//    public void loadYard() {
-//        Gson gson = new Gson();
-//        try (FileReader reader = new FileReader(YARD_FILE)) {
-//            YardJsonParser loadedYard = gson.fromJson(reader, YardJsonParser.class);
-//            yard = loadedYard;
-//        } catch (IOException e) {
-//            emptyYard();
-//        }
-//    }
+        } catch (IOException e) {
+            emptyYard();
+        }
+    }
+
+    public void makeCatsList(JsonArray json) {
+        Gson gson = new Gson();
+        Type catListType = new TypeToken<ArrayList<Cat>>(){}.getType();
+        ArrayList<Cat> cats = gson.fromJson(json, catListType);
+        this.cats = cats;
+    }
+
+    public void makeFoodList(JsonArray json) {
+        Gson gson = new Gson();
+        Type foodListType = new TypeToken<ArrayList<Food>>(){}.getType();
+        ArrayList<Item> foods = gson.fromJson(json, foodListType);
+        this.foods = foods;
+    }
+
+    public void makeToyList(JsonArray json) {
+        Gson gson = new Gson();
+        Type toyListType = new TypeToken<ArrayList<Toy>>(){}.getType();
+        ArrayList<Item> toys = gson.fromJson(json, toyListType);
+        this.toys = toys;
+    }
+
+    public void makeYard() {
+        yard = new Yard(cats, foods, toys);
+
+    }
+
+
+
 
 //    public void loadInventory() {
 //        Gson gson = new Gson();
@@ -403,9 +380,9 @@ public class CatLawnApp {
 //        inventory = new Inventory();
 //    }
 
-//    public void emptyYard() {
-//        yard = new Yard();
-//    }
+    public void emptyYard() {
+        yard = new Yard();
+    }
 
 }
 

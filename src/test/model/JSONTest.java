@@ -26,12 +26,8 @@ public class JSONTest {
         testToy = new Toy("toy", 1);
         testFood = new Food("food", 2);
     }
-
-    @Test
-    void testJSONString() {
-        testYard.cats.add(testCat);
-        assertEquals(testYard.saveCats(), "");
-
-    }
 }
+
+
+
 

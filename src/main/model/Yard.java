@@ -2,16 +2,10 @@ package model;
 
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import persistance.Reader;
-import persistance.Saveable;
-import persistance.Writer;
 
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
@@ -38,6 +32,17 @@ public class Yard  {
         gameCats.listUncommonCats();
 
 
+
+
+    }
+
+    //EFFECTS: Constructs a yard from saved yard data
+    public Yard(ArrayList<Cat> cats, ArrayList<Item> food, ArrayList<Item> toys) {
+        this.cats = cats;
+        this.food = food;
+        this.toys = toys;
+        gameCats.listCommonCats();
+        gameCats.listUncommonCats();
 
 
     }
@@ -107,122 +112,6 @@ public class Yard  {
             }
         }
     }
-
-//    //EFFECTS: returns cat names in the lawn
-//    public String catNames() {
-//        String catNames = "";
-//        for (int i = 0; i < cats.size(); i++) {
-//            String catName = cats.get(i).getName();
-//            if (i != (cats.size() - 1)) {
-//                catNames += catName + ",";
-//            } else {
-//                catNames += catName;
-//            }
-//
-//        }
-//        return catNames;
-//
-//    }
-
-//    //EFFECTS: returns food names in the lawn
-//    public String foodNames() {
-//        String foodNames = "";
-//        for (int i = 0; i < food.size(); i++) {
-//            String foodName = food.get(i).getName();
-//            if (i != (food.size() - 1)) {
-//                foodNames += foodName + ",";
-//            } else {
-//                foodNames += foodName;
-//            }
-//
-//        }
-//        return foodNames;
-//    }
-
-//    //EFFECTS: returns toy names in the lawn
-//    public String toyNames() {
-//        String toyNames = "";
-//        for (int i = 0; i < toys.size(); i++) {
-//            String toyName = toys.get(i).getName();
-//            if (i != (toys.size() - 1)) {
-//                toyNames += toyName + ",";
-//            } else {
-//                toyNames += toyName;
-//            }
-//        }
-//        return toyNames;
-//    }
-
-
-    public JsonObject saveYard() {
-        //saveCats();
-        //saveFood();
-        //saveToys();
-        JsonObject yardJson = new JsonObject();
-        yardJson.add("cats", saveCats());
-        yardJson.add("food", saveFood());
-        yardJson.add("toys", saveToys());
-
-        return yardJson;
-
-
-    }
-
-
-    //EFFECTS: saves the cats in the yard into an array of JSON objects
-    public JsonArray saveCats() {
-        JsonArray saveCats = new JsonArray();
-        for (Cat cat : cats) {
-            Gson gson = new Gson();
-            String saveCat = gson.toJson(cat);
-            saveCats.add(saveCat);
-        }
-
-        return saveCats;
-    }
-
-    //EFFECTS: saves the food in the yard into an array of JSON objects
-    public JsonArray saveFood() {
-        JsonArray saveFoods = new JsonArray();
-        for (Item food : food) {
-            Gson gson = new Gson();
-            String saveFood = gson.toJson(food);
-            saveFoods.add(saveFood);
-
-        }
-
-        return saveFoods;
-    }
-
-    //EFFECTS: saves the toys in the yard into an array of JSON objects
-    public JsonArray saveToys() {
-        JsonArray saveToys = new JsonArray();
-        for (Item toy : toys) {
-            Gson gson = new Gson();
-            String saveToy = gson.toJson(toy);
-            saveToys.add(saveToy);
-
-        }
-
-        return saveToys;
-    }
-
-
-
-
-
-//    @Override
-//    public void save(PrintWriter printWriter) {
-//
-
-//        printWriter.print(catNames());
-//        //printWriter.print(Reader.DELIMITER);
-//        printWriter.print(foodNames());
-//        //printWriter.print(Reader.DELIMITER);
-//        printWriter.print(toyNames());
-//        //printWriter.print(Reader.DELIMITER);
-
-
 
 
 

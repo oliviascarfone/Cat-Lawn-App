@@ -64,9 +64,9 @@ public class JsonWriter {
             catJson.addProperty("name", cat.getName());
             catJson.addProperty("breed", cat.getBreed());
             catJson.addProperty("coat", cat.getCoat());
-            catJson.addProperty("rarity", cat.getRarityLevel());
-            catJson.addProperty("foodpref", cat.getFoodPreference());
-            catJson.addProperty("toypref", cat.getToyPreference());
+            catJson.addProperty("rarityLevel", cat.getRarityLevel());
+            catJson.addProperty("foodPreference", cat.getFoodPreference());
+            catJson.addProperty("toyPreference", cat.getToyPreference());
             saveCats.add(catJson);
         }
 

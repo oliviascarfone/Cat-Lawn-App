@@ -98,8 +98,16 @@ public class Yard  {
     public void addCatToYard() {
         Cat cc;
         Cat uc;
+        Boolean catIndicator = false;
         if (food.size() >= 1) {
             cc = gameCats.generateCommonCat();
+//            for (Cat c : cats) {
+//                String eachCat = c.getName();
+//                if (eachCat.equals(cc.getName())) {
+//                    catIndicator = true;
+//                    break;
+//                }
+//            }
             if ((!cats.contains(cc)) && (food.size() > cats.size())) {
                 cats.add(cc);
             }

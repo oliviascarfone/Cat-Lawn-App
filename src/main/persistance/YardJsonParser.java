@@ -1,11 +1,9 @@
 package persistance;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import jdk.nashorn.internal.parser.JSONParser;
 import model.Cat;
 import model.Food;
 import model.Item;
@@ -28,9 +26,10 @@ public class YardJsonParser {
     }
 
     public void loadYard() {
-        parser = new JsonParser();
+        Gson parser = new Gson();
+
         try (FileReader reader = new FileReader(YARD_FILE)) {
-            JsonObject result = parser.parse(reader).getAsJsonObject();
+            JsonObject result = parser.fromJson(reader, JsonObject.class);  // .(reader).getAsJsonObject();
             JsonArray loadedCats = result.getAsJsonArray("cats");
             ArrayList<Cat> listOfCats = makeCatsList(loadedCats);
             JsonArray loadedFood = result.getAsJsonArray("food");
@@ -46,31 +45,35 @@ public class YardJsonParser {
 
     public ArrayList<Cat> makeCatsList(JsonArray json) {
         Gson gson = new Gson();
-        Type catListType = new TypeToken<ArrayList<Cat>>(){}.getType();
+        Type catListType = new TypeToken<ArrayList<Cat>>() {
+        }.getType();
         ArrayList<Cat> cats = gson.fromJson(json, catListType);
         return cats;
     }
 
     public ArrayList<Item> makeFoodList(JsonArray json) {
         Gson gson = new Gson();
-        Type foodListType = new TypeToken<ArrayList<Food>>(){}.getType();
+        Type foodListType = new TypeToken<ArrayList<Food>>() {
+        }.getType();
         ArrayList<Item> foods = gson.fromJson(json, foodListType);
         return foods;
     }
 
     public ArrayList<Item> makeToyList(JsonArray json) {
         Gson gson = new Gson();
-        Type toyListType = new TypeToken<ArrayList<Toy>>(){}.getType();
+        Type toyListType = new TypeToken<ArrayList<Toy>>() {
+        }.getType();
         ArrayList<Item> toys = gson.fromJson(json, toyListType);
         return toys;
     }
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+

@@ -21,16 +21,13 @@ public class CatLawnApp {
     boolean keepGoing = true;
     String command = null;
     Scanner input;
-    Yard yard = new Yard();
+    Yard yard;
+    Yard newYard = new Yard();
     YardJsonParser parser = new YardJsonParser(this);
     Inventory inventory = new Inventory();
     GameItems gameItems = new GameItems();
     GameCats gameCats = new GameCats();
-    JsonObject yardJson;
-    JsonObject inventoryJson;
-    ArrayList<Cat> cats;
-    ArrayList<Item> foods;
-    ArrayList<Item> toys;
+
 
 
     public CatLawnApp() {
@@ -74,6 +71,7 @@ public class CatLawnApp {
         System.out.println("\tplace -> place items in yard");
         System.out.println("\tshop -> shop for items");
         System.out.println("\tsave -> save your game");
+        System.out.println("\tnew -> create new game");
         System.out.println("\tquit -> quit the game");
 
     }
@@ -93,11 +91,17 @@ public class CatLawnApp {
             placeItemsInYard();
         } else if (command.equals("shop")) {
             shopItems();
+        } else if (command.equals("new")) {
+            clearYard();
         } else if (command.equals("save")) {
             JsonWriter.saveGame(yard);
         } else {
             System.out.println("Invalid selection, please try another menu option");
         }
+    }
+
+    private void clearYard() {
+        this.yard = newYard;
     }
 
 

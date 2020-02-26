@@ -38,7 +38,6 @@ public class JsonWriter {
 //            FileWriter fileWriter1 = new FileWriter(INVENTORY_FILE);
 //            fileWriter1.write(jsonObjectInventory.toString());
 //            fileWriter1.close();
-            System.out.println("Successfully saved inventory data!");
         } catch (FileNotFoundException e) {
             System.out.println("Problem saving game data");
         } catch (IOException e) {

@@ -73,7 +73,6 @@ public class CatLawnApp {
         System.out.println("\tsave -> save your game");
         System.out.println("\tnew -> create new game");
         System.out.println("\tquit -> quit the game");
-
     }
 
     // MODIFIES: this
@@ -92,7 +91,7 @@ public class CatLawnApp {
         } else if (command.equals("shop")) {
             shopItems();
         } else if (command.equals("new")) {
-            clearYard();
+            JsonWriter.saveGame(newYard);
         } else if (command.equals("save")) {
             JsonWriter.saveGame(yard);
         } else {
@@ -100,9 +99,6 @@ public class CatLawnApp {
         }
     }
 
-    private void clearYard() {
-        this.yard = newYard;
-    }
 
 
     //EFFECTS: places items from the inventory into the yard

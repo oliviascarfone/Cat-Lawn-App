@@ -241,14 +241,14 @@ public class CatLawnApp {
 //        }
 //    }
 
-    public JsonObject saveYard() {
-        yardJson = new JsonObject();
-        yardJson.add("cats", saveCats());
-        yardJson.add("food", saveFood());
-        yardJson.add("toys", saveToys());
-
-        return yardJson;
-    }
+//    public JsonObject saveYard() {
+//        yardJson = new JsonObject();
+//        yardJson.add("cats", saveCats());
+//        yardJson.add("food", saveFood());
+//        yardJson.add("toys", saveToys());
+//
+//        return yardJson;
+//    }
 
 //    public JsonObject saveInventory() {
 //        inventoryJson = new JsonObject();
@@ -267,51 +267,51 @@ public class CatLawnApp {
 //        }
 //        return saveInventoryList;
 //    }
-
-
-    //EFFECTS: saves the cats in the yard into an array of JSON objects
-    public JsonArray saveCats() {
-        JsonArray saveCats = new JsonArray();
-        for (Cat cat : yard.cats) {
-            JsonObject catJson = new JsonObject();
-            catJson.addProperty("name", cat.getName());
-            catJson.addProperty("breed", cat.getBreed());
-            catJson.addProperty("coat", cat.getCoat());
-            catJson.addProperty("rarity", cat.getRarityLevel());
-            catJson.addProperty("foodpref", cat.getFoodPreference());
-            catJson.addProperty("toypref", cat.getToyPreference());
-            saveCats.add(catJson);
-        }
-
-        return saveCats;
-    }
-
-    //EFFECTS: saves the food in the yard into an array of JSON objects
-    public JsonArray saveFood() {
-        JsonArray saveFoods = new JsonArray();
-        for (Item food : yard.food) {
-            JsonObject foodJson = new JsonObject();
-            foodJson.addProperty("name", food.getName());
-            foodJson.addProperty("cost", food.getCost());
-            saveFoods.add(foodJson);
-        }
-
-        return saveFoods;
-    }
-
-    //EFFECTS: saves the toys in the yard into an array of JSON objects
-    public JsonArray saveToys() {
-        JsonArray saveToys = new JsonArray();
-        for (Item toy : yard.toys) {
-            JsonObject toyJson = new JsonObject();
-            toyJson.addProperty("name", toy.getName());
-            toyJson.addProperty("cost", toy.getCost());
-            saveToys.add(toyJson);
-
-        }
-
-        return saveToys;
-    }
+//
+//
+//    //EFFECTS: saves the cats in the yard into an array of JSON objects
+//    public JsonArray saveCats() {
+//        JsonArray saveCats = new JsonArray();
+//        for (Cat cat : yard.cats) {
+//            JsonObject catJson = new JsonObject();
+//            catJson.addProperty("name", cat.getName());
+//            catJson.addProperty("breed", cat.getBreed());
+//            catJson.addProperty("coat", cat.getCoat());
+//            catJson.addProperty("rarity", cat.getRarityLevel());
+//            catJson.addProperty("foodpref", cat.getFoodPreference());
+//            catJson.addProperty("toypref", cat.getToyPreference());
+//            saveCats.add(catJson);
+//        }
+//
+//        return saveCats;
+//    }
+//
+//    //EFFECTS: saves the food in the yard into an array of JSON objects
+//    public JsonArray saveFood() {
+//        JsonArray saveFoods = new JsonArray();
+//        for (Item food : yard.food) {
+//            JsonObject foodJson = new JsonObject();
+//            foodJson.addProperty("name", food.getName());
+//            foodJson.addProperty("cost", food.getCost());
+//            saveFoods.add(foodJson);
+//        }
+//
+//        return saveFoods;
+//    }
+//
+//    //EFFECTS: saves the toys in the yard into an array of JSON objects
+//    public JsonArray saveToys() {
+//        JsonArray saveToys = new JsonArray();
+//        for (Item toy : yard.toys) {
+//            JsonObject toyJson = new JsonObject();
+//            toyJson.addProperty("name", toy.getName());
+//            toyJson.addProperty("cost", toy.getCost());
+//            saveToys.add(toyJson);
+//
+//        }
+//
+//        return saveToys;
+//    }
 
 
     public void loadGame() {
@@ -358,7 +358,7 @@ public class CatLawnApp {
         this.toys = toys;
     }
 
-    public void makeYard() {
+    public void makeYard(ArrayList<Cat> cats, ArrayList<Item> foods, ArrayList<Item> toys) {
         yard = new Yard(cats, foods, toys);
 
     }

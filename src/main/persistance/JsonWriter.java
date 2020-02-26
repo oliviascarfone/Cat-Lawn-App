@@ -25,8 +25,7 @@ public class JsonWriter {
     }
 
 
-    //EFFECTS: saves the state of the Cat Lawn Yard and Inventory to YARD_FILE and INVENTORY_FILE,
-    //         respectively
+    //EFFECTS: saves the state of the Cat Lawn Yard to YARD_FILE as a JSON object
 
     public static void saveGame(Yard yard) {
         JsonObject jsonObjectYard = saveYard(yard);
@@ -47,6 +46,8 @@ public class JsonWriter {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs the JSON object out of the components of Yard JSON elements
     public static JsonObject saveYard(Yard yard) {
         yardJson = new JsonObject();
         yardJson.add("cats", saveCats(yard));
@@ -56,7 +57,7 @@ public class JsonWriter {
         return yardJson;
     }
 
-    //EFFECTS: saves the cats in the yard into an array of JSON objects
+    //EFFECTS: saves the cats in the yard into an Array
     public static JsonArray saveCats(Yard yard) {
         JsonArray saveCats = new JsonArray();
         for (Cat cat : yard.cats) {
@@ -73,7 +74,7 @@ public class JsonWriter {
         return saveCats;
     }
 
-    //EFFECTS: saves the food in the yard into an array of JSON objects
+    //EFFECTS: saves the food in the yard into an Array
     public static JsonArray saveFood(Yard yard) {
         JsonArray saveFoods = new JsonArray();
         for (Item food : yard.food) {
@@ -86,7 +87,7 @@ public class JsonWriter {
         return saveFoods;
     }
 
-    //EFFECTS: saves the toys in the yard into an array of JSON objects
+    //EFFECTS: saves the toys in the yard into an Array
     public static JsonArray saveToys(Yard yard) {
         JsonArray saveToys = new JsonArray();
         for (Item toy : yard.toys) {

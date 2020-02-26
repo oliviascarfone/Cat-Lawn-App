@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.*;
 import persistance.JsonWriter;
+import persistance.YardJsonParser;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class CatLawnApp {
     String command = null;
     Scanner input;
     Yard yard = new Yard();
+    YardJsonParser parser = new YardJsonParser(this);
     Inventory inventory = new Inventory();
     GameItems gameItems = new GameItems();
     GameCats gameCats = new GameCats();
@@ -315,56 +317,57 @@ public class CatLawnApp {
 
 
     public void loadGame() {
-        loadYard();
+        parser.loadYard();
     }
         //loadInventory();
 
 
-    public void loadYard() {
-        JsonParser parser = new JsonParser();
-        try (FileReader reader = new FileReader(YARD_FILE)) {
-            JsonObject result = parser.parse(reader).getAsJsonObject();
-            JsonArray loadedCats = result.getAsJsonArray("cats");
-            makeCatsList(loadedCats);
-            JsonArray loadedFood = result.getAsJsonArray("food");
-            makeFoodList(loadedFood);
-            JsonArray loadedToys = result.getAsJsonArray("toys");
-            makeToyList(loadedToys);
-            makeYard();
-
-        } catch (IOException e) {
-            emptyYard();
-        }
-    }
-
-    public void makeCatsList(JsonArray json) {
-        Gson gson = new Gson();
-        Type catListType = new TypeToken<ArrayList<Cat>>(){}.getType();
-        ArrayList<Cat> cats = gson.fromJson(json, catListType);
-        this.cats = cats;
-    }
-
-    public void makeFoodList(JsonArray json) {
-        Gson gson = new Gson();
-        Type foodListType = new TypeToken<ArrayList<Food>>(){}.getType();
-        ArrayList<Item> foods = gson.fromJson(json, foodListType);
-        this.foods = foods;
-    }
-
-    public void makeToyList(JsonArray json) {
-        Gson gson = new Gson();
-        Type toyListType = new TypeToken<ArrayList<Toy>>(){}.getType();
-        ArrayList<Item> toys = gson.fromJson(json, toyListType);
-        this.toys = toys;
-    }
-
+//    public void loadYard() {
+//        JsonParser parser = new JsonParser();
+//        try (FileReader reader = new FileReader(YARD_FILE)) {
+//            JsonObject result = parser.parse(reader).getAsJsonObject();
+//            JsonArray loadedCats = result.getAsJsonArray("cats");
+//            makeCatsList(loadedCats);
+//            JsonArray loadedFood = result.getAsJsonArray("food");
+//            makeFoodList(loadedFood);
+//            JsonArray loadedToys = result.getAsJsonArray("toys");
+//            makeToyList(loadedToys);
+//            makeYard();
+//
+//        } catch (IOException e) {
+//            emptyYard();
+//        }
+//    }
+//
+//    public void makeCatsList(JsonArray json) {
+//        Gson gson = new Gson();
+//        Type catListType = new TypeToken<ArrayList<Cat>>(){}.getType();
+//        ArrayList<Cat> cats = gson.fromJson(json, catListType);
+//        this.cats = cats;
+//    }
+//
+//    public void makeFoodList(JsonArray json) {
+//        Gson gson = new Gson();
+//        Type foodListType = new TypeToken<ArrayList<Food>>(){}.getType();
+//        ArrayList<Item> foods = gson.fromJson(json, foodListType);
+//        this.foods = foods;
+//    }
+//
+//    public void makeToyList(JsonArray json) {
+//        Gson gson = new Gson();
+//        Type toyListType = new TypeToken<ArrayList<Toy>>(){}.getType();
+//        ArrayList<Item> toys = gson.fromJson(json, toyListType);
+//        this.toys = toys;
+//    }
+//
     public void makeYard(ArrayList<Cat> cats, ArrayList<Item> foods, ArrayList<Item> toys) {
         yard = new Yard(cats, foods, toys);
-
     }
 
 
-
+//
+//
+//
 
 //    public void loadInventory() {
 //        Gson gson = new Gson();

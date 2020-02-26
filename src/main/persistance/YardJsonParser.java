@@ -20,10 +20,11 @@ import java.util.ArrayList;
 public class YardJsonParser {
     JsonParser parser;
     private static final String YARD_FILE = "./data/yard.json";
+    private CatLawnApp catLawn;
 
 
-    YardJsonParser() {
-
+    public YardJsonParser(CatLawnApp catLawn) {
+        this.catLawn = catLawn;
     }
 
     public void loadYard() {
@@ -36,10 +37,10 @@ public class YardJsonParser {
             ArrayList<Item> listOfFood = makeFoodList(loadedFood);
             JsonArray loadedToys = result.getAsJsonArray("toys");
             ArrayList<Item> listOfToy = makeToyList(loadedToys);
-            CatLawnApp.makeYard(listOfCats, listOfFood, listOfToy);
+            catLawn.makeYard(listOfCats, listOfFood, listOfToy);
 
         } catch (IOException e) {
-            CatLawnApp.emptyYard();
+            catLawn.emptyYard();
         }
     }
 

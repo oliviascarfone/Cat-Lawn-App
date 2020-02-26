@@ -1,9 +1,13 @@
 package persistance;
 
 import model.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ui.CatLawnApp;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 
 import java.util.ArrayList;
 import java.util.jar.JarEntry;
@@ -17,8 +21,9 @@ public class JsonWriterTest {
     Cat testCat;
     Item testToy;
     Item testFood;
-    String YARD_FILE = "./data/yard.json";
-    String FAKE_FILE = "./data/fake.json";
+    String TEST_YARD_FILE = "./data/testYard.json";
+    //CatLawnApp catApp = new CatLawnApp();
+
 
 
     @BeforeEach
@@ -40,9 +45,17 @@ public class JsonWriterTest {
     }
 
     @Test
-    void saveGameTest() {
+    void saveGameTestGoodDataGoodFile() {
+       assertTrue(testJsonWriter.saveGame(testYard, TEST_YARD_FILE));
 
     }
+
+    @Test
+    void saveGameTestGoodDataBadFile() {
+        assertFalse(testJsonWriter.saveGame(testYard, "/./././."));
+    }
+
+
 
 }
 

@@ -15,20 +15,27 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+//class representing a Json Parser to read saved files
+//https://futurestud.io/tutorials/gson-mapping-of-nested-objects - this and the other gson tutorials
+// I used for Phase 2
+//https://www.leveluplunch.com/java/examples/convert-json-array-to-arraylist-gson/
 public class YardJsonParser {
     JsonParser parser;
     private static final String YARD_FILE = "./data/yard.json";
     private CatLawnApp catLawn;
 
 
+    //EFFECTS; creates new YardJsonParser
     public YardJsonParser(CatLawnApp catLawn) {
         this.catLawn = catLawn;
     }
 
-    public void loadYard() {
+    //MODIFIES: CatLawn
+    //EFFECTS: loads data from .json file
+    public boolean loadYard(String file) {
         Gson parser = new Gson();
 
-        try (FileReader reader = new FileReader(YARD_FILE)) {
+        try (FileReader reader = new FileReader(file)) {
             JsonObject result = parser.fromJson(reader, JsonObject.class);  // .(reader).getAsJsonObject();
             JsonArray loadedCats = result.getAsJsonArray("cats");
             ArrayList<Cat> listOfCats = makeCatsList(loadedCats);
@@ -37,12 +44,16 @@ public class YardJsonParser {
             JsonArray loadedToys = result.getAsJsonArray("toys");
             ArrayList<Item> listOfToy = makeToyList(loadedToys);
             catLawn.makeYard(listOfCats, listOfFood, listOfToy);
+            return true;
 
         } catch (IOException e) {
             catLawn.emptyYard();
+            return false;
         }
     }
 
+
+    //EFFECTS: Makes an ArrayList of Cat Objects from JSON file
     public ArrayList<Cat> makeCatsList(JsonArray json) {
         Gson gson = new Gson();
         Type catListType = new TypeToken<ArrayList<Cat>>() {
@@ -51,6 +62,7 @@ public class YardJsonParser {
         return cats;
     }
 
+    //EFFECTS: Makes an ArrayList of Food Objects from JSON file
     public ArrayList<Item> makeFoodList(JsonArray json) {
         Gson gson = new Gson();
         Type foodListType = new TypeToken<ArrayList<Food>>() {
@@ -59,6 +71,7 @@ public class YardJsonParser {
         return foods;
     }
 
+    //EFFECTS: Makes an ArrayList of Toy Objects from JSON file
     public ArrayList<Item> makeToyList(JsonArray json) {
         Gson gson = new Gson();
         Type toyListType = new TypeToken<ArrayList<Toy>>() {

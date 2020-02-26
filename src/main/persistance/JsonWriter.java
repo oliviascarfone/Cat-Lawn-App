@@ -20,28 +20,32 @@ public class JsonWriter {
     private static JsonObject yardJson;
 
 
+    //EFFECTS: creates new Json Writer
     public JsonWriter() {
 
     }
 
 
+    //MODIFIES: .json file
     //EFFECTS: saves the state of the Cat Lawn Yard to YARD_FILE as a JSON object
-
-    public static void saveGame(Yard yard) {
+    public static boolean saveGame(Yard yard, String file) {
         JsonObject jsonObjectYard = saveYard(yard);
         //JsonObject jsonObjectInventory = saveInventory();
         try {
-            FileWriter fileWriter = new FileWriter(YARD_FILE);
+            FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(jsonObjectYard.toString());
             fileWriter.close();
             System.out.println("Successfully saved yard data!");
+            return true;
 //            FileWriter fileWriter1 = new FileWriter(INVENTORY_FILE);
 //            fileWriter1.write(jsonObjectInventory.toString());
 //            fileWriter1.close();
         } catch (FileNotFoundException e) {
             System.out.println("Problem saving game data");
+            return false;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

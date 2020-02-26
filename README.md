@@ -34,7 +34,7 @@ be played casually and has no learning curve
 ##User Stories
 
 -As a user, I want to be able to save my game progress, including both cats and items in my yard
--As a user, I want to be able to load past game data and progress from there
+-As a user, I want to be able to play from past game data and progress from there
 
 
 

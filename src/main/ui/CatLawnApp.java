@@ -12,12 +12,9 @@ import java.util.Scanner;
 import java.lang.reflect.Type;
 
 //ideas taken from AccountNotRobust program
-//https://futurestud.io/tutorials/gson-mapping-of-nested-objects - this and the other gson tutorials
-// I used for Phase 2
-//https://www.leveluplunch.com/java/examples/convert-json-array-to-arraylist-gson/
+
 public class CatLawnApp {
     private static final String YARD_FILE = "./data/yard.json";
-    private static final String INVENTORY_FILE = "./data/inventory.json";
     boolean keepGoing = true;
     String command = null;
     Scanner input;
@@ -43,7 +40,7 @@ public class CatLawnApp {
         input = new Scanner(System.in);
         command = input.nextLine();
 
-        loadGame();
+        loadGame(YARD_FILE);
 
 
         while (keepGoing) {
@@ -91,9 +88,9 @@ public class CatLawnApp {
         } else if (command.equals("shop")) {
             shopItems();
         } else if (command.equals("new")) {
-            JsonWriter.saveGame(newYard);
+            JsonWriter.saveGame(newYard, YARD_FILE);
         } else if (command.equals("save")) {
-            JsonWriter.saveGame(yard);
+            JsonWriter.saveGame(yard, YARD_FILE);
         } else {
             System.out.println("Invalid selection, please try another menu option");
         }
@@ -316,8 +313,9 @@ public class CatLawnApp {
 //    }
 
 
-    public void loadGame() {
-        parser.loadYard();
+    public void loadGame(String file) {
+        parser.loadYard(file);
+
     }
         //loadInventory();
 

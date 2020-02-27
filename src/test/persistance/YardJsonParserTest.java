@@ -27,14 +27,14 @@ public class YardJsonParserTest {
     Item testFood;
     YardJsonParser testYardJsonParser;
     String TEST_YARD_FILE = "./data/testYard.json";
+    String FAKE_YARD_FILE = "./././././";
     CatLawnApp catAppTest;
     CatLawnApp catAppTest1;
 
     @BeforeEach
     void runBefore() {
-        testYardJsonParser = new YardJsonParser(catAppTest = new CatLawnApp());
-        testYardJsonParser = new YardJsonParser(catAppTest1 = new CatLawnApp());
         testYard = new Yard();
+        testYardJsonParser = new YardJsonParser(catAppTest = new CatLawnApp(testYard));
         testCatsList = new ArrayList<>();
         testFoodList = new ArrayList<>();
         testToysList = new ArrayList<>();
@@ -43,6 +43,22 @@ public class YardJsonParserTest {
         testToy = new Toy("toy", 1);
         testFood = new Food("food", 2);
     }
+
+
+
+    @Test
+
+    void testParsedDataGoodFile() {
+        assertTrue(catAppTest.loadGame(TEST_YARD_FILE));
+
+    }
+
+    @Test
+
+    void testParsedDataBadFile() {
+        assertFalse(catAppTest.loadGame(FAKE_YARD_FILE));
+    }
+
 
 
 

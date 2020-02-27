@@ -35,6 +35,17 @@ public class CatLawnApp {
         gameCats.listUncommonCats();
     }
 
+
+    //EFFECTS: creates a constructor using a yard
+    public CatLawnApp(Yard yard) {
+        gameItems.listToys();
+        gameItems.listFood();
+        gameCats.listCommonCats();
+        gameCats.listUncommonCats();
+    }
+
+
+
     //EFFECTS: processes user input
     private void runCatLawnApp() {
         input = new Scanner(System.in);
@@ -90,6 +101,7 @@ public class CatLawnApp {
         } else if (command.equals("new")) {
             JsonWriter.saveGame(newYard, YARD_FILE);
         } else if (command.equals("save")) {
+
             JsonWriter.saveGame(yard, YARD_FILE);
         } else {
             System.out.println("Invalid selection, please try another menu option");
@@ -313,8 +325,8 @@ public class CatLawnApp {
 //    }
 
 
-    public void loadGame(String file) {
-        parser.loadYard(file);
+    public boolean loadGame(String file) {
+        return parser.loadYard(file);
 
     }
         //loadInventory();

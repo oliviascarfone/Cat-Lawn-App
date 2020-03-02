@@ -121,6 +121,13 @@ public class Yard  {
         }
     }
 
+    // to compare the fields of the objects
+    // Yard Extends Object (this is implicit)
+    // generate --> equals() and hashcode()
+    // uncheck options
+    //include the fields you want (Cat)
+    // cast to Cat (since Object class won't have the same fields
+
 
 
 }

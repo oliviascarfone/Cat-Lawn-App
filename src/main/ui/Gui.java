@@ -45,8 +45,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 
-
-
 public class Gui extends JPanel implements ActionListener {
     static String[] testItems = {"Kibble", "Spring"};
     String cats = "";

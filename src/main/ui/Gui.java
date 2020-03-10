@@ -35,6 +35,9 @@ package ui;
 //https://docs.oracle.com/javase/tutorial/uiswing/components/button.html
 
 
+import model.Cat;
+import model.Yard;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -45,16 +48,14 @@ import java.awt.event.KeyEvent;
 
 
 public class Gui extends JPanel implements ActionListener {
-    static String[] testItems = { "Kibble", "Spring" } ;
-    private JComponent yard;
+    static String[] testItems = {"Kibble", "Spring"};
+    String cats = "";
     private JTabbedPane tabbedPane;
-    private ImageIcon shopIcon = createImageIcon("./data/tobs.jpg");
-    protected CatLawnApp catLawn;
+    private ImageIcon shopIcon = createImageIcon("https://placekitten.com/g/200/300");
+    //protected CatLawnApp catLawn;
 
     public Gui() {
         super(new GridLayout(1, 1));
-
-
         tabbedPane = new JTabbedPane();
         makeShop();
         makeInventory();
@@ -77,7 +78,9 @@ public class Gui extends JPanel implements ActionListener {
         return panel;
     }
 
-    /** Returns an ImageIcon, or null if the path was invalid. */
+    /**
+     * Returns an ImageIcon, or null if the path was invalid.
+     */
     protected static ImageIcon createImageIcon(String path) {
         java.net.URL imgURL = Gui.class.getResource(path);
         if (imgURL != null) {
@@ -137,14 +140,14 @@ public class Gui extends JPanel implements ActionListener {
     }
 
     public void makeYard() {
-        yard = new JPanel();
+        JPanel yard = new JPanel();
         JComponent buttonsMenu = makeTextPanel("Please Select an Option!");
         JButton buttonCat = new JButton("See cats in yard");
         JButton buttonItems = new JButton("See items in yard");
         tabbedPane.addTab("Yard", shopIcon, yard,
                 "Yard");
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-        JLabel label = new JLabel("test");
+        JLabel label = new JLabel(cats);
         buttonCat.addActionListener(this);
         buttonItems.addActionListener(this);
         buttonsMenu.add(buttonCat);
@@ -153,10 +156,9 @@ public class Gui extends JPanel implements ActionListener {
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonsMenu, label);
         yard.add(splitPane);
-        Dimension minimumSize = new Dimension(200, 200);
+        Dimension minimumSize = new Dimension(200, 100);
         buttonsMenu.setMinimumSize(minimumSize);
         label.setMinimumSize(minimumSize);
-
 
 
 //        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
@@ -200,15 +202,16 @@ public class Gui extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
-        if (action == "See cats in yard") {
-            //
-        }
-
-
-
-
+        //if (action == "See cats in yard") {
+        //cats = catLawn.yard.catsInYard();
     }
 }
+
+
+
+
+
+
 
 
 

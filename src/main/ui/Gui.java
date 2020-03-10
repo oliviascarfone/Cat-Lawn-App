@@ -31,17 +31,23 @@ package ui;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+//https://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
+//https://docs.oracle.com/javase/tutorial/uiswing/components/button.html
+
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 
 
-public class Gui extends JPanel {
-    static String[] testItems = {"Kibble", "Spring"};
+public class Gui extends JPanel implements ActionListener {
+    static String[] testItems = { "Kibble", "Spring" } ;
+    //JComponent yard = makeTextPanel("Yard");
     private JTabbedPane tabbedPane;
-    private ImageIcon shopIcon = createImageIcon("./images/ragdoll.png");
+    private ImageIcon shopIcon = createImageIcon("./data/tobs.jpg");
 
     public Gui() {
         super(new GridLayout(1, 1));
@@ -52,46 +58,11 @@ public class Gui extends JPanel {
         makeYard();
         makeOptions();
 
-
         //Add the tabbed pane to this panel.
         add(tabbedPane);
 
         //The following line enables to use scrolling tabs.
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-
-//        JComponent shop = makeTextPanel("Shop");
-//        JList<String> myShop = new JList<String>(testItems);
-//        myShop.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-//        myShop.setLayoutOrientation(JList.VERTICAL_WRAP);
-//        myShop.setVisibleRowCount(-1);
-//        tabbedPane.addTab("Shop", icon, shop,
-//                "What would you like to buy?");
-//        tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-//        shop.add(myShop);
-//        //JButton shopButton = new JButton();
-
-//        JComponent inventory = makeTextPanel("Inventory");
-//        tabbedPane.addTab("Inventory", shopIcon, inventory,
-//                "Here is your inventory");
-//        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-
-//        JComponent yard = makeTextPanel("Yard");
-//        JButton buttonCat = new JButton("See cats in yard");
-//        JButton buttonItems = new JButton("See items in yard");
-//        tabbedPane.addTab("Yard", shopIcon, yard,
-//                "Yard");
-//        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-//
-//        yard.add(buttonCat);
-//        yard.add(buttonItems);
-
-//        JComponent options = makeTextPanel(
-//                "Options: save, load new");
-//        options.setPreferredSize(new Dimension(410, 50));
-//        tabbedPane.addTab("Options", shopIcon, options,
-//                "Does nothing at all");
-//        tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
-
     }
 
     protected JComponent makeTextPanel(String text) {
@@ -133,7 +104,8 @@ public class Gui extends JPanel {
     }
 
     public void makeShop() {
-        JComponent shop = makeTextPanel("Shop");
+        JComponent shop = new JPanel();
+        JLabel label = new JLabel("Welcome to the Shop!");
         JList<String> myShop = new JList<String>(testItems);
         myShop.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         myShop.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -141,12 +113,15 @@ public class Gui extends JPanel {
         tabbedPane.addTab("Shop", shopIcon, shop,
                 "What would you like to buy?");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+        //shop.setBackground(Color.orange);
+        shop.add(label);
         shop.add(myShop);
+
     }
 
-    
+
     public void makeInventory() {
-        JComponent inventory = makeTextPanel("Inventory");
+        JComponent inventory = new JPanel();
         JButton buttonShowItems = new JButton("Show Items");
         JButton buttonPlaceItems = new JButton("Place Items in Yard");
         tabbedPane.addTab("Inventory", shopIcon, inventory,
@@ -158,21 +133,41 @@ public class Gui extends JPanel {
     }
 
     public void makeYard() {
-        JComponent yard = makeTextPanel("Yard");
+        JComponent yard = new JPanel();
+        JComponent buttonsMenu = makeTextPanel("Please Select an Option!");
         JButton buttonCat = new JButton("See cats in yard");
         JButton buttonItems = new JButton("See items in yard");
         tabbedPane.addTab("Yard", shopIcon, yard,
                 "Yard");
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+        JLabel label = new JLabel("test");
+        buttonCat.addActionListener(this);
+        buttonItems.addActionListener(this);
+        buttonsMenu.add(buttonCat);
+        buttonsMenu.add(buttonItems);
+        yard.add(buttonsMenu);
 
-        yard.add(buttonCat);
-        yard.add(buttonItems);
+
+        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonsMenu, label);
+        yard.add(splitPane);
+        Dimension minimumSize = new Dimension(100, 100);
+        buttonsMenu.setMinimumSize(minimumSize);
+        label.setMinimumSize(minimumSize);
+
+
+//        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+//        yard.add(splitPane);
+
+//        //Provide minimum sizes for the two components in the split pane
+//        Dimension minimumSize = new Dimension(100, 50);
+//        listScrollPane.setMinimumSize(minimumSize);
+//        pictureScrollPane.setMinimumSize(minimumSize);
+
 
     }
 
     public void makeOptions() {
-        JComponent options = makeTextPanel(
-                "Options: save, load new");
+        JComponent options = new JPanel();
         options.setPreferredSize(new Dimension(410, 50));
         tabbedPane.addTab("Options", shopIcon, options,
                 "Does nothing at all");
@@ -196,6 +191,18 @@ public class Gui extends JPanel {
                 createAndShowGUI();
             }
         });
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String action = e.getActionCommand();
+        if (action == "See cats in yard") {
+            System.out.println("test");
+        }
+
+
+
+
     }
 }
 

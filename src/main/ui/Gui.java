@@ -43,14 +43,17 @@ import java.awt.event.KeyEvent;
 
 
 
+
 public class Gui extends JPanel implements ActionListener {
     static String[] testItems = { "Kibble", "Spring" } ;
-    //JComponent yard = makeTextPanel("Yard");
+    private JComponent yard;
     private JTabbedPane tabbedPane;
     private ImageIcon shopIcon = createImageIcon("./data/tobs.jpg");
+    protected CatLawnApp catLawn;
 
     public Gui() {
         super(new GridLayout(1, 1));
+
 
         tabbedPane = new JTabbedPane();
         makeShop();
@@ -99,6 +102,7 @@ public class Gui extends JPanel implements ActionListener {
         frame.add(new Gui(), BorderLayout.CENTER);
 
         //Display the window.
+        frame.setPreferredSize(new Dimension(500, 300));
         frame.pack();
         frame.setVisible(true);
     }
@@ -133,7 +137,7 @@ public class Gui extends JPanel implements ActionListener {
     }
 
     public void makeYard() {
-        JComponent yard = new JPanel();
+        yard = new JPanel();
         JComponent buttonsMenu = makeTextPanel("Please Select an Option!");
         JButton buttonCat = new JButton("See cats in yard");
         JButton buttonItems = new JButton("See items in yard");
@@ -147,12 +151,12 @@ public class Gui extends JPanel implements ActionListener {
         buttonsMenu.add(buttonItems);
         yard.add(buttonsMenu);
 
-
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonsMenu, label);
         yard.add(splitPane);
-        Dimension minimumSize = new Dimension(100, 100);
+        Dimension minimumSize = new Dimension(200, 200);
         buttonsMenu.setMinimumSize(minimumSize);
         label.setMinimumSize(minimumSize);
+
 
 
 //        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
@@ -197,7 +201,7 @@ public class Gui extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         if (action == "See cats in yard") {
-            System.out.println("test");
+            //
         }
 
 

@@ -24,6 +24,7 @@ public class CatLawnApp {
     Inventory inventory = new Inventory();
     GameItems gameItems = new GameItems();
     GameCats gameCats = new GameCats();
+    //Gui gui = new Gui();
 
 
 
@@ -38,6 +39,7 @@ public class CatLawnApp {
 
     //EFFECTS: creates a constructor using a yard
     public CatLawnApp(Yard yard) {
+
         gameItems.listToys();
         gameItems.listFood();
         gameCats.listCommonCats();

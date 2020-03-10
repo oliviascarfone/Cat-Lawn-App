@@ -49,6 +49,15 @@ public class Gui extends JPanel {
 
         tabbedPane = new JTabbedPane();
         makeShop();
+        makeInventory();
+        makeYard();
+        makeOptions();
+
+        //Add the tabbed pane to this panel.
+        add(tabbedPane);
+
+        //The following line enables to use scrolling tabs.
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
 //        JComponent shop = makeTextPanel("Shop");
 //        JList<String> myShop = new JList<String>(testItems);
@@ -61,33 +70,28 @@ public class Gui extends JPanel {
 //        shop.add(myShop);
 //        //JButton shopButton = new JButton();
 
-        JComponent inventory = makeTextPanel("Inventory");
-        tabbedPane.addTab("Inventory", shopIcon, inventory,
-                "Here is your inventory");
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+//        JComponent inventory = makeTextPanel("Inventory");
+//        tabbedPane.addTab("Inventory", shopIcon, inventory,
+//                "Here is your inventory");
+//        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 
-        JComponent yard = makeTextPanel("Yard");
-        JButton buttonCat = new JButton("See cats in yard");
-        JButton buttonItems = new JButton("See items in yard");
-        tabbedPane.addTab("Yard", shopIcon, yard,
-                "Yard");
-        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+//        JComponent yard = makeTextPanel("Yard");
+//        JButton buttonCat = new JButton("See cats in yard");
+//        JButton buttonItems = new JButton("See items in yard");
+//        tabbedPane.addTab("Yard", shopIcon, yard,
+//                "Yard");
+//        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+//
+//        yard.add(buttonCat);
+//        yard.add(buttonItems);
 
-        yard.add(buttonCat);
-        yard.add(buttonItems);
+//        JComponent options = makeTextPanel(
+//                "Options: save, load new");
+//        options.setPreferredSize(new Dimension(410, 50));
+//        tabbedPane.addTab("Options", shopIcon, options,
+//                "Does nothing at all");
+//        tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
 
-        JComponent options = makeTextPanel(
-                "Options: save, load new");
-        options.setPreferredSize(new Dimension(410, 50));
-        tabbedPane.addTab("Options", shopIcon, options,
-                "Does nothing at all");
-        tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
-
-        //Add the tabbed pane to this panel.
-        add(tabbedPane);
-
-        //The following line enables to use scrolling tabs.
-        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
     }
 
     protected JComponent makeTextPanel(String text) {
@@ -138,8 +142,42 @@ public class Gui extends JPanel {
                 "What would you like to buy?");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
         shop.add(myShop);
+    }
 
+    public void makeInventory() {
+        JComponent inventory = makeTextPanel("Inventory");
+        tabbedPane.addTab("Inventory", shopIcon, inventory,
+                "Here is your inventory");
+        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 
+    }
+
+    public void makeYard() {
+        JComponent yard = makeTextPanel("Yard");
+        JButton buttonCat = new JButton("See cats in yard");
+        JButton buttonItems = new JButton("See items in yard");
+        tabbedPane.addTab("Yard", shopIcon, yard,
+                "Yard");
+        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
+
+        yard.add(buttonCat);
+        yard.add(buttonItems);
+
+    }
+
+    public void makeOptions() {
+        JComponent options = makeTextPanel(
+                "Options: save, load new");
+        options.setPreferredSize(new Dimension(410, 50));
+        tabbedPane.addTab("Options", shopIcon, options,
+                "Does nothing at all");
+        tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
+        JButton buttonSave = new JButton("Save Game");
+        JButton buttonNew = new JButton("New Game");
+        JButton buttonQuit = new JButton("Quit Game");
+        options.add(buttonNew);
+        options.add(buttonSave);
+        options.add(buttonQuit);
 
     }
 

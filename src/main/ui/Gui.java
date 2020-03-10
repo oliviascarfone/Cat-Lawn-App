@@ -41,8 +41,7 @@ import java.awt.event.KeyEvent;
 public class Gui extends JPanel {
     static String[] testItems = {"Kibble", "Spring"};
     private JTabbedPane tabbedPane;
-    private ImageIcon shopIcon = createImageIcon("images/ragdoll.png");
-
+    private ImageIcon shopIcon = createImageIcon("./images/ragdoll.png");
 
     public Gui() {
         super(new GridLayout(1, 1));
@@ -52,6 +51,7 @@ public class Gui extends JPanel {
         makeInventory();
         makeYard();
         makeOptions();
+
 
         //Add the tabbed pane to this panel.
         add(tabbedPane);
@@ -144,11 +144,16 @@ public class Gui extends JPanel {
         shop.add(myShop);
     }
 
+    
     public void makeInventory() {
         JComponent inventory = makeTextPanel("Inventory");
+        JButton buttonShowItems = new JButton("Show Items");
+        JButton buttonPlaceItems = new JButton("Place Items in Yard");
         tabbedPane.addTab("Inventory", shopIcon, inventory,
                 "Here is your inventory");
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+        inventory.add(buttonShowItems);
+        inventory.add(buttonPlaceItems);
 
     }
 

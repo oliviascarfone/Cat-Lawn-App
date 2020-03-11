@@ -52,7 +52,7 @@ import java.awt.event.KeyEvent;
 public class Gui extends JPanel implements ActionListener, ListSelectionListener {
     static String[] testItems = {"Kibble", "Spring"};
     //Cat testCat = new Cat("Moki", "Ragdoll", "Point",
-     //       "Common", "Kibble", "Spring");
+    //       "Common", "Kibble", "Spring");
     //Food testfood = new Food("name", 1);
     Item testItem = new Food("food", 1);
     JLabel yardLabel;
@@ -64,6 +64,8 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     //private ImageIcon shopIcon = createImageIcon("data/ragdoll.png", "cat");
     private ImageIcon kittyIcon = new ImageIcon("data/ragdoll.png", "cat");
     private ImageIcon cartIcon = new ImageIcon("data/cart.png", "cart");
+    private ImageIcon backpackIcon = new ImageIcon("data/backpack.png", "inventory");
+    private ImageIcon saveIcon = new ImageIcon("data/save.png", "save");
     Yard newYard = new Yard();
     Inventory inventory = new Inventory();
     GameItems gameItems = new GameItems();
@@ -166,7 +168,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         inventoryList.setVisibleRowCount(10);
         JScrollPane listScrollPane = new JScrollPane(inventoryList);
 
-        tabbedPane.addTab("Inventory", kittyIcon, inventoryPanel,
+        tabbedPane.addTab("Inventory", backpackIcon, inventoryPanel,
                 "Here is your inventoryPanel");
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
         inventoryPanel.add(listScrollPane);
@@ -215,15 +217,12 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         yard.add(splitPane);
         buttonsMenu.setMinimumSize(minimumSize);
 
-
-
-
     }
 
     public void makeOptions() {
         JComponent options = new JPanel();
         options.setPreferredSize(new Dimension(410, 50));
-        tabbedPane.addTab("Options", kittyIcon, options,
+        tabbedPane.addTab("Options", saveIcon, options,
                 "Does nothing at all");
         tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
         JButton buttonSave = new JButton("Save Game");

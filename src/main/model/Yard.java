@@ -64,6 +64,20 @@ public class Yard  {
         }
     }
 
+    public ArrayList<String> catsInYardArray() {
+        ArrayList<String> catsInArray = new ArrayList<>();
+        String catToString = "";
+        if (cats.size() > 0) {
+            for (int i = 0; i < cats.size(); i++) {
+                String eachCat = cats.get(i).getName();
+                catToString = (String.format("%s is visiting your lawn!",
+                        eachCat));
+                catsInArray.add(catToString);
+            }
+        }
+        return catsInArray;
+    }
+
     //REQUIRES: Must have a non-empty Inventory
     //MODIFIES: this
     //EFFECTS: adds an item from the inventory to the yard
@@ -91,6 +105,8 @@ public class Yard  {
             return itemsToString;
         }
     }
+
+
 
     //REQUIRES: GameCats lists are not empty
     //MODIFIES: this

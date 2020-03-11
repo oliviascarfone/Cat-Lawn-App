@@ -24,7 +24,7 @@ public class CatLawnApp {
     Inventory inventory = new Inventory();
     GameItems gameItems = new GameItems();
     GameCats gameCats = new GameCats();
-    //Gui gui = new Gui();
+
 
 
 

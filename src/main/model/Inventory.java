@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 //represents an inventory for storing money and purchased items
@@ -78,6 +79,7 @@ public class Inventory {
             return inventoryToString;
         }
     }
+
 
 
 

@@ -33,24 +33,37 @@ package ui;
 
 //https://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
 //https://docs.oracle.com/javase/tutorial/uiswing/components/button.html
+//https://stackoverflow.com/questions/42381633/refreshing-a-jlabel
+//https://docs.oracle.com/javase/tutorial/uiswing/components/list.html
 
 
-import model.Cat;
-import model.Yard;
+import model.*;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 
-public class Gui extends JPanel implements ActionListener {
+public class Gui extends JPanel implements ActionListener, ListSelectionListener {
     static String[] testItems = {"Kibble", "Spring"};
-    String cats = "";
+    //Cat testCat = new Cat("Moki", "Ragdoll", "Point",
+     //       "Common", "Kibble", "Spring");
+    //Food testfood = new Food("name", 1);
+    Item testItem = new Food("food", 1);
+    JLabel yardLabel;
+    private DefaultListModel listModel;
+    private JList list;
+    private JButton placeInYardButton;
     private JTabbedPane tabbedPane;
     private ImageIcon shopIcon = createImageIcon("https://placekitten.com/g/200/300");
-    //protected CatLawnApp catLawn;
+    Yard newYard = new Yard();
+    Inventory inventory = new Inventory();
+    GameItems gameItems = new GameItems();
+    GameCats gameCats = new GameCats();
 
     public Gui() {
         super(new GridLayout(1, 1));
@@ -103,7 +116,7 @@ public class Gui extends JPanel implements ActionListener {
         frame.add(new Gui(), BorderLayout.CENTER);
 
         //Display the window.
-        frame.setPreferredSize(new Dimension(500, 300));
+        frame.setPreferredSize(new Dimension(500, 500));
         frame.pack();
         frame.setVisible(true);
     }
@@ -115,57 +128,66 @@ public class Gui extends JPanel implements ActionListener {
         myShop.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         myShop.setLayoutOrientation(JList.VERTICAL_WRAP);
         myShop.setVisibleRowCount(-1);
+        JScrollPane listScroller = new JScrollPane(myShop);
+        listScroller.setPreferredSize(new Dimension(250, 80));
         tabbedPane.addTab("Shop", shopIcon, shop,
                 "What would you like to buy?");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
         //shop.setBackground(Color.orange);
         shop.add(label);
         shop.add(myShop);
-
     }
 
 
     public void makeInventory() {
-        JComponent inventory = new JPanel();
-        JButton buttonShowItems = new JButton("Show Items");
-        JButton buttonPlaceItems = new JButton("Place Items in Yard");
-        tabbedPane.addTab("Inventory", shopIcon, inventory,
-                "Here is your inventory");
+        JComponent inventoryPanel = new JPanel();
+        listModel = new DefaultListModel();
+        //inventory.inventoryList.add(new InventoryEntry(testItem, 1));
+        for (InventoryEntry i : inventory.inventoryList) {
+            String itemName = i.getItem().getName();
+            listModel.addElement(itemName);
+        }
+        list = new JList(listModel);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setSelectedIndex(0);
+        list.addListSelectionListener(this);
+        list.setVisibleRowCount(10);
+        JScrollPane listScrollPane = new JScrollPane(list);
+
+        tabbedPane.addTab("Inventory", shopIcon, inventoryPanel,
+                "Here is your inventoryPanel");
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-        inventory.add(buttonShowItems);
-        inventory.add(buttonPlaceItems);
+        inventoryPanel.add(listScrollPane);
+        inventoryPanel.add(placeInYardButton = new JButton("Place in Yard"));
+        placeInYardButton.addActionListener(new PlaceInYard());
 
     }
 
     public void makeYard() {
         JPanel yard = new JPanel();
-        JComponent buttonsMenu = makeTextPanel("Please Select an Option!");
+        Dimension minimumSize = new Dimension(400, 300);
+        yardLabel = new JLabel("Please select an option");
+        yardLabel.setMinimumSize(minimumSize);
+        JComponent buttonsMenu = new JPanel();
         JButton buttonCat = new JButton("See cats in yard");
-        JButton buttonItems = new JButton("See items in yard");
+        JButton buttonFood = new JButton("See food in yard");
+        JButton buttonToys = new JButton("See toys in yard");
         tabbedPane.addTab("Yard", shopIcon, yard,
                 "Yard");
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-        JLabel label = new JLabel(cats);
         buttonCat.addActionListener(this);
-        buttonItems.addActionListener(this);
+        buttonFood.addActionListener(this);
+        buttonToys.addActionListener(this);
         buttonsMenu.add(buttonCat);
-        buttonsMenu.add(buttonItems);
+        buttonsMenu.add(buttonFood);
+        buttonsMenu.add(buttonToys);
         yard.add(buttonsMenu);
 
-        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonsMenu, label);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonsMenu, yardLabel);
         yard.add(splitPane);
-        Dimension minimumSize = new Dimension(200, 100);
         buttonsMenu.setMinimumSize(minimumSize);
-        label.setMinimumSize(minimumSize);
 
 
-//        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-//        yard.add(splitPane);
-
-//        //Provide minimum sizes for the two components in the split pane
-//        Dimension minimumSize = new Dimension(100, 50);
-//        listScrollPane.setMinimumSize(minimumSize);
-//        pictureScrollPane.setMinimumSize(minimumSize);
 
 
     }
@@ -200,10 +222,75 @@ public class Gui extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
-        //if (action == "See cats in yard") {
-        //cats = catLawn.yard.catsInYard();
+        if (action == "See cats in yard") {
+            newYard.addCatToYard();
+            updateLabel(newYard.catsInYard());
+        } else if (action == "See food in yard") {
+            updateLabel(newYard.itemsInYard(newYard.food));
+        } else if (action == "See toys in yard") {
+            updateLabel(newYard.itemsInYard(newYard.toys));
+        }
+
     }
+
+    public void updateLabel(String status) {
+        yardLabel.setText(status);
+
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting() == false) {
+
+            if (list.getSelectedIndex() == -1) {
+                //No selection, disable fire button.
+                placeInYardButton.setEnabled(false);
+
+            } else {
+                //Selection, enable the fire button.
+                placeInYardButton.setEnabled(true);
+            }
+        }
+    }
+
+
+    class PlaceInYard implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            //This method can be called only if
+            //there's a valid selection
+            //so go ahead and remove whatever's selected.
+            int index = list.getSelectedIndex();
+            placeItem((String) listModel.get(index));
+            listModel.remove(index);
+
+            int size = listModel.getSize();
+
+            if (size == 0) { //Nobody's left, disable firing.
+                placeInYardButton.setEnabled(false);
+
+            } else { //Select an index.
+                if (index == listModel.getSize()) {
+                    //removed item in last position
+                    index--;
+                }
+
+                list.setSelectedIndex(index);
+                list.ensureIndexIsVisible(index);
+            }
+        }
+    }
+
+    public void placeItem(String item) {
+        if (item == "Kibble") {
+            newYard.addItemToYard(new Food("Kibble", 0));
+        } else if (item == "Spring") {
+            newYard.addItemToYard(new Toy("Spring", 0));
+        }
+    }
+
 }
+
+
 
 
 

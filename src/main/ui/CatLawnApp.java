@@ -20,7 +20,7 @@ public class CatLawnApp {
     Scanner input;
     Yard yard;
     Yard newYard = new Yard();
-    YardJsonParser parser = new YardJsonParser(this);
+    //YardJsonParser parser = new YardJsonParser(this);
     Inventory inventory = new Inventory();
     GameItems gameItems = new GameItems();
     GameCats gameCats = new GameCats();
@@ -53,7 +53,7 @@ public class CatLawnApp {
         input = new Scanner(System.in);
         command = input.nextLine();
 
-        loadGame(YARD_FILE);
+        //loadGame(YARD_FILE);
 
 
         while (keepGoing) {
@@ -327,10 +327,10 @@ public class CatLawnApp {
 //    }
 
 
-    public boolean loadGame(String file) {
-        return parser.loadYard(file);
+    //public boolean loadGame(String file) {
+     //   return parser.loadYard(file);
 
-    }
+    //}
         //loadInventory();
 
 

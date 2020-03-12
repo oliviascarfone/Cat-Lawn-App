@@ -6,6 +6,7 @@ import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.CatLawnApp;
+import ui.Gui;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,13 +29,13 @@ public class YardJsonParserTest {
     YardJsonParser testYardJsonParser;
     String TEST_YARD_FILE = "./data/testYard.json";
     String FAKE_YARD_FILE = "./././././";
-    CatLawnApp catAppTest;
+    Gui gui;
     CatLawnApp catAppTest1;
 
     @BeforeEach
     void runBefore() {
         testYard = new Yard();
-        testYardJsonParser = new YardJsonParser(catAppTest = new CatLawnApp(testYard));
+        testYardJsonParser = new YardJsonParser(gui = new Gui());
         testCatsList = new ArrayList<>();
         testFoodList = new ArrayList<>();
         testToysList = new ArrayList<>();
@@ -49,14 +50,14 @@ public class YardJsonParserTest {
     @Test
 
     void testParsedDataGoodFile() {
-        assertTrue(catAppTest.loadGame(TEST_YARD_FILE));
+        assertTrue(gui.loadGame(TEST_YARD_FILE));
 
     }
 
     @Test
 
     void testParsedDataBadFile() {
-        assertFalse(catAppTest.loadGame(FAKE_YARD_FILE));
+        assertFalse(gui.loadGame(FAKE_YARD_FILE));
     }
 
 

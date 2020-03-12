@@ -40,6 +40,7 @@ package ui;
 
 import model.*;
 import persistance.JsonWriter;
+import persistance.YardJsonParser;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -48,6 +49,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 
 public class Gui extends JPanel implements ActionListener, ListSelectionListener {
@@ -65,6 +67,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private ImageIcon saveIcon = new ImageIcon("data/save.png", "save");
     Yard newYard = new Yard();
     Inventory inventory = new Inventory();
+    YardJsonParser parser = new YardJsonParser(this);
     GameItems gameItems = new GameItems();
     GameCats gameCats = new GameCats();
 
@@ -75,6 +78,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         makeInventoryPanel();
         makeYard();
         makeOptions();
+        loadGame(YARD_FILE);
 
         //Add the tabbed pane to this panel.
         add(tabbedPane);
@@ -292,6 +296,10 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         }
     }
 
+    public void loadedGameYard(ArrayList<Cat> listOfCats, ArrayList<Item> listOfFood, ArrayList<Item> listOfToy) {
+        newYard = new Yard(listOfCats, listOfFood, listOfToy);
+    }
+
 
     class PlaceInYard implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -353,6 +361,14 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
             updateInventory();
         }
 
+    }
+
+    public boolean loadGame(String file) {
+        return parser.loadYard(file);
+    }
+
+    public void emptyYard() {
+        newYard = new Yard();
     }
 
 }

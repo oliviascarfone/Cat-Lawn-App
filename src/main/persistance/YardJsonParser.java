@@ -2,13 +2,11 @@ package persistance;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import jdk.nashorn.internal.parser.JSONParser;
 import model.Cat;
 import model.Food;
 import model.Item;
 import model.Toy;
-import ui.CatLawnApp;
+import ui.Gui;
 
 
 import java.io.FileReader;
@@ -23,12 +21,12 @@ import java.util.ArrayList;
 public class YardJsonParser {
     JsonParser parser;
     private static final String YARD_FILE = "./data/yard.json";
-    private CatLawnApp catLawn;
+    private Gui gui;
 
 
     //EFFECTS; creates new YardJsonParser
-    public YardJsonParser(CatLawnApp catLawn) {
-        this.catLawn = catLawn;
+    public YardJsonParser(Gui gui) {
+        this.gui = gui;
     }
 
     //MODIFIES: CatLawn
@@ -44,11 +42,11 @@ public class YardJsonParser {
             ArrayList<Item> listOfFood = makeFoodList(loadedFood);
             JsonArray loadedToys = result.getAsJsonArray("toys");
             ArrayList<Item> listOfToy = makeToyList(loadedToys);
-            catLawn.makeYard(listOfCats, listOfFood, listOfToy);
+            gui.loadedGameYard(listOfCats, listOfFood, listOfToy);
             return true;
 
         } catch (IOException e) {
-            catLawn.emptyYard();
+            gui.emptyYard();
             return false;
         }
     }

@@ -39,6 +39,7 @@ package ui;
 
 
 import model.*;
+import persistance.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -50,18 +51,14 @@ import java.awt.event.KeyEvent;
 
 
 public class Gui extends JPanel implements ActionListener, ListSelectionListener {
+    private static final String YARD_FILE = "./data/yard.json";
     static String[] testItems = {"Kibble", "Spring"};
-    //Cat testCat = new Cat("Moki", "Ragdoll", "Point",
-    //       "Common", "Kibble", "Spring");
-    //Food testfood = new Food("name", 1);
-    Item testItem = new Food("food", 1);
     JLabel yardLabel;
     private DefaultListModel listModelInventory;
     private JList inventoryList;
     private JList shopList;
     private JButton placeInYardButton;
     private JTabbedPane tabbedPane;
-    //private ImageIcon shopIcon = createImageIcon("data/ragdoll.png", "cat");
     private ImageIcon kittyIcon = new ImageIcon("data/ragdoll.png", "cat");
     private ImageIcon cartIcon = new ImageIcon("data/cart.png", "cart");
     private ImageIcon backpackIcon = new ImageIcon("data/backpack.png", "inventory");
@@ -226,8 +223,11 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
                 "Does nothing at all");
         tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
         JButton buttonSave = new JButton("Save Game");
+        buttonSave.addActionListener(this);
         JButton buttonNew = new JButton("New Game");
+        buttonNew.addActionListener(this);
         JButton buttonQuit = new JButton("Quit Game");
+        buttonQuit.addActionListener(this);
         options.add(buttonNew);
         options.add(buttonSave);
         options.add(buttonQuit);
@@ -256,9 +256,21 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
             updateLabel(newYard.itemsInYard(newYard.food));
         } else if (action == "See toys in yard") {
             updateLabel(newYard.itemsInYard(newYard.toys));
+        } else if (action == "Quit Game") {
+            System.exit(0);
+        } else if (action == "New Game") {
+            inventory.inventoryList.clear();
+            newYard.cats.clear();
+            newYard.food.clear();
+            newYard.toys.clear();
+        } else if (action == "Save Game") {
+            JsonWriter.saveGame(newYard, YARD_FILE);
         }
 
     }
+
+
+
 
     public void updateLabel(String status) {
         yardLabel.setText(status);
@@ -321,7 +333,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
             //int index = shopList.getSelectedIndex();
             buyItem((String) shopList.getSelectedValue());
 
-            int size = listModelInventory.getSize();
+            //int size = listModelInventory.getSize();
         }
     }
 

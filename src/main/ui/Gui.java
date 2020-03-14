@@ -221,24 +221,26 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         buttonsMenu.add(buttonFood);
         buttonsMenu.add(buttonToys);
         yard.add(buttonsMenu);
-        makeYardImage();
+        //makeYardImage();
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonsMenu, yardLabel);
+        //JSplitPane totalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitPane, yardImage);
         yard.add(splitPane);
+        //yard.add(totalPane);
         buttonsMenu.setMinimumSize(minimumSize);
 
     }
 
-    public void makeYardImage() {
-        try {
-            BufferedImage picture = ImageIO.read(new File("data/cats/moki.png"));
-            yardImage = new JLabel(new ImageIcon(picture));
-        } catch (IOException e) {
-           //
-        }
+//    public void makeYardImage() {
+//        try {
+//            BufferedImage picture = ImageIO.read(new File("data/cats/moki.png"));
+//            yardImage = new JLabel(new ImageIcon(picture));
+//        } catch (IOException e) {
+//           //
+//        }
 
 
 
-    }
+
 
     public void makeOptions() {
         JComponent options = new JPanel();

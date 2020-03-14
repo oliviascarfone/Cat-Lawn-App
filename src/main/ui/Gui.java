@@ -238,7 +238,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     }
 
-    public static void main(String[] args) {
+    public static void start() {
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {

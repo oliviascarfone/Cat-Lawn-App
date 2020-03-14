@@ -48,7 +48,7 @@ public class GameItems {
         for (int i = 0; i < allFood.size(); i++) {
             String eachItem = allFood.get(i).getName();
             int eachItemCost = allFood.get(i).getCost();
-            foodToString += (String.format(" %s for $%s\n",
+            foodToString += (String.format("%s for $%s\n",
                     eachItem, eachItemCost));
 
         }
@@ -61,7 +61,7 @@ public class GameItems {
         for (int i = 0; i < allToys.size(); i++) {
             String eachItem = allToys.get(i).getName();
             int eachItemCost = allToys.get(i).getCost();
-            toyToString += (String.format(" %s for $%s\n",
+            toyToString += (String.format("%s for $%s\n",
                     eachItem, eachItemCost));
 
         }

@@ -42,6 +42,7 @@ import model.*;
 import persistance.JsonWriter;
 import persistance.YardJsonParser;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -49,16 +50,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class Gui extends JPanel implements ActionListener, ListSelectionListener {
     private static final String YARD_FILE = "./data/yard.json";
     static String[] testItems = {"Kibble", "Spring"};
-    JLabel yardLabel;
+    JTextArea yardLabel;
     private DefaultListModel listModelInventory;
     private JList inventoryList;
     private JList shopList;
+    private JLabel yardImage;
     private JButton placeInYardButton;
     private JTabbedPane tabbedPane;
     private ImageIcon kittyIcon = new ImageIcon("data/ragdoll.png", "cat");
@@ -197,8 +202,11 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     public void makeYard() {
         JPanel yard = new JPanel();
         Dimension minimumSize = new Dimension(400, 300);
-        yardLabel = new JLabel("Please select an option");
-        yardLabel.setMinimumSize(minimumSize);
+        yardLabel = new JTextArea("Please select an option");
+        yardLabel.setEditable(false);
+        yardLabel.setLineWrap(true);
+        //yardLabel = new JLabel("Please select an option");
+        //yardLabel.setMinimumSize(minimumSize);
         JComponent buttonsMenu = new JPanel();
         JButton buttonCat = new JButton("See cats in yard");
         JButton buttonFood = new JButton("See food in yard");
@@ -213,10 +221,22 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         buttonsMenu.add(buttonFood);
         buttonsMenu.add(buttonToys);
         yard.add(buttonsMenu);
-
+        makeYardImage();
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonsMenu, yardLabel);
         yard.add(splitPane);
         buttonsMenu.setMinimumSize(minimumSize);
+
+    }
+
+    public void makeYardImage() {
+        try {
+            BufferedImage picture = ImageIO.read(new File("data/cats/moki.png"));
+            yardImage = new JLabel(new ImageIcon(picture));
+        } catch (IOException e) {
+           //
+        }
+
+
 
     }
 

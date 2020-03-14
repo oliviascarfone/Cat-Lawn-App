@@ -38,7 +38,7 @@ public class GameCats {
                 "Kibble", "String");
         Cat luna = new Cat("Luna", "Shorthair", "Point", "Common",
                 "Kibble", "Brush");
-        Cat jiji = new Cat("Jiji", "Shorthair", "Black", "Common",
+        Cat zeus = new Cat("Zeus", "Shorthair", "Black", "Common",
                 "Kibble", "Spring");
         Cat nala = new Cat("Nala", "Shorthair", "Black", "Common",
                 "Kibble", "Mouse");
@@ -48,7 +48,7 @@ public class GameCats {
         commonGameCats.add(sushi);
         commonGameCats.add(evie);
         commonGameCats.add(luna);
-        commonGameCats.add(jiji);
+        commonGameCats.add(zeus);
         commonGameCats.add(nala);
         commonGameCats.add(milo);
 

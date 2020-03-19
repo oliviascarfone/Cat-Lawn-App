@@ -36,11 +36,18 @@ package ui;
 //https://stackoverflow.com/questions/42381633/refreshing-a-jlabel
 //https://docs.oracle.com/javase/tutorial/uiswing/components/list.html
 //https://stackoverflow.com/questions/15840857/java-createimageicon-not-recognized-in-code/15840895
+//https://stackoverflow.com/questions/20811728/adding-music-sound-to-java-programs
+//music from Kazumi Totaka, Wii menu music
 
 
+import jdk.internal.util.xml.impl.Input;
 import model.*;
 import persistance.JsonWriter;
 import persistance.YardJsonParser;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -51,8 +58,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -73,8 +79,8 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     Yard newYard = new Yard();
     Inventory inventory = new Inventory();
     YardJsonParser parser = new YardJsonParser(this);
-    GameItems gameItems = new GameItems();
-    GameCats gameCats = new GameCats();
+    //GameItems gameItems = new GameItems();
+    //GameCats gameCats = new GameCats();
 
     public Gui() {
         super(new GridLayout(1, 1));
@@ -83,6 +89,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         makeInventoryPanel();
         makeYard();
         makeOptions();
+        addMusic();
         loadGame(YARD_FILE);
 
         //Add the tabbed pane to this panel.
@@ -133,6 +140,25 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         frame.setVisible(true);
     }
 
+    public void addMusic() {
+        AudioPlayer audioPlayer = AudioPlayer.player;
+        AudioStream audioStream;
+        AudioData audioData;
+        ContinuousAudioDataStream audioLoop = null;
+
+        try {
+            InputStream musicFile = new FileInputStream("data/music/01 Main Menu.wav");
+            audioStream = new AudioStream(musicFile);
+            audioPlayer.start(audioStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        audioPlayer.start(audioLoop);
+
+    }
+
     public void makeShop() {
         JComponent shop = new JPanel();
         shop.setLayout(new BorderLayout());
@@ -161,12 +187,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         listModelInventory = new DefaultListModel();
         makeInventoryInit();
         updateInventory();
-        //listModelInventory = new DefaultListModel();
-        //inventory.inventoryList.add(new InventoryEntry(testItem, 1));
-//        for (InventoryEntry i : inventory.inventoryList) {
-//            String itemName = i.getItem().getName();
-//            listModelInventory.addElement(itemName);
-//        }
+
         inventoryList = new JList(listModelInventory);
         inventoryList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         inventoryList.setSelectedIndex(0);

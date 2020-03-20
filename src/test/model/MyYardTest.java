@@ -121,11 +121,11 @@ class MyYardTest {
 
     }
 
-    @Test
-    void catsAsArrayStringTest() {
-        testYard.cats.add(testCat);
-        assertEquals(testYard.catsInYardArray().get(0), "name is visiting your lawn!");
-    }
+//    @Test
+//    void catsAsArrayStringTest() {
+//        testYard.cats.add(testCat);
+//        assertEquals(testYard.catsInYardArray().get(0), "name is visiting your lawn!");
+//    }
 
 
 }

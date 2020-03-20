@@ -6,6 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import model.Cat;
+import model.Inventory;
 import model.Item;
 import model.Yard;
 import netscape.javascript.JSObject;
@@ -17,7 +18,9 @@ import java.util.ArrayList;
 //a writer that writes cat lawn data to a file
 public class JsonWriter {
     private static final String YARD_FILE = "./data/yard.json";
+    private static final String INVENTORY_FILE = "./data/inventory.json";
     private static JsonObject yardJson;
+    private static JsonObject inventoryJson;
 
 
     //EFFECTS: creates new Json Writer
@@ -37,9 +40,6 @@ public class JsonWriter {
             fileWriter.close();
             System.out.println("Successfully saved yard data!");
             return true;
-//            FileWriter fileWriter1 = new FileWriter(INVENTORY_FILE);
-//            fileWriter1.write(jsonObjectInventory.toString());
-//            fileWriter1.close();
         } catch (FileNotFoundException e) {
             System.out.println("Problem saving game data");
             return false;
@@ -48,6 +48,10 @@ public class JsonWriter {
             return false;
         }
     }
+
+
+
+
 
     //MODIFIES: this
     //EFFECTS: constructs the JSON object out of the components of Yard JSON elements

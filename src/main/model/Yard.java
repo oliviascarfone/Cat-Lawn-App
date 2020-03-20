@@ -64,19 +64,19 @@ public class Yard  {
         }
     }
 
-    public ArrayList<String> catsInYardArray() {
-        ArrayList<String> catsInArray = new ArrayList<>();
-        String catToString = "";
-        if (cats.size() > 0) {
-            for (int i = 0; i < cats.size(); i++) {
-                String eachCat = cats.get(i).getName();
-                catToString = (String.format("%s is visiting your lawn!",
-                        eachCat));
-                catsInArray.add(catToString);
-            }
-        }
-        return catsInArray;
-    }
+//    public ArrayList<String> catsInYardArray() {
+//        ArrayList<String> catsInArray = new ArrayList<>();
+//        String catToString = "";
+//        if (cats.size() > 0) {
+//            for (int i = 0; i < cats.size(); i++) {
+//                String eachCat = cats.get(i).getName();
+//                catToString = (String.format("%s is visiting your lawn!",
+//                        eachCat));
+//                catsInArray.add(catToString);
+//            }
+//        }
+//        return catsInArray;
+//    }
 
     //REQUIRES: Must have a non-empty Inventory
     //MODIFIES: this
@@ -117,13 +117,6 @@ public class Yard  {
         Boolean catIndicator = false;
         if (food.size() >= 1) {
             cc = gameCats.generateCommonCat();
-//            for (Cat c : cats) {
-//                String eachCat = c.getName();
-//                if (eachCat.equals(cc.getName())) {
-//                    catIndicator = true;
-//                    break;
-//                }
-//            }
             if ((!cats.contains(cc)) && (food.size() > cats.size())) {
                 cats.add(cc);
             }

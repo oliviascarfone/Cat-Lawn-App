@@ -40,16 +40,13 @@ package ui;
 //music from Kazumi Totaka, Wii menu music
 
 
-import jdk.internal.util.xml.impl.Input;
 import model.*;
 import persistance.JsonWriter;
 import persistance.YardJsonParser;
-import sun.audio.AudioData;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -57,7 +54,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -76,7 +72,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private ImageIcon cartIcon = new ImageIcon("data/cart.png", "cart");
     private ImageIcon backpackIcon = new ImageIcon("data/backpack.png", "inventory");
     private ImageIcon saveIcon = new ImageIcon("data/save.png", "save");
-    Yard newYard = new Yard();
+    Yard yard = new Yard();
     Inventory inventory = new Inventory();
     YardJsonParser parser = new YardJsonParser(this);
     //GameItems gameItems = new GameItems();
@@ -91,6 +87,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         makeOptions();
         addMusic();
         loadGame(YARD_FILE);
+        //loadItems(INVENTORY_FILE);
 
         //Add the tabbed pane to this panel.
         add(tabbedPane);
@@ -143,7 +140,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     public void addMusic() {
         AudioPlayer audioPlayer = AudioPlayer.player;
         AudioStream audioStream;
-        AudioData audioData;
+       // AudioData audioData;
         ContinuousAudioDataStream audioLoop = null;
 
         try {
@@ -297,21 +294,21 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         if (action == "See cats in yard") {
-            newYard.addCatToYard();
-            updateLabel(newYard.catsInYard());
+            yard.addCatToYard();
+            updateLabel(yard.catsInYard());
         } else if (action == "See food in yard") {
-            updateLabel(newYard.itemsInYard(newYard.food));
+            updateLabel(yard.itemsInYard(yard.food));
         } else if (action == "See toys in yard") {
-            updateLabel(newYard.itemsInYard(newYard.toys));
+            updateLabel(yard.itemsInYard(yard.toys));
         } else if (action == "Quit Game") {
             System.exit(0);
         } else if (action == "New Game") {
             inventory.inventoryList.clear();
-            newYard.cats.clear();
-            newYard.food.clear();
-            newYard.toys.clear();
+            yard.cats.clear();
+            yard.food.clear();
+            yard.toys.clear();
         } else if (action == "Save Game") {
-            JsonWriter.saveGame(newYard, YARD_FILE);
+            JsonWriter.saveGame(yard, YARD_FILE);
         }
 
     }
@@ -340,7 +337,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     }
 
     public void loadedGameYard(ArrayList<Cat> listOfCats, ArrayList<Item> listOfFood, ArrayList<Item> listOfToy) {
-        newYard = new Yard(listOfCats, listOfFood, listOfToy);
+        yard = new Yard(listOfCats, listOfFood, listOfToy);
     }
 
 
@@ -373,9 +370,9 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     public void placeItem(String item) {
         if (item == "Kibble") {
-            newYard.addItemToYard(new Food("Kibble", 0));
+            yard.addItemToYard(new Food("Kibble", 0));
         } else if (item == "Spring") {
-            newYard.addItemToYard(new Toy("Spring", 0));
+            yard.addItemToYard(new Toy("Spring", 0));
         }
     }
 
@@ -411,7 +408,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     }
 
     public void emptyYard() {
-        newYard = new Yard();
+        yard = new Yard();
     }
 
 }

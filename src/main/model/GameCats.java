@@ -16,13 +16,13 @@ public class GameCats {
     ArrayList<Cat> commonGameCats;
     ArrayList<Cat> uncommonGameCats;
     Random random;
-    ArrayList<String> catNames;
+    //ArrayList<String> catNames;
 
     public GameCats() {
         commonGameCats = new ArrayList<>();
         uncommonGameCats = new ArrayList<>();
         random = new Random();
-        catNames = catNamesAsStrings();
+        //catNames = catNamesAsStrings();
 
     }
 
@@ -80,24 +80,24 @@ public class GameCats {
         return commonGameCats.get(r);
     }
 
-    //REQUIRES: list of uncommon cats is not empty
-    //EFFECT: randomly generates an uncommon cat
-    public Cat generateUncommonCat() {
-        int x = random.nextInt(uncommonGameCats.size());
-        return uncommonGameCats.get(x);
-    }
-
-    //EFFECTS: returns the cats names in a list
-    public ArrayList<String> catNamesAsStrings() {
-        for (int i = 0; i < commonGameCats.size(); i++) {
-            catNames.add(commonGameCats.get(i).getName());
-
-        }
-        for (int i = 0; i < uncommonGameCats.size(); i++) {
-            catNames.add(uncommonGameCats.get(i).getName());
-        }
-        return catNames;
-    }
+//    //REQUIRES: list of uncommon cats is not empty
+//    //EFFECT: randomly generates an uncommon cat
+//    public Cat generateUncommonCat() {
+//        int x = random.nextInt(uncommonGameCats.size());
+//        return uncommonGameCats.get(x);
+//    }
+//
+//    //EFFECTS: returns the cats names in a list
+//    public ArrayList<String> catNamesAsStrings() {
+//        for (int i = 0; i < commonGameCats.size(); i++) {
+//            catNames.add(commonGameCats.get(i).getName());
+//
+//        }
+//        for (int i = 0; i < uncommonGameCats.size(); i++) {
+//            catNames.add(uncommonGameCats.get(i).getName());
+//        }
+//        return catNames;
+//    }
 
 
 }

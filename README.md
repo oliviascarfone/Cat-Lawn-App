@@ -37,5 +37,23 @@ be played casually and has no learning curve
 -As a user, I want to be able to play from past game data and progress from there
 
 
+#Phase 3
+##Instructions for Grader
+
+
+- You generate the first requirement (after purchasing an item in the shop tab) 
+ by selecting an item from the list of items in the inventory.
+- You can generate the second required event by clicking the button to place the item in the yard. 
+The last even is to click on the yard tab and 
+check out the item you have placed.
+- You can locate my audio component via background music which is
+ triggered once the application has started. 
+- You can locate my visual component via icons that should load once application 
+is opened and by purchasing items.
+- You can save the state of my application by clicking the 'Save game' button in the Options tab
+- You can reload the game by opening the application. The default mode is to 
+load an older game. You can create a new game by clicking the 'New game' button in the Options tab
+
+
 
 

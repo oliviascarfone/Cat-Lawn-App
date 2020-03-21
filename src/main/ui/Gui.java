@@ -349,7 +349,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         inventory = new Inventory();
         //updateInventory();
     }
-    
+
     class PlaceInYard implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {

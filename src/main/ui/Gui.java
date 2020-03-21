@@ -414,10 +414,6 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
 
 
-
-
-
-
     public void buyItem(String selection) {
         if (selection == "Kibble") {
             inventory.inventoryList.add(new InventoryEntry(new Food("Kibble", 0), 1));
@@ -445,9 +441,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
                     JOptionPane.INFORMATION_MESSAGE, springIcon);
         }
     }
-
-
-
+    
     public boolean loadGame(String yardFile, String inventoryFile) {
         return parser.loadGame(yardFile, inventoryFile);
     }

@@ -80,12 +80,12 @@ public class GameCats {
         return commonGameCats.get(r);
     }
 
-//    //REQUIRES: list of uncommon cats is not empty
-//    //EFFECT: randomly generates an uncommon cat
-//    public Cat generateUncommonCat() {
-//        int x = random.nextInt(uncommonGameCats.size());
-//        return uncommonGameCats.get(x);
-//    }
+    //REQUIRES: list of uncommon cats is not empty
+    //EFFECT: randomly generates an uncommon cat
+    public Cat generateUncommonCat() {
+        int x = random.nextInt(uncommonGameCats.size());
+        return uncommonGameCats.get(x);
+    }
 //
 //    //EFFECTS: returns the cats names in a list
 //    public ArrayList<String> catNamesAsStrings() {

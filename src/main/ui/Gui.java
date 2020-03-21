@@ -37,6 +37,7 @@ package ui;
 //https://docs.oracle.com/javase/tutorial/uiswing/components/list.html
 //https://stackoverflow.com/questions/15840857/java-createimageicon-not-recognized-in-code/15840895
 //https://stackoverflow.com/questions/20811728/adding-music-sound-to-java-programs
+//https://mkyong.com/swing/java-swing-how-to-make-a-simple-dialog/
 //music from Kazumi Totaka, Wii menu music
 
 
@@ -73,8 +74,8 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private ImageIcon cartIcon = new ImageIcon("data/cart.png", "cart");
     private ImageIcon backpackIcon = new ImageIcon("data/backpack.png", "inventory");
     private ImageIcon saveIcon = new ImageIcon("data/save.png", "save");
-    Yard yard; //= new Yard();
-    Inventory inventory; //= new Inventory();
+    Yard yard;
+    Inventory inventory;
     YardJsonParser parser = new YardJsonParser(this);
 
 
@@ -421,12 +422,31 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         if (selection == "Kibble") {
             inventory.inventoryList.add(new InventoryEntry(new Food("Kibble", 0), 1));
             updateInventory();
+            confirmPurchase("Kibble");
         } else if (selection == "Spring") {
             inventory.inventoryList.add(new InventoryEntry(new Toy("Spring", 0), 1));
             updateInventory();
+            confirmPurchase("Spring");
         }
 
     }
+
+    public void confirmPurchase(String itemType) {
+        JOptionPane popup = new JOptionPane();
+        ImageIcon kibbleIcon = new ImageIcon("data/kibblepic.png");
+        ImageIcon springIcon = new ImageIcon("data/Spring.png");
+        if (itemType.equals("Kibble")) {
+
+            popup.showMessageDialog(null, "Bought Kibble!", "Purchase Confirmation",
+                    JOptionPane.INFORMATION_MESSAGE, kibbleIcon);
+
+        } else if (itemType.equals("Spring")) {
+            popup.showMessageDialog(null, "Bought a Spring!", "Purchase Confirmation",
+                    JOptionPane.INFORMATION_MESSAGE, springIcon);
+        }
+    }
+
+
 
     public boolean loadGame(String yardFile, String inventoryFile) {
         return parser.loadGame(yardFile, inventoryFile);

@@ -349,8 +349,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         inventory = new Inventory();
         //updateInventory();
     }
-
-
+    
     class PlaceInYard implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -441,7 +440,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
                     JOptionPane.INFORMATION_MESSAGE, springIcon);
         }
     }
-    
+
     public boolean loadGame(String yardFile, String inventoryFile) {
         return parser.loadGame(yardFile, inventoryFile);
     }

@@ -20,12 +20,12 @@ public class Inventory {
 
 
     //
-    //EFFECTS: creates an Inventory from saved data
-    public Inventory(ArrayList<InventoryEntry> inventoryList, int balance) {
-        this.inventoryList = inventoryList;
-        this.balance = balance;
-    }
-
+//    //EFFECTS: creates an Inventory from saved data
+//    public Inventory(ArrayList<InventoryEntry> inventoryList, int balance) {
+//        this.inventoryList = inventoryList;
+//        this.balance = balance;
+//    }
+//
     public int getBalance() {
         return balance;
     }
@@ -121,13 +121,6 @@ public class Inventory {
     }
 
 
-
-//    @Override
-//    public void save(PrintWriter printWriter) {
-//        printWriter.print(balance);
-//        printWriter.print(Reader.DELIMITER);
-//        printWriter.print(inventoryEntryQuantityNames());
-//        printWriter.print(Reader.DELIMITER);
 
 
 

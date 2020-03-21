@@ -262,7 +262,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         JComponent options = new JPanel();
         options.setPreferredSize(new Dimension(410, 50));
         tabbedPane.addTab("Options", saveIcon, options,
-                "Does nothing at all");
+                "Create new game, save game, or quit");
         tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
         JButton buttonSave = new JButton("Save Game");
         buttonSave.addActionListener(this);
@@ -351,6 +351,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
 
     class PlaceInYard implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             //This method can be called only if
             //there's a valid selection
@@ -381,11 +382,11 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         if (item.equals("Kibble")) {
             yard.addItemToYard(new Food("Kibble", 0));
             removeItemFromInventory("Kibble");
-            updateInventory();
+            //updateInventory();
         } else if (item.equals("Spring")) {
             yard.addItemToYard(new Toy("Spring", 0));
             removeItemFromInventory("Spring");
-            updateInventory();
+            //updateInventory();
         }
     }
 

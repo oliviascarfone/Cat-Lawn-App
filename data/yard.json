@@ -1,1 +1,1 @@
-{"cats":[{"name":"Mimi","breed":"Shorthair","coat":"Black","rarityLevel":"Uncommon","foodPreference":"Tuna","toyPreference":"Mouse"},{"name":"Roddick","breed":"Longhair","coat":"Ginger","rarityLevel":"Uncommon","foodPreference":"Salmon","toyPreference":"Brush"}],"food":[],"toys":[{"name":"Spring","cost":0}]}
+{"cats":[{"name":"Nala","breed":"Shorthair","coat":"Black","rarityLevel":"Common","foodPreference":"Kibble","toyPreference":"Mouse"}],"food":[{"name":"Kibble","cost":0}],"toys":[]}

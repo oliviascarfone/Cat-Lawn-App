@@ -101,10 +101,10 @@ public class CatLawnApp {
         } else if (command.equals("shop")) {
             shopItems();
         } else if (command.equals("new")) {
-            JsonWriter.saveGame(newYard, YARD_FILE);
+            //JsonWriter.saveGame(newYard, YARD_FILE);
         } else if (command.equals("save")) {
 
-            JsonWriter.saveGame(yard, YARD_FILE);
+            //JsonWriter.saveGame(yard, YARD_FILE);
         } else {
             System.out.println("Invalid selection, please try another menu option");
         }

@@ -28,7 +28,8 @@ public class YardJsonParserTest {
     Item testFood;
     YardJsonParser testYardJsonParser;
     String TEST_YARD_FILE = "./data/testYard.json";
-    String FAKE_YARD_FILE = "./././././";
+    String TEST_INVENTORY_FILE = "./data/testInventory.json";
+    String FAKE_FILE = "./././././";
     Gui gui;
     CatLawnApp catAppTest1;
 
@@ -50,14 +51,14 @@ public class YardJsonParserTest {
     @Test
 
     void testParsedDataGoodFile() {
-        assertTrue(gui.loadGame(TEST_YARD_FILE));
+        assertTrue(gui.loadGame(TEST_YARD_FILE, TEST_INVENTORY_FILE));
 
     }
 
     @Test
 
     void testParsedDataBadFile() {
-        assertFalse(gui.loadGame(FAKE_YARD_FILE));
+        assertFalse(gui.loadGame(FAKE_FILE, FAKE_FILE));
     }
 
 

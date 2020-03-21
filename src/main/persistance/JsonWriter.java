@@ -17,10 +17,10 @@ import java.util.ArrayList;
 //ideas from https://crunchify.com/how-to-write-json-object-to-file-in-java/
 //a writer that writes cat lawn data to a file
 public class JsonWriter {
-    private static final String YARD_FILE = "./data/yard.json";
-    private static final String INVENTORY_FILE = "./data/inventory.json";
+    //private static final String YARD_FILE = "./data/yard.json";
+    //private static final String INVENTORY_FILE = "./data/inventory.json";
     private static JsonObject yardJson;
-    private static JsonObject inventoryJson;
+    private static Gson inventoryJson;
 
 
     //EFFECTS: creates new Json Writer
@@ -30,15 +30,19 @@ public class JsonWriter {
 
 
     //MODIFIES: .json file
-    //EFFECTS: saves the state of the Cat Lawn Yard to YARD_FILE as a JSON object
-    public static boolean saveGame(Yard yard, String file) {
+    //EFFECTS: saves the state of the Cat Lawn Yard to YARD_FILE and INVENTORY_FILE as a JSON object
+    public static boolean saveGame(Yard yard, Inventory inventory, String yardFile, String inventoryFile) {
         JsonObject jsonObjectYard = saveYard(yard);
-        //JsonObject jsonObjectInventory = saveInventory();
+        String jsonObjectInventory = saveInventory(inventory);
         try {
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(yardFile);
             fileWriter.write(jsonObjectYard.toString());
+            //fileWriter.write(jsonObjectInventory);
             fileWriter.close();
-            System.out.println("Successfully saved yard data!");
+            FileWriter fileWriter2 = new FileWriter(inventoryFile);
+            fileWriter2.write(jsonObjectInventory);
+            fileWriter2.close();
+            System.out.println("Successfully saved game data!");
             return true;
         } catch (FileNotFoundException e) {
             System.out.println("Problem saving game data");
@@ -62,6 +66,12 @@ public class JsonWriter {
         yardJson.add("toys", saveToys(yard));
 
         return yardJson;
+    }
+
+    public static String saveInventory(Inventory inventory) {
+        inventoryJson = new Gson();
+        String savedInventoryString = inventoryJson.toJson(inventory);
+        return savedInventoryString;
     }
 
     //EFFECTS: saves the cats in the yard into an Array

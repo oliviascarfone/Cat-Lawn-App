@@ -10,8 +10,7 @@ public class Toy extends Item {
 
 
     public Toy(String name, int cost) {
-        this.name = name;
-        this.cost = cost;
+        super(name,cost);
 
     }
 

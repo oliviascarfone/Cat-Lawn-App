@@ -60,6 +60,7 @@ import java.util.ArrayList;
 
 public class Gui extends JPanel implements ActionListener, ListSelectionListener {
     private static final String YARD_FILE = "./data/yard.json";
+    private static final String INVENTORY_FILE = "./data/inventory.json";
     static String[] testItems = {"Kibble", "Spring"};
     JTextArea yardLabel;
     private DefaultListModel listModelInventory;
@@ -72,22 +73,21 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private ImageIcon cartIcon = new ImageIcon("data/cart.png", "cart");
     private ImageIcon backpackIcon = new ImageIcon("data/backpack.png", "inventory");
     private ImageIcon saveIcon = new ImageIcon("data/save.png", "save");
-    Yard yard = new Yard();
-    Inventory inventory = new Inventory();
+    Yard yard; //= new Yard();
+    Inventory inventory; //= new Inventory();
     YardJsonParser parser = new YardJsonParser(this);
-    //GameItems gameItems = new GameItems();
-    //GameCats gameCats = new GameCats();
+
 
     public Gui() {
         super(new GridLayout(1, 1));
         tabbedPane = new JTabbedPane();
+        loadGame(YARD_FILE, INVENTORY_FILE);
         makeShop();
         makeInventoryPanel();
         makeYard();
         makeOptions();
         addMusic();
-        loadGame(YARD_FILE);
-        //loadItems(INVENTORY_FILE);
+        updateInventory();
 
         //Add the tabbed pane to this panel.
         add(tabbedPane);
@@ -140,9 +140,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     public void addMusic() {
         AudioPlayer audioPlayer = AudioPlayer.player;
         AudioStream audioStream;
-       // AudioData audioData;
         ContinuousAudioDataStream audioLoop = null;
-
         try {
             InputStream musicFile = new FileInputStream("data/music/01 Main Menu.wav");
             audioStream = new AudioStream(musicFile);
@@ -183,7 +181,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         JComponent inventoryPanel = new JPanel();
         listModelInventory = new DefaultListModel();
         makeInventoryInit();
-        updateInventory();
+        //updateInventory();
 
         inventoryList = new JList(listModelInventory);
         inventoryList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -218,7 +216,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     }
 
     public void makeYard() {
-        JPanel yard = new JPanel();
+        JPanel yardPanel = new JPanel();
         Dimension minimumSize = new Dimension(400, 300);
         yardLabel = new JTextArea("Please select an option");
         yardLabel.setEditable(false);
@@ -229,7 +227,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         JButton buttonCat = new JButton("See cats in yard");
         JButton buttonFood = new JButton("See food in yard");
         JButton buttonToys = new JButton("See toys in yard");
-        tabbedPane.addTab("Yard", kittyIcon, yard,
+        tabbedPane.addTab("Yard", kittyIcon, yardPanel,
                 "Yard");
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
         buttonCat.addActionListener(this);
@@ -238,11 +236,11 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         buttonsMenu.add(buttonCat);
         buttonsMenu.add(buttonFood);
         buttonsMenu.add(buttonToys);
-        yard.add(buttonsMenu);
+        yardPanel.add(buttonsMenu);
         //makeYardImage();
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonsMenu, yardLabel);
         //JSplitPane totalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitPane, yardImage);
-        yard.add(splitPane);
+        yardPanel.add(splitPane);
         //yard.add(totalPane);
         buttonsMenu.setMinimumSize(minimumSize);
 
@@ -304,11 +302,12 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
             System.exit(0);
         } else if (action == "New Game") {
             inventory.inventoryList.clear();
+            updateInventory();
             yard.cats.clear();
             yard.food.clear();
             yard.toys.clear();
         } else if (action == "Save Game") {
-            JsonWriter.saveGame(yard, YARD_FILE);
+            JsonWriter.saveGame(yard, inventory, YARD_FILE, INVENTORY_FILE);
         }
 
     }
@@ -340,6 +339,16 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         yard = new Yard(listOfCats, listOfFood, listOfToy);
     }
 
+    public void loadedGameInventory(Inventory inventoryFromFile) {
+        inventory = inventoryFromFile;
+        //updateInventory();
+    }
+
+    public void emptyInventory() {
+        inventory = new Inventory();
+        //updateInventory();
+    }
+
 
     class PlaceInYard implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -353,7 +362,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
             int size = listModelInventory.getSize();
 
-            if (size == 0) { //Nobody's left, disable firing.
+            if (size == 0) {
                 placeInYardButton.setEnabled(false);
 
             } else { //Select an index.
@@ -369,10 +378,25 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     }
 
     public void placeItem(String item) {
-        if (item == "Kibble") {
+        if (item.equals("Kibble")) {
             yard.addItemToYard(new Food("Kibble", 0));
-        } else if (item == "Spring") {
+            removeItemFromInventory("Kibble");
+            updateInventory();
+        } else if (item.equals("Spring")) {
             yard.addItemToYard(new Toy("Spring", 0));
+            removeItemFromInventory("Spring");
+            updateInventory();
+        }
+    }
+
+    public void removeItemFromInventory(String selection) {
+        for (InventoryEntry e : inventory.inventoryList) {
+            String itemName = e.getItem().getName();
+            if (itemName == selection) {
+                inventory.inventoryList.remove(e);
+                break;
+
+            }
         }
     }
 
@@ -395,7 +419,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     public void buyItem(String selection) {
         if (selection == "Kibble") {
             inventory.inventoryList.add(new InventoryEntry(new Food("Kibble", 0), 1));
-            updateInventory(); //need to find a way to update properly - right now it makes a new tab.
+            updateInventory();
         } else if (selection == "Spring") {
             inventory.inventoryList.add(new InventoryEntry(new Toy("Spring", 0), 1));
             updateInventory();
@@ -403,8 +427,8 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     }
 
-    public boolean loadGame(String file) {
-        return parser.loadYard(file);
+    public boolean loadGame(String yardFile, String inventoryFile) {
+        return parser.loadGame(yardFile, inventoryFile);
     }
 
     public void emptyYard() {

@@ -2,13 +2,11 @@ package persistance;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import model.Cat;
-import model.Food;
-import model.Item;
-import model.Toy;
+import model.*;
 import ui.Gui;
 
 
+import javax.swing.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 //https://www.leveluplunch.com/java/examples/convert-json-array-to-arraylist-gson/
 public class YardJsonParser {
     JsonParser parser;
-    private static final String YARD_FILE = "./data/yard.json";
+    //private static final String YARD_FILE = "./data/yard.json";
     private Gui gui;
 
 
@@ -31,10 +29,11 @@ public class YardJsonParser {
 
     //MODIFIES: CatLawn
     //EFFECTS: loads data from .json file
-    public boolean loadYard(String file) {
+    public boolean loadGame(String yardFile, String inventoryFile) {
         Gson parser = new Gson();
+        Gson parser2 = new Gson();
 
-        try (FileReader reader = new FileReader(file)) {
+        try (FileReader reader = new FileReader(yardFile)) {
             JsonObject result = parser.fromJson(reader, JsonObject.class);  // .(reader).getAsJsonObject();
             JsonArray loadedCats = result.getAsJsonArray("cats");
             ArrayList<Cat> listOfCats = makeCatsList(loadedCats);
@@ -43,10 +42,18 @@ public class YardJsonParser {
             JsonArray loadedToys = result.getAsJsonArray("toys");
             ArrayList<Item> listOfToy = makeToyList(loadedToys);
             gui.loadedGameYard(listOfCats, listOfFood, listOfToy);
+
+            try (FileReader reader2 = new FileReader(inventoryFile)) {
+                Inventory inventoryFromFile = parser2.fromJson(reader2, Inventory.class);
+                //Inventory inventoryFromFile = parser2.fromJson(String.valueOf(inventoryString), Inventory.class);
+                gui.loadedGameInventory(inventoryFromFile);
+            }
+
             return true;
 
         } catch (IOException e) {
             gui.emptyYard();
+            gui.emptyInventory();
             return false;
         }
     }

@@ -15,6 +15,7 @@ import java.util.jar.JarEntry;
 public class JsonWriterTest {
     JsonWriter testJsonWriter;
     Yard testYard;
+    Inventory testInventory;
     ArrayList<Cat> testCatsList;
     ArrayList<Item> testFoodList;
     ArrayList<Item> testToysList;
@@ -22,6 +23,7 @@ public class JsonWriterTest {
     Item testToy;
     Item testFood;
     String TEST_YARD_FILE = "./data/testYard.json";
+    String TEST_INVENTORY_FILE = "./data/testInventory.json";
     //CatLawnApp catApp = new CatLawnApp();
 
 
@@ -30,6 +32,7 @@ public class JsonWriterTest {
     void runBefore() {
         testJsonWriter = new JsonWriter();
         testYard = new Yard();
+        testInventory = new Inventory();
         testCatsList = new ArrayList<>();
         testFoodList = new ArrayList<>();
         testToysList = new ArrayList<>();
@@ -46,13 +49,13 @@ public class JsonWriterTest {
 
     @Test
     void saveGameTestGoodDataGoodFile() {
-       assertTrue(testJsonWriter.saveGame(testYard, TEST_YARD_FILE));
+       assertTrue(testJsonWriter.saveGame(testYard, testInventory, TEST_YARD_FILE,TEST_INVENTORY_FILE));
 
     }
 
     @Test
     void saveGameTestGoodDataBadFile() {
-        assertFalse(testJsonWriter.saveGame(testYard, "/./././."));
+        assertFalse(testJsonWriter.saveGame(testYard, testInventory,"/./././.", "/././."));
     }
 
 

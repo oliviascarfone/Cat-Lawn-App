@@ -40,7 +40,7 @@ package ui;
 //https://mkyong.com/swing/java-swing-how-to-make-a-simple-dialog/
 //music from Kazumi Totaka, Wii menu music
 
-
+//creates the gui
 import model.*;
 import persistance.JsonWriter;
 import persistance.YardJsonParser;
@@ -79,6 +79,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     YardJsonParser parser = new YardJsonParser(this);
 
 
+    //EFFECTS: Creates and initializes JFrame and Tab components
     public Gui() {
         super(new GridLayout(1, 1));
         tabbedPane = new JTabbedPane();
@@ -97,33 +98,36 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
     }
 
-    protected JComponent makeTextPanel(String text) {
-        JPanel panel = new JPanel(false);
-        JLabel filler = new JLabel(text);
-        filler.setHorizontalAlignment(JLabel.CENTER);
-        panel.setLayout(new GridLayout(1, 1));
-        panel.add(filler);
-        return panel;
-    }
 
-    /**
-     * Returns an ImageIcon, or null if the path was invalid.
-     */
-    protected static ImageIcon createImageIcon(String path, String description) {
-        java.net.URL imgURL = Gui.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL, description);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }
+//    protected JComponent makeTextPanel(String text) {
+//        JPanel panel = new JPanel(false);
+//        JLabel filler = new JLabel(text);
+//        filler.setHorizontalAlignment(JLabel.CENTER);
+//        panel.setLayout(new GridLayout(1, 1));
+//        panel.add(filler);
+//        return panel;
+//    }
+
+//    /**
+//     * Returns an ImageIcon, or null if the path was invalid.
+//     */
+//    protected static ImageIcon createImageIcon(String path, String description) {
+//        java.net.URL imgURL = Gui.class.getResource(path);
+//        if (imgURL != null) {
+//            return new ImageIcon(imgURL, description);
+//        } else {
+//            System.err.println("Couldn't find file: " + path);
+//            return null;
+//        }
+//    }
 
     /**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from
      * the event dispatch thread.
      */
+
+    //EFFECTS: creates GUI and displays
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("Cat Lawn");
@@ -138,6 +142,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         frame.setVisible(true);
     }
 
+    //EFFECTS: Adds background music to game
     public void addMusic() {
         AudioPlayer audioPlayer = AudioPlayer.player;
         AudioStream audioStream;
@@ -155,6 +160,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     }
 
+    //EFFECTS: Makes the components of the shop tab
     public void makeShop() {
         JComponent shop = new JPanel();
         shop.setLayout(new BorderLayout());
@@ -178,6 +184,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     }
 
 
+    //EFECTS: Makes the Inventory tab
     public void makeInventoryPanel() {
         JComponent inventoryPanel = new JPanel();
         listModelInventory = new DefaultListModel();
@@ -200,6 +207,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     }
 
+    //EFFECTS: Creates initial inventory JList
     public void makeInventoryInit() {
         //listModelInventory = new DefaultListModel();
         for (InventoryEntry i : inventory.inventoryList) {
@@ -208,6 +216,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         }
     }
 
+    //EFFECTS: updates the inventory JList to match inventory changes
     public void updateInventory() {
         listModelInventory.removeAllElements();
         for (InventoryEntry i : inventory.inventoryList) {
@@ -216,6 +225,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         }
     }
 
+    //EFFECTS: Makes yard tab
     public void makeYard() {
         JPanel yardPanel = new JPanel();
         Dimension minimumSize = new Dimension(400, 300);
@@ -259,6 +269,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
 
 
+    //EFFECTS: Makes Options tab
     public void makeOptions() {
         JComponent options = new JPanel();
         options.setPreferredSize(new Dimension(410, 50));
@@ -277,6 +288,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     }
 
+    //EFFECTS: runs the Gui - called from Main
     public static void start() {
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
@@ -289,6 +301,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         });
     }
 
+    //EFFECTS: Action Listener for all buttons
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
@@ -316,11 +329,13 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
 
 
+    //EFFECTS: Updates the Yard status when called
     public void updateLabel(String status) {
         yardLabel.setText(status);
 
     }
 
+    //EFFECTS: Stops the place in yard button if there are no more items in inventory
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
@@ -336,20 +351,27 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: makes yard from loaded file data
     public void loadedGameYard(ArrayList<Cat> listOfCats, ArrayList<Item> listOfFood, ArrayList<Item> listOfToy) {
         yard = new Yard(listOfCats, listOfFood, listOfToy);
     }
 
+    //MODIFIES: this
+    //EFFECTS: makes inventory from loaded file data
     public void loadedGameInventory(Inventory inventoryFromFile) {
         inventory = inventoryFromFile;
         //updateInventory();
     }
 
+    //MODIFIES: this
+    //EFFECTS: makes a new empty inventory
     public void emptyInventory() {
         inventory = new Inventory();
         //updateInventory();
     }
 
+    //Class to give functionality to 'Place in Yard' button in Inventory tab
     class PlaceInYard implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -378,6 +400,8 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         }
     }
 
+    //EFFECTS: Takes selected Inventory item and places it into the yard, also removes selection
+    // from the inventory
     public void placeItem(String item) {
         if (item.equals("Kibble")) {
             yard.addItemToYard(new Food("Kibble", 0));
@@ -390,6 +414,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         }
     }
 
+    //EFFECTS: removes item from inventory has the same name as the given string
     public void removeItemFromInventory(String selection) {
         for (InventoryEntry e : inventory.inventoryList) {
             String itemName = e.getItem().getName();
@@ -401,6 +426,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         }
     }
 
+    //class to help with the 'Purchase Item' functionality
     class PurchaseItem implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             //int index = shopList.getSelectedIndex();
@@ -413,6 +439,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
 
 
+    //EFFECTS: buys selected item form the store and moves it into the inventory
     public void buyItem(String selection) {
         if (selection == "Kibble") {
             inventory.inventoryList.add(new InventoryEntry(new Food("Kibble", 0), 1));
@@ -426,6 +453,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     }
 
+    //EFFECTS: creates the pop-up with an image of the purchased item
     public void confirmPurchase(String itemType) {
         JOptionPane popup = new JOptionPane();
         ImageIcon kibbleIcon = new ImageIcon("data/kibblepic.png");
@@ -441,10 +469,14 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         }
     }
 
+    //MODIFIES: this, YardJsonParser
+    //EFFECTS: loads the game data
     public boolean loadGame(String yardFile, String inventoryFile) {
         return parser.loadGame(yardFile, inventoryFile);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs an empty yard
     public void emptyYard() {
         yard = new Yard();
     }

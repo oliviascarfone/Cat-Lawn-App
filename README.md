@@ -40,6 +40,11 @@ be played casually and has no learning curve
 #Phase 3
 ##Instructions for Grader
 
+How to use: The application will open up to a shop tab with items you can select. Purchasing an
+item will move it to the inventory. In the inventory tab you will see a list of all purchase items. 
+You can select a specific item and place it in the yard. In the yard tab you can check out the items you placed and the
+cats that have arrived (after some time). The options tab has the options for saving, making a new game, and quitting.
+
 
 - You generate the first requirement (after purchasing an item in the shop tab) 
  by selecting an item from the list of items in the inventory.

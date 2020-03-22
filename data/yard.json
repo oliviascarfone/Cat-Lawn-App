@@ -1,1 +1,1 @@
-{"cats":[],"food":[],"toys":[]}
+{"cats":[{"name":"Sushi","breed":"Siamese","coat":"Point","rarityLevel":"Common","foodPreference":"Kibble","toyPreference":"Ribbon"},{"name":"Sesame","breed":"Longhair","coat":"Grey","rarityLevel":"Uncommon","foodPreference":"Kibble","toyPreference":"Mouse"}],"food":[{"name":"Kibble","cost":0}],"toys":[{"name":"Spring","cost":0}]}

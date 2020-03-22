@@ -308,6 +308,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         if (action == "See cats in yard") {
             yard.addCatToYard();
             updateLabel(yard.catsInYard());
+            updateLabel(yard.catsInYard());
         } else if (action == "See food in yard") {
             updateLabel(yard.itemsInYard(yard.food));
         } else if (action == "See toys in yard") {

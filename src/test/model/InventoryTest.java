@@ -75,19 +75,19 @@ public class InventoryTest {
 
     }
 
-    @Test
-    void checkInventoryItemsTest(){
-        testInventory.inventoryList.add(testInventoryEntry);
-        testInventory.inventoryList.add(new InventoryEntry(testItemToy, 3));
-        assertEquals(testInventory.checkInventoryItems(), "food (x2) is in your inventory!\n" +
-                "toy (x3) is in your inventory!\n");
+//    @Test
+//    void checkInventoryItemsTest(){
+//        testInventory.inventoryList.add(testInventoryEntry);
+//        testInventory.inventoryList.add(new InventoryEntry(testItemToy, 3));
+//        assertEquals(testInventory.checkInventoryItems(), "food (x2) is in your inventory!\n" +
+//                "toy (x3) is in your inventory!\n");
+//
+//    }
 
-    }
-
-    @Test
-    void checkInventoryItemsWithNoItems() {
-        assertEquals(testInventory.checkInventoryItems(), "There is nothing in your inventory!");
-    }
+//    @Test
+//    void checkInventoryItemsWithNoItems() {
+//        assertEquals(testInventory.checkInventoryItems(), "There is nothing in your inventory!");
+//    }
 
     @Test
     void removeItemFromInventoryTest() {

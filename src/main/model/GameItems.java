@@ -42,31 +42,31 @@ public class GameItems {
 
     }
 
-    //EFFECTS: returns all Food Item names and cost
-    public String showAllFood() {
-        String foodToString = "";
-        for (int i = 0; i < allFood.size(); i++) {
-            String eachItem = allFood.get(i).getName();
-            int eachItemCost = allFood.get(i).getCost();
-            foodToString += (String.format("%s for $%s\n",
-                    eachItem, eachItemCost));
-
-        }
-        return foodToString;
-    }
-
-    //EFFECTS: returns all Toy Item names and cost
-    public String showAllToys() {
-        String toyToString = "";
-        for (int i = 0; i < allToys.size(); i++) {
-            String eachItem = allToys.get(i).getName();
-            int eachItemCost = allToys.get(i).getCost();
-            toyToString += (String.format("%s for $%s\n",
-                    eachItem, eachItemCost));
-
-        }
-        return toyToString;
-    }
+//    //EFFECTS: returns all Food Item names and cost
+//    public String showAllFood() {
+//        String foodToString = "";
+//        for (int i = 0; i < allFood.size(); i++) {
+//            String eachItem = allFood.get(i).getName();
+//            int eachItemCost = allFood.get(i).getCost();
+//            foodToString += (String.format("%s for $%s\n",
+//                    eachItem, eachItemCost));
+//
+//        }
+//        return foodToString;
+//    }
+//
+//    //EFFECTS: returns all Toy Item names and cost
+//    public String showAllToys() {
+//        String toyToString = "";
+//        for (int i = 0; i < allToys.size(); i++) {
+//            String eachItem = allToys.get(i).getName();
+//            int eachItemCost = allToys.get(i).getCost();
+//            toyToString += (String.format("%s for $%s\n",
+//                    eachItem, eachItemCost));
+//
+//        }
+//        return toyToString;
+//    }
 
 
 

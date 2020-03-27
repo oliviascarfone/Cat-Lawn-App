@@ -17,15 +17,15 @@ public class GameItemsTest {
         testToy = new Toy("toy", 2);
     }
 
-    @Test
-    void testAllFoods() {
-        assertEquals("Kibble for $0\nTuna for $1\nSalmon for $2\n", testGameItems.showAllFood());
-    }
-
-    @Test
-    void testAllToys() {
-        assertEquals("Spring for $0\nMouse for $1\nBrush for $2\n", testGameItems.showAllToys());
-    }
+//    @Test
+//    void testAllFoods() {
+//        assertEquals("Kibble for $0\nTuna for $1\nSalmon for $2\n", testGameItems.showAllFood());
+//    }
+//
+//    @Test
+//    void testAllToys() {
+//        assertEquals("Spring for $0\nMouse for $1\nBrush for $2\n", testGameItems.showAllToys());
+//    }
 
 
 

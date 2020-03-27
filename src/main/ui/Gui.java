@@ -446,13 +446,11 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     public void buyItem(String selection) {
         if (selection == "Kibble") {
             inventory.inventoryList.add(new InventoryEntry(new Food("Kibble", 0), 1));
-            updateInventory();
-            confirmPurchase("Kibble");
         } else if (selection == "Spring") {
             inventory.inventoryList.add(new InventoryEntry(new Toy("Spring", 0), 1));
-            updateInventory();
-            confirmPurchase("Spring");
         }
+        updateInventory();
+        confirmPurchase(selection);
 
     }
 

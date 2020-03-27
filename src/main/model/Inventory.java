@@ -63,22 +63,22 @@ public class Inventory {
         }
     }
 
-    //EFFECTS: shows all items in your inventory
-    public String checkInventoryItems() {
-        String inventoryToString = "";
-        if (inventoryList.size() > 0) {
-            for (int i = 0; i < inventoryList.size(); i++) {
-                String eachItem = inventoryList.get(i).getItem().getName();
-                int eachItemQuantity = inventoryList.get(i).getQuantity();
-                inventoryToString += (String.format("%s (x%s) is in your inventory!\n",
-                        eachItem, eachItemQuantity));
-            }
-            return inventoryToString;
-        } else {
-            inventoryToString += "There is nothing in your inventory!";
-            return inventoryToString;
-        }
-    }
+//    //EFFECTS: shows all items in your inventory
+//    public String checkInventoryItems() {
+//        String inventoryToString = "";
+//        if (inventoryList.size() > 0) {
+//            for (int i = 0; i < inventoryList.size(); i++) {
+//                String eachItem = inventoryList.get(i).getItem().getName();
+//                int eachItemQuantity = inventoryList.get(i).getQuantity();
+//                inventoryToString += (String.format("%s (x%s) is in your inventory!\n",
+//                        eachItem, eachItemQuantity));
+//            }
+//            return inventoryToString;
+//        } else {
+//            inventoryToString += "There is nothing in your inventory!";
+//            return inventoryToString;
+//        }
+//    }
 
 
 

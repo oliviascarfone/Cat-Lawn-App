@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -16,6 +17,7 @@ public class GameCats {
     ArrayList<Cat> commonGameCats;
     ArrayList<Cat> uncommonGameCats;
     Random random;
+
     //ArrayList<String> catNames;
 
     public GameCats() {

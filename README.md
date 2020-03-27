@@ -59,6 +59,8 @@ is opened and by purchasing items.
 - You can reload the game by opening the application. The default mode is to 
 load an older game. You can create a new game by clicking the 'New game' button in the Options tab
 
+#Phase 4
 
+-Gui has poor cohesion, will work to separate into different classes
 
 

@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.CatLawnApp;
+//import ui.CatLawnApp;
 import ui.Gui;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,7 +31,7 @@ public class YardJsonParserTest {
     String TEST_INVENTORY_FILE = "./data/testInventory.json";
     String FAKE_FILE = "./././././";
     Gui gui;
-    CatLawnApp catAppTest1;
+    //CatLawnApp catAppTest1;
 
     @BeforeEach
     void runBefore() {

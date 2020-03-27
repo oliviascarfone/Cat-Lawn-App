@@ -1,10 +1,12 @@
 package persistance;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.CatLawnApp;
+//import ui.CatLawnApp;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,6 +59,28 @@ public class JsonWriterTest {
     void saveGameTestGoodDataBadFile() {
         assertFalse(testJsonWriter.saveGame(testYard, testInventory,"/./././.", "/././."));
     }
+
+    @Test
+    void testSaveCats() {
+        testYard.cats.add(testCat);
+        JsonArray jsonArray = JsonWriter.saveCats(testYard);
+        assertTrue(jsonArray.isJsonArray());
+    }
+
+    @Test
+    void testSaveFood() {
+        testYard.food.add(testFood);
+        JsonArray jsonArray = JsonWriter.saveFood(testYard);
+        assertTrue(jsonArray.isJsonArray());
+    }
+
+    @Test
+    void testSaveToys() {
+        testYard.toys.add(testToy);
+        JsonArray jsonArray = JsonWriter.saveToys(testYard);
+        assertTrue(jsonArray.isJsonArray());
+    }
+    
 
 
 

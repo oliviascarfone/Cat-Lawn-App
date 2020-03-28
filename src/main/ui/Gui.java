@@ -408,32 +408,32 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     public void placeItem(String item) {
         if (item.equals("Kibble")) {
             yard.addItemToYard(new Food("Kibble", 0));
-            removeItemFromInventory("Kibble");
+            inventory.removeItemFromInventory("Kibble", inventory);
             //updateInventory();
         } else if (item.equals("Spring")) {
             yard.addItemToYard(new Toy("Spring", 0));
-            removeItemFromInventory("Spring");
+            inventory.removeItemFromInventory("Spring", inventory);
             //updateInventory();
         }
     }
-
+    //WORKING ON THIS
     //EFFECTS: removes item from inventory has the same name as the given string
-    public void removeItemFromInventory(String selection) {
-        for (InventoryEntry e : inventory.inventoryList) {
-            String itemName = e.getItem().getName();
-            if (itemName == selection) {
-                inventory.inventoryList.remove(e);
-                break;
-
-            }
-        }
-    }
+//    public void removeItemFromInventory(String selection) {
+//        for (InventoryEntry e : inventory.inventoryList) {
+//            String itemName = e.getItem().getName();
+//            if (itemName == selection) {
+//                inventory.inventoryList.remove(e);
+//                break;
+//
+//            }
+//        }
+//    }
 
     //class to help with the 'Purchase Item' functionality
     class PurchaseItem implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             //int index = shopList.getSelectedIndex();
-            buyItem((String) shopList.getSelectedValue());
+            buyItemFromShopTab((String) shopList.getSelectedValue());
 
             //int size = listModelInventory.getSize();
         }
@@ -443,11 +443,11 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
 
     //EFFECTS: buys selected item form the store and moves it into the inventory
-    public void buyItem(String selection) {
+    public void buyItemFromShopTab(String selection) {
         if (selection == "Kibble") {
-            inventory.inventoryList.add(new InventoryEntry(new Food("Kibble", 0), 1));
+            inventory.buyItem(new Food("Kibble", 0), 1);
         } else if (selection == "Spring") {
-            inventory.inventoryList.add(new InventoryEntry(new Toy("Spring", 0), 1));
+            inventory.buyItem(new Toy("Spring", 0), 1);
         }
         updateInventory();
         confirmPurchase(selection);
@@ -460,10 +460,8 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         ImageIcon kibbleIcon = new ImageIcon("data/kibblepic.png");
         ImageIcon springIcon = new ImageIcon("data/Spring.png");
         if (itemType.equals("Kibble")) {
-
             popup.showMessageDialog(null, "Bought Kibble!", "Purchase Confirmation",
                     JOptionPane.INFORMATION_MESSAGE, kibbleIcon);
-
         } else if (itemType.equals("Spring")) {
             popup.showMessageDialog(null, "Bought a Spring!", "Purchase Confirmation",
                     JOptionPane.INFORMATION_MESSAGE, springIcon);

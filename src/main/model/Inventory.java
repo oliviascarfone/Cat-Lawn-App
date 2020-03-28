@@ -18,7 +18,6 @@ public class Inventory {
     }
 
 
-
     //
 //    //EFFECTS: creates an Inventory from saved data
 //    public Inventory(ArrayList<InventoryEntry> inventoryList, int balance) {
@@ -82,25 +81,25 @@ public class Inventory {
 
 
 
-
-    //REQUIRES: non-empty Inventory and Inventory contains the parameter item
-    //MODIFIES: Inventory
-    //EFFECTS: Removes a quantity from the inventory, removes entry if quantity is zero.
-    public void removeItemFromInventory(Item item) {
-        int amount;
-
-        for (int i = 0; inventoryList.size() > i; i++) {
-            if (inventoryList.get(i).getItem().equals(item)) {
-                amount = inventoryList.get(i).getQuantity();
-                inventoryList.get(i).setQuantity(--amount);
-                if (inventoryList.get(i).getQuantity() == 0) {
-                    inventoryList.remove(i);
-                }
-
-            }
-        }
-
-    }
+//Used for Console
+//    //REQUIRES: non-empty Inventory and Inventory contains the parameter item
+//    //MODIFIES: Inventory
+//    //EFFECTS: Removes a quantity from the inventory, removes entry if quantity is zero.
+//    public void removeItemFromInventory(Item item) {
+//        int amount;
+//
+//        for (int i = 0; inventoryList.size() > i; i++) {
+//            if (inventoryList.get(i).getItem().equals(item)) {
+//                amount = inventoryList.get(i).getQuantity();
+//                inventoryList.get(i).setQuantity(--amount);
+//                if (inventoryList.get(i).getQuantity() == 0) {
+//                    inventoryList.remove(i);
+//                }
+//
+//            }
+//        }
+//
+//    }
 
     //EFFECTS: returns inventory entry names and quantity in the inventory
     public String inventoryEntryQuantityNames() {
@@ -118,6 +117,24 @@ public class Inventory {
             }
         }
         return inventoryEntryQuantityNames;
+    }
+
+//    public Inventory clearInventory(Inventory inventoryObj) {
+//        inventoryObj.inventoryList.clear();
+//        inventoryObj.setBalance(0);
+//        return inventoryObj;
+//    }
+
+    //EFFECTS: removes item from inventory has the same name as the given string
+    public void removeItemFromInventory(String selection, Inventory gameInventory) {
+        for (int i = 0; i < gameInventory.inventoryList.size(); i++) {
+        //for (InventoryEntry e : gameInventory.inventoryList) {
+            String itemName = gameInventory.inventoryList.get(i).item.getName();
+//            String itemName = getItem(i).getName();
+            if (itemName == selection) {
+                gameInventory.inventoryList.remove(i);
+            }
+        }
     }
 
 

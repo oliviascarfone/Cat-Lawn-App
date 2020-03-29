@@ -25,13 +25,13 @@ public class GameCatTest {
         assertEquals(testGameCatsArray.commonGameCats, new ArrayList<Cat>());
     }
 
-    @Test
-    void testHashmap() {
-        assertEquals(testGameCatsArray.catPics.get("Moki"), "data/cats/moki.png");
+//    @Test
+//    void testHashmap() {
+//        assertEquals(testGameCatsArray.catPics.get("Moki"), "data/cats/moki.png");
 
 
 
-    }
+
 
 
 

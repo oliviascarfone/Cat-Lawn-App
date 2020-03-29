@@ -66,6 +66,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     static String[] testItems = {"Kibble", "Spring"};
     private String[] catStrings = { "Moki", "Sesame", "Zeus" };
     JTextArea yardLabel;
+    JLabel picture;
     private DefaultListModel listModelInventory;
     private JList inventoryList;
     private JList shopList;
@@ -76,6 +77,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private ImageIcon cartIcon = new ImageIcon("data/cart.png", "cart");
     private ImageIcon backpackIcon = new ImageIcon("data/backpack.png", "inventory");
     private ImageIcon saveIcon = new ImageIcon("data/save.png", "save");
+    private ImageIcon cat;
     Yard yard;
     Inventory inventory;
     YardJsonParser parser = new YardJsonParser(this);
@@ -92,7 +94,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         makeOptions();
         addMusic();
         updateInventory();
-        //makeGallery();
+        makeGallery();
 
 
         //Add the tabbed pane to this panel.
@@ -265,8 +267,10 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     public void makeGallery() {
         ActionListener galleryListener;
         JPanel gallery = new JPanel();
+        picture = new JLabel();
         JComboBox catList = new JComboBox(catStrings);
         gallery.add(catList);
+        gallery.add(picture);
         catList.setSelectedIndex(2);
         galleryListener = new ActionListener() {
             @Override
@@ -284,7 +288,9 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     }
 
     public void catPicture(String selection) {
-        //String selectedCat = yard.gameCats.getCatPic(selection);
+        String selectedCat = yard.getCatPic(selection);
+        cat = new ImageIcon(selectedCat);
+        picture.setIcon(cat);
 
 
     }

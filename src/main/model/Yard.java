@@ -131,6 +131,10 @@ public class Yard  {
         y.food.clear();
     }
 
+    public String getCatPic(String selection) {
+        return gameCats.catPics.get(selection);
+    }
+
 
 
     // to compare the fields of the objects

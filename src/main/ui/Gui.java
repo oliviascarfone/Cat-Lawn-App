@@ -41,6 +41,7 @@ package ui;
 //music from Kazumi Totaka, Wii menu music
 
 //creates the gui
+import javafx.scene.control.SplitPane;
 import model.*;
 import persistance.JsonWriter;
 import persistance.YardJsonParser;
@@ -63,6 +64,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private static final String YARD_FILE = "./data/yard.json";
     private static final String INVENTORY_FILE = "./data/inventory.json";
     static String[] testItems = {"Kibble", "Spring"};
+    private String[] catStrings = { "Moki", "Sesame", "Zeus" };
     JTextArea yardLabel;
     private DefaultListModel listModelInventory;
     private JList inventoryList;
@@ -90,6 +92,8 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         makeOptions();
         addMusic();
         updateInventory();
+        //makeGallery();
+
 
         //Add the tabbed pane to this panel.
         add(tabbedPane);
@@ -257,6 +261,34 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     }
 
+    //EFFECTS: creates cat gallery tab
+    public void makeGallery() {
+        ActionListener galleryListener;
+        JPanel gallery = new JPanel();
+        JComboBox catList = new JComboBox(catStrings);
+        gallery.add(catList);
+        catList.setSelectedIndex(2);
+        galleryListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox selection = (JComboBox)e.getSource();
+                String catSelection = (String)selection.getSelectedItem();
+                catPicture(catSelection);
+            }
+        };
+        catList.addActionListener(galleryListener);
+        catList.addActionListener(this);
+        tabbedPane.addTab("Gallery", kittyIcon, gallery,
+                "Look at cute cats");
+        tabbedPane.setMnemonicAt(4, KeyEvent.VK_4);
+    }
+
+    public void catPicture(String selection) {
+        //String selectedCat = yard.gameCats.getCatPic(selection);
+
+
+    }
+
 //    public void makeYardImage() {
 //        try {
 //            BufferedImage picture = ImageIO.read(new File("data/cats/moki.png"));
@@ -318,21 +350,32 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         } else if (action == "Quit Game") {
             System.exit(0);
         } else if (action == "New Game") {
-            inventory.inventoryList.clear();
+            //inventory.inventoryList.clear();
+            inventory.clearInventory(inventory);
             updateInventory();
-            yard.cats.clear();
-            yard.food.clear();
-            yard.toys.clear();
+            yard.clearYard(yard);
+            //yard.cats.clear();
+            //yard.food.clear();
+            //yard.toys.clear();
         } else if (action == "Save Game") {
             JsonWriter.saveGame(yard, inventory, YARD_FILE, INVENTORY_FILE);
         }
 
     }
 
+//    private void createCatPopUp() {
+//        JOptionPane catPopup = new JOptionPane();
+//        ImageIcon kibbleIcon = new ImageIcon("data/kibblepic.png");
+//
+//        catPopup.showMessageDialog(null, "Here are your cats!", "Kitties",
+//                    JOptionPane.INFORMATION_MESSAGE, kibbleIcon);
+//
+//    }
 
 
 
-    //EFFECTS: Updates the Yard status when called
+
+    //EFFECTS: Updates the YardTab test status when called
     public void updateLabel(String status) {
         yardLabel.setText(status);
 
@@ -438,8 +481,6 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
             //int size = listModelInventory.getSize();
         }
     }
-
-
 
 
     //EFFECTS: buys selected item form the store and moves it into the inventory

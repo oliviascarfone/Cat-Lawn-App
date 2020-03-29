@@ -89,15 +89,15 @@ public class InventoryTest {
 //        assertEquals(testInventory.checkInventoryItems(), "There is nothing in your inventory!");
 //    }
 
-//    @Test
-//    void removeItemFromInventoryTest() {
-//        testInventory.inventoryList.add(testInventoryEntry);
-//        testInventory.removeItemFromInventory(testItemFood);
-//        assertEquals(testInventory.inventoryList.size(), 1);
+    @Test
+    void removeItemFromInventoryTest() {
+        testInventory.inventoryList.add(testInventoryEntry);
+        testInventory.removeItemFromInventory("Kibble", testInventory);
+        assertEquals(testInventory.inventoryList.size(), 1);
 //        testInventory.removeItemFromInventory(testItemFood);
 //        assertEquals(testInventory.inventoryList.size(), 0);
-//
-//    }
+
+    }
 //
 //    @Test
 //    void removeItemFromInventoryWithMultipleItemTypesTest() {

@@ -43,14 +43,15 @@ public class Inventory {
         if ((item.getCost() * quantity) <= balance) {
             balance = (balance - (item.getCost() * quantity));
 
-            for (int i = 0; i < inventoryList.size(); i++) {
-                String eachItemName = inventoryList.get(i).getItem().getName();
-                if (eachItemName == item.getName()) {
-                    indicator += 1;
-                    inventoryList.get(i).addQuantity(quantity);
-
-                }
-            }
+            //Functionality for having money - a feature that is not currently being used
+//            for (int i = 0; i < inventoryList.size(); i++) {
+//                String eachItemName = inventoryList.get(i).getItem().getName();
+//                if (eachItemName == item.getName()) {
+//                    indicator += 1;
+//                    inventoryList.get(i).addQuantity(quantity);
+//
+//                }
+//            }
             if (indicator == 0) {
                 InventoryEntry boughtItem = new InventoryEntry(item, quantity);
                 inventoryList.add(boughtItem);
@@ -135,6 +136,11 @@ public class Inventory {
                 gameInventory.inventoryList.remove(i);
             }
         }
+    }
+
+    public void clearInventory(Inventory inv) {
+        inv.inventoryList.clear();
+        inv.setBalance(0);
     }
 
 

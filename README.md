@@ -61,6 +61,13 @@ load an older game. You can create a new game by clicking the 'New game' button 
 
 #Phase 4
 
--Gui has poor cohesion, will work to separate into different classes
+-First major issue was that the Gui class had too much functionality. It was doing both the construction of 
+gui elements and had gameplay elements. The gameplay functionality was giving the Gui too much knowledge 
+about other classes, so I decided to move these functions into better suited model classes. 
+    __
+
+- The method that removed items from the inventory after placing in the yard was moved from Gui to Inventory
+- method created in Yard to handle events once 'New Game' button is pressed, consolidated functionality into one method. This was originally done in Gui
+- method created in Inventory to handle events once 'New Game' button is pressed. This was originally done in Gui
 
 

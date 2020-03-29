@@ -3,17 +3,17 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameCatTest {
-    ArrayList<Cat> testGameCats;
+    GameCats testGameCatsArray;
     Cat testCat;
+
 
     @BeforeEach
     void runBefore() {
-        testGameCats = new ArrayList<Cat>();
+        testGameCatsArray = new GameCats();
         testCat = new Cat("name", "breed", "coat", "rare",
                 "food", "toy");
 
@@ -22,7 +22,15 @@ public class GameCatTest {
 
     @Test
     void testConstructor() {
-        assertEquals(testGameCats, new ArrayList<Cat>());
+        assertEquals(testGameCatsArray.commonGameCats, new ArrayList<Cat>());
+    }
+
+    @Test
+    void testHashmap() {
+        assertEquals(testGameCatsArray.catPics.get("Moki"), "data/cats/moki.png");
+
+
+
     }
 
 

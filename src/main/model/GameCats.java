@@ -17,6 +17,7 @@ public class GameCats {
     ArrayList<Cat> commonGameCats;
     ArrayList<Cat> uncommonGameCats;
     Random random;
+    HashMap<String, String> catPics = new HashMap<>();
 
     //ArrayList<String> catNames;
 
@@ -25,6 +26,10 @@ public class GameCats {
         uncommonGameCats = new ArrayList<>();
         random = new Random();
         //catNames = catNamesAsStrings();
+        catPics.put("Moki", "data/cats/moki.png");
+        catPics.put("Sesame", "data/cats/sesame.png");
+        catPics.put("Zeus", "data/cats/zeus.png");
+
 
     }
 
@@ -100,6 +105,10 @@ public class GameCats {
 //        }
 //        return catNames;
 //    }
+
+    public String getCatPic(String selection) {
+        return catPics.get(selection);
+    }
 
 
 }

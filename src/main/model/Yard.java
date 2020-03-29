@@ -59,19 +59,19 @@ public class Yard  {
         }
     }
 
-//    public ArrayList<String> catsInYardArray() {
-//        ArrayList<String> catsInArray = new ArrayList<>();
-//        String catToString = "";
-//        if (cats.size() > 0) {
-//            for (int i = 0; i < cats.size(); i++) {
-//                String eachCat = cats.get(i).getName();
-//                catToString = (String.format("%s is visiting your lawn!",
-//                        eachCat));
-//                catsInArray.add(catToString);
-//            }
-//        }
-//        return catsInArray;
-//    }
+    public ArrayList<String> catsInYardArray() {
+        ArrayList<String> catsInArray = new ArrayList<>();
+        String catToString = "";
+        if (cats.size() > 0) {
+            for (int i = 0; i < cats.size(); i++) {
+                String eachCat = cats.get(i).getName();
+                catToString = (String.format("%s",
+                        eachCat));
+                catsInArray.add(catToString);
+            }
+        }
+        return catsInArray;
+    }
 
     //REQUIRES: Must have a non-empty Inventory
     //MODIFIES: this
@@ -123,6 +123,12 @@ public class Yard  {
 
             }
         }
+    }
+
+    public void clearYard(Yard y) {
+        y.cats.clear();
+        y.toys.clear();
+        y.food.clear();
     }
 
 

@@ -29,6 +29,12 @@ public class GameCats {
         catPics.put("Moki", "data/cats/moki.png");
         catPics.put("Sesame", "data/cats/sesame.png");
         catPics.put("Zeus", "data/cats/zeus.png");
+        catPics.put("Sushi", "data/cats/sushi.png");
+        catPics.put("Evie", "data/cats/evie.png");
+        catPics.put("Luna", "data/cats/luna.png");
+        catPics.put("Mimi", "data/cats/mimi.png");
+        catPics.put("Roddick", "data/cats/roddick.png");
+
 
 
     }

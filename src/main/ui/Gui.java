@@ -32,6 +32,7 @@ package ui;
  */
 
 //https://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
+//https://docs.oracle.com/javase/tutorial/uiswing/components/combobox.html
 //https://docs.oracle.com/javase/tutorial/uiswing/components/button.html
 //https://stackoverflow.com/questions/42381633/refreshing-a-jlabel
 //https://docs.oracle.com/javase/tutorial/uiswing/components/list.html
@@ -64,7 +65,8 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private static final String YARD_FILE = "./data/yard.json";
     private static final String INVENTORY_FILE = "./data/inventory.json";
     static String[] testItems = {"Kibble", "Spring"};
-    private String[] catStrings = { "Moki", "Sesame", "Zeus" };
+    private String[] catStrings = { "Moki", "Sesame", "Zeus", "Sushi", "Evie", "Luna", "Nala",
+            "Milo", "Mimi", "Roddick", "Kiwi" };
     JTextArea yardLabel;
     JLabel picture;
     private DefaultListModel listModelInventory;
@@ -73,6 +75,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private JLabel yardImage;
     private JButton placeInYardButton;
     private JTabbedPane tabbedPane;
+    private ImageIcon yardIcon = new ImageIcon("data/yard.png", "yard");
     private ImageIcon kittyIcon = new ImageIcon("data/ragdoll.png", "cat");
     private ImageIcon cartIcon = new ImageIcon("data/cart.png", "cart");
     private ImageIcon backpackIcon = new ImageIcon("data/backpack.png", "inventory");
@@ -95,6 +98,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         addMusic();
         updateInventory();
         makeGallery();
+        setBorder(BorderFactory.createEmptyBorder(20,10,20,10));
 
 
         //Add the tabbed pane to this panel.
@@ -146,6 +150,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         frame.setPreferredSize(new Dimension(500, 500));
         frame.pack();
         frame.setVisible(true);
+
     }
 
     //EFFECTS: Adds background music to game
@@ -244,7 +249,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         JButton buttonCat = new JButton("See cats in yard");
         JButton buttonFood = new JButton("See food in yard");
         JButton buttonToys = new JButton("See toys in yard");
-        tabbedPane.addTab("Yard", kittyIcon, yardPanel,
+        tabbedPane.addTab("Yard", yardIcon, yardPanel,
                 "Yard");
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
         buttonCat.addActionListener(this);
@@ -266,12 +271,18 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     //EFFECTS: creates cat gallery tab
     public void makeGallery() {
         ActionListener galleryListener;
-        JPanel gallery = new JPanel();
+        JPanel galleryTab = new JPanel();
+        JPanel gallery = new JPanel(new BorderLayout());
         picture = new JLabel();
         JComboBox catList = new JComboBox(catStrings);
-        gallery.add(catList);
-        gallery.add(picture);
-        catList.setSelectedIndex(2);
+
+        //JSplitPane galleryPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, catList, picture);
+        //gallery.add(galleryPane);
+        //gallery.add(holdDropMenu, BorderLayout.PAGE_START);
+        gallery.add(catList, BorderLayout.PAGE_START);
+        gallery.add(picture, BorderLayout.PAGE_END);
+        galleryTab.add(gallery);
+        catList.setSelectedIndex(0);
         galleryListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -282,7 +293,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         };
         catList.addActionListener(galleryListener);
         catList.addActionListener(this);
-        tabbedPane.addTab("Gallery", kittyIcon, gallery,
+        tabbedPane.addTab("Gallery", kittyIcon, galleryTab,
                 "Look at cute cats");
         tabbedPane.setMnemonicAt(4, KeyEvent.VK_4);
     }
@@ -290,6 +301,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     public void catPicture(String selection) {
         String selectedCat = yard.getCatPic(selection);
         cat = new ImageIcon(selectedCat);
+        picture.setHorizontalAlignment(JLabel.CENTER);
         picture.setIcon(cat);
 
 

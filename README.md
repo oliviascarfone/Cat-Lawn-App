@@ -61,10 +61,18 @@ load an older game. You can create a new game by clicking the 'New game' button 
 
 #Phase 4
 
+
+##Task 2
+
+- For this requirement I created a Hashmap within the GameCats class. 
+It is used in the Gallery Tab of the Gui and uses the cat names as keys and the path way to their pictures as the values. 
+It is called by the getCatPic method and is created in the GameCats constructor
+
+##Task 3
 -First major issue was that the Gui class had too much functionality. It was doing both the construction of 
 gui elements and had gameplay elements. The gameplay functionality was giving the Gui too much knowledge 
-about other classes, so I decided to move these functions into better suited model classes. 
-    __
+about other classes, so I decided to move these functions into better suited model classes. Overall this increased the 
+cohesion of my Gui class
 
 - The method that removed items from the inventory after placing in the yard was moved from Gui to Inventory
 - method created in Yard to handle events once 'New Game' button is pressed, consolidated functionality into one method. This was originally done in Gui

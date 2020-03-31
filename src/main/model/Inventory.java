@@ -9,6 +9,7 @@ public class Inventory {
     public int balance;
     public ArrayList<InventoryEntry> inventoryList;
     private static final int MAX_INVENTORY_SIZE = 5;
+    InventoryEntry boughtItem;
 
     //EFFECTS: creates an empty inventory with no items and no money
     public Inventory() {
@@ -39,13 +40,13 @@ public class Inventory {
     // Item is purchased only if sufficient funds, produces false if not enough funds
 
     public void buyItem(String item) {
-        InventoryEntry boughtItem = null;
         if (item.equals("Kibble")) {
             boughtItem = new InventoryEntry(new Food("Kibble", 0), 1);
+            inventoryList.add(boughtItem);
         } else if (item.equals("Spring")) {
             boughtItem = new InventoryEntry(new Toy("Spring", 0), 1);
+            inventoryList.add(boughtItem);
         }
-        inventoryList.add(boughtItem);
     }
         //int indicator = 0;
 //        if ((item.getCost() * quantity) <= balance) {

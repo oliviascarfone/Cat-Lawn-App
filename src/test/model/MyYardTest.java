@@ -52,16 +52,24 @@ class MyYardTest {
 
 
     @Test
-    void testAddItemsToYard(){
+    void testAddItemsToYard() {
         testYard.addItemToYard("Kibble");
         assertEquals(testYard.food.size(), 1);
         testYard.addItemToYard("Spring");
         assertEquals(testYard.toys.size(), 1);
         assertEquals(testYard.toys.get(0).getName(), "Spring");
         //assertEquals(testYard.toys.get(0), testToy);
-
-
     }
+
+    @Test
+    void testBadSelection() {
+        testYard.addItemToYard("test");
+        assertEquals(testYard.toys.size(), 0);
+        assertEquals(testYard.food.size(), 0);
+    }
+
+
+
 
     @Test
     void testCatsInYard(){
@@ -103,6 +111,11 @@ class MyYardTest {
         testYard.toys.add(testToy);
         testYard.addCatToYard();
         assertEquals(testYard.cats.size(), 1);
+    }
+
+    @Test
+    void addCatsToLawnSimulateRandom() {
+
     }
 
     @Test

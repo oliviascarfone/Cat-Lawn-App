@@ -63,6 +63,12 @@ public class InventoryTest {
 
     }
 
+    @Test
+    void testBadSelection() {
+        testInventory.buyItem("test");
+        assertEquals(testInventory.inventoryList.size(), 0);
+    }
+
 //    @Test
 //    void buySameItems(){
 //        testInventory.setBalance(100);

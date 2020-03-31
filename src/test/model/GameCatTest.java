@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameCatTest {
-    GameCats testGameCatsArray;
+    GameCats testGameCats;
     Cat testCat;
 
 
     @BeforeEach
     void runBefore() {
-        testGameCatsArray = new GameCats();
+        testGameCats = new GameCats();
         testCat = new Cat("name", "breed", "coat", "rare",
                 "food", "toy");
 
@@ -22,12 +22,14 @@ public class GameCatTest {
 
     @Test
     void testConstructor() {
-        assertEquals(testGameCatsArray.commonGameCats, new ArrayList<Cat>());
+        assertEquals(testGameCats.commonGameCats, new ArrayList<Cat>());
     }
 
-//    @Test
-//    void testHashmap() {
-//        assertEquals(testGameCatsArray.catPics.get("Moki"), "data/cats/moki.png");
+    @Test
+    void testHashmap() {
+        assertEquals(testGameCats.catPics.get("Moki"),
+                testGameCats.retrieveCatPath("Moki"));
+    }
 
 
 

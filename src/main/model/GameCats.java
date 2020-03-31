@@ -34,6 +34,9 @@ public class GameCats {
         catPics.put("Luna", "data/cats/luna.png");
         catPics.put("Mimi", "data/cats/mimi.png");
         catPics.put("Roddick", "data/cats/roddick.png");
+        catPics.put("Kiwi", "data/cats/kiwi.png");
+        catPics.put("Nala", "data/cats/nala.png");
+        catPics.put("Milo", "data/cats/milo.png");
 
 
 
@@ -112,7 +115,7 @@ public class GameCats {
 //        return catNames;
 //    }
 
-    public String getCatPic(String selection) {
+    public String retrieveCatPath(String selection) {
         return catPics.get(selection);
     }
 

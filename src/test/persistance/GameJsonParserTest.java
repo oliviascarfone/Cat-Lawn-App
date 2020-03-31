@@ -1,7 +1,5 @@
 package persistance;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,13 +8,11 @@ import ui.Gui;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import java.io.FileReader;
 import java.util.ArrayList;
 
-public class YardJsonParserTest {
+public class GameJsonParserTest {
 
     private FileReader reader;
     Yard testYard;
@@ -26,7 +22,7 @@ public class YardJsonParserTest {
     Cat testCat;
     Item testToy;
     Item testFood;
-    YardJsonParser testYardJsonParser;
+    GameJsonParser testGameJsonParser;
     String TEST_YARD_FILE = "./data/testYard.json";
     String TEST_INVENTORY_FILE = "./data/testInventory.json";
     String FAKE_FILE = "./././././";
@@ -36,7 +32,7 @@ public class YardJsonParserTest {
     @BeforeEach
     void runBefore() {
         testYard = new Yard();
-        testYardJsonParser = new YardJsonParser(gui = new Gui());
+        testGameJsonParser = new GameJsonParser(gui = new Gui());
         testCatsList = new ArrayList<>();
         testFoodList = new ArrayList<>();
         testToysList = new ArrayList<>();

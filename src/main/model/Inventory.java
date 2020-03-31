@@ -38,10 +38,18 @@ public class Inventory {
     // If item is already in the inventory increase the quantity of existing entry.
     // Item is purchased only if sufficient funds, produces false if not enough funds
 
-    public boolean buyItem(Item item, int quantity) {
-        int indicator = 0;
-        if ((item.getCost() * quantity) <= balance) {
-            balance = (balance - (item.getCost() * quantity));
+    public void buyItem(String item) {
+        InventoryEntry boughtItem = null;
+        if (item.equals("Kibble")) {
+            boughtItem = new InventoryEntry(new Food("Kibble", 0), 1);
+        } else if (item.equals("Spring")) {
+            boughtItem = new InventoryEntry(new Toy("Spring", 0), 1);
+        }
+        inventoryList.add(boughtItem);
+    }
+        //int indicator = 0;
+//        if ((item.getCost() * quantity) <= balance) {
+//            balance = (balance - (item.getCost() * quantity));
 
             //Functionality for having money - a feature that is not currently being used
 //            for (int i = 0; i < inventoryList.size(); i++) {
@@ -52,16 +60,16 @@ public class Inventory {
 //
 //                }
 //            }
-            if (indicator == 0) {
-                InventoryEntry boughtItem = new InventoryEntry(item, quantity);
-                inventoryList.add(boughtItem);
+//            if (indicator == 0) {
+//                InventoryEntry boughtItem = new InventoryEntry(item, quantity);
+//                inventoryList.add(boughtItem);
+//
+//            }
+//            return true;
+//        } else {
+//            return false;
+//        }
 
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 //    //EFFECTS: shows all items in your inventory
 //    public String checkInventoryItems() {

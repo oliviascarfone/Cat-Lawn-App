@@ -16,14 +16,14 @@ import java.util.ArrayList;
 //https://futurestud.io/tutorials/gson-mapping-of-nested-objects - this and the other gson tutorials
 // I used for Phase 2
 //https://www.leveluplunch.com/java/examples/convert-json-array-to-arraylist-gson/
-public class YardJsonParser {
+public class GameJsonParser {
     JsonParser parser;
     //private static final String YARD_FILE = "./data/yard.json";
     private Gui gui;
 
 
     //EFFECTS; creates new YardJsonParser
-    public YardJsonParser(Gui gui) {
+    public GameJsonParser(Gui gui) {
         this.gui = gui;
     }
 

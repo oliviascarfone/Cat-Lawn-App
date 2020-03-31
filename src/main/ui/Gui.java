@@ -42,10 +42,11 @@ package ui;
 //music from Kazumi Totaka, Wii menu music
 
 //creates the gui
-import javafx.scene.control.SplitPane;
 import model.*;
-import persistance.JsonWriter;
-import persistance.YardJsonParser;
+
+import persistance.GameJsonParser;
+import persistance.JsonWriterInventory;
+import persistance.JsonWriterYard;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
@@ -64,7 +65,7 @@ import java.util.ArrayList;
 public class Gui extends JPanel implements ActionListener, ListSelectionListener {
     private static final String YARD_FILE = "./data/yard.json";
     private static final String INVENTORY_FILE = "./data/inventory.json";
-    static String[] testItems = {"Kibble", "Spring"};
+    static String[] itemString = {"Kibble", "Spring"};
     private String[] catStrings = { "Moki", "Sesame", "Zeus", "Sushi", "Evie", "Luna", "Nala",
             "Milo", "Mimi", "Roddick", "Kiwi" };
     JTextArea yardLabel;
@@ -72,7 +73,6 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private DefaultListModel listModelInventory;
     private JList inventoryList;
     private JList shopList;
-    private JLabel yardImage;
     private JButton placeInYardButton;
     private JTabbedPane tabbedPane;
     private ImageIcon yardIcon = new ImageIcon("data/yard.png", "yard");
@@ -83,7 +83,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     private ImageIcon cat;
     Yard yard;
     Inventory inventory;
-    YardJsonParser parser = new YardJsonParser(this);
+    GameJsonParser parser = new GameJsonParser(this);
 
 
     //EFFECTS: Creates and initializes JFrame and Tab components
@@ -108,28 +108,6 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
     }
 
-
-//    protected JComponent makeTextPanel(String text) {
-//        JPanel panel = new JPanel(false);
-//        JLabel filler = new JLabel(text);
-//        filler.setHorizontalAlignment(JLabel.CENTER);
-//        panel.setLayout(new GridLayout(1, 1));
-//        panel.add(filler);
-//        return panel;
-//    }
-
-//    /**
-//     * Returns an ImageIcon, or null if the path was invalid.
-//     */
-//    protected static ImageIcon createImageIcon(String path, String description) {
-//        java.net.URL imgURL = Gui.class.getResource(path);
-//        if (imgURL != null) {
-//            return new ImageIcon(imgURL, description);
-//        } else {
-//            System.err.println("Couldn't find file: " + path);
-//            return null;
-//        }
-//    }
 
     /**
      * Create the GUI and show it.  For thread safety,
@@ -176,7 +154,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         JComponent shop = new JPanel();
         shop.setLayout(new BorderLayout());
         JLabel label = new JLabel("Welcome to the Shop!");
-        shopList = new JList<String>(testItems);
+        shopList = new JList<String>(itemString);
         shopList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         shopList.setLayoutOrientation(JList.VERTICAL_WRAP);
         shopList.setVisibleRowCount(-1);
@@ -368,30 +346,17 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         } else if (action == "Quit Game") {
             System.exit(0);
         } else if (action == "New Game") {
-            //inventory.inventoryList.clear();
             inventory.clearInventory(inventory);
             updateInventory();
             yard.clearYard(yard);
-            //yard.cats.clear();
-            //yard.food.clear();
-            //yard.toys.clear();
         } else if (action == "Save Game") {
-            JsonWriter.saveGame(yard, inventory, YARD_FILE, INVENTORY_FILE);
+            JsonWriterYard.saveGame(yard, YARD_FILE);
+            JsonWriterInventory.saveGame(inventory, INVENTORY_FILE);
+            //new JsonWriter(yard, inventory, YARD_FILE, INVENTORY_FILE);
+            //JsonWriter.saveGame(yard, inventory, YARD_FILE, INVENTORY_FILE);
         }
 
     }
-
-//    private void createCatPopUp() {
-//        JOptionPane catPopup = new JOptionPane();
-//        ImageIcon kibbleIcon = new ImageIcon("data/kibblepic.png");
-//
-//        catPopup.showMessageDialog(null, "Here are your cats!", "Kitties",
-//                    JOptionPane.INFORMATION_MESSAGE, kibbleIcon);
-//
-//    }
-
-
-
 
     //EFFECTS: Updates the YardTab test status when called
     public void updateLabel(String status) {
@@ -425,14 +390,14 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     //EFFECTS: makes inventory from loaded file data
     public void loadedGameInventory(Inventory inventoryFromFile) {
         inventory = inventoryFromFile;
-        //updateInventory();
+
     }
 
     //MODIFIES: this
     //EFFECTS: makes a new empty inventory
     public void emptyInventory() {
         inventory = new Inventory();
-        //updateInventory();
+
     }
 
     //Class to give functionality to 'Place in Yard' button in Inventory tab
@@ -467,16 +432,19 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
     //EFFECTS: Takes selected Inventory item and places it into the yard, also removes selection
     // from the inventory
     public void placeItem(String item) {
-        if (item.equals("Kibble")) {
-            yard.addItemToYard(new Food("Kibble", 0));
-            inventory.removeItemFromInventory("Kibble", inventory);
-            //updateInventory();
-        } else if (item.equals("Spring")) {
-            yard.addItemToYard(new Toy("Spring", 0));
-            inventory.removeItemFromInventory("Spring", inventory);
-            //updateInventory();
-        }
+        yard.addItemToYard(item);
+        inventory.removeItemFromInventory(item, inventory);
     }
+//        if (item.equals("Kibble")) {
+//            yard.addItemToYard(new Food("Kibble", 0));
+//            inventory.removeItemFromInventory("Kibble", inventory);
+//            //updateInventory();
+//        } else if (item.equals("Spring")) {
+//            yard.addItemToYard(new Toy("Spring", 0));
+//            inventory.removeItemFromInventory("Spring", inventory);
+//            //updateInventory();
+//        }
+//    }
     //WORKING ON THIS
     //EFFECTS: removes item from inventory has the same name as the given string
 //    public void removeItemFromInventory(String selection) {
@@ -503,11 +471,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     //EFFECTS: buys selected item form the store and moves it into the inventory
     public void buyItemFromShopTab(String selection) {
-        if (selection == "Kibble") {
-            inventory.buyItem(new Food("Kibble", 0), 1);
-        } else if (selection == "Spring") {
-            inventory.buyItem(new Toy("Spring", 0), 1);
-        }
+        inventory.buyItem(selection);
         updateInventory();
         confirmPurchase(selection);
 

@@ -76,13 +76,19 @@ public class Yard  {
     //REQUIRES: Must have a non-empty Inventory
     //MODIFIES: this
     //EFFECTS: adds an item from the inventory to the yard
-    public void addItemToYard(Item item) {
-        if (item.getClass() == Food.class) {
-            food.add(item);
-        } else {
-            toys.add(item);
+    public void addItemToYard(String selection) { //old sign was Item item
+        if (selection.equals("Kibble")) {
+            food.add(new Food("Kibble", 0));
+        } else if (selection.equals("Spring")) {
+            toys.add(new Toy("Spring", 0));
         }
     }
+//        if (item.getClass() == Food.class) {
+//            food.add(item);
+//        } else {
+//            toys.add(item);
+//        }
+//    }
 
 
     //EFFECTS: returns a message containing the names of all items currently in the yard.
@@ -107,17 +113,16 @@ public class Yard  {
     //MODIFIES: this
     //EFFECTS: adds a cat to the yard, either common or uncommon cat depending on the item placed
     public void addCatToYard() {
-        Cat cc;
-        Cat uc;
-        //Boolean catIndicator = false;
+        Cat cc = gameCats.generateCommonCat();
+        Cat uc = gameCats.generateUncommonCat();
         if (food.size() >= 1) {
-            cc = gameCats.generateCommonCat();
+            //cc = gameCats.generateCommonCat();
             if ((!cats.contains(cc)) && (food.size() > cats.size())) {
                 cats.add(cc);
             }
         }
         if (toys.size() >= 1) {
-            uc = gameCats.generateUncommonCat();
+            //uc = gameCats.generateUncommonCat();
             if ((!cats.contains(uc)) && (toys.size() >= cats.size())) {
                 cats.add(uc);
 
@@ -132,7 +137,8 @@ public class Yard  {
     }
 
     public String getCatPic(String selection) {
-        return gameCats.catPics.get(selection);
+        return gameCats.retrieveCatPath(selection);
+        //return gameCats.catPics.get(selection);
     }
 
 

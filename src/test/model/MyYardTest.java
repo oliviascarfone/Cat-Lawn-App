@@ -53,11 +53,12 @@ class MyYardTest {
 
     @Test
     void testAddItemsToYard(){
-        testYard.addItemToYard(testFood);
+        testYard.addItemToYard("Kibble");
         assertEquals(testYard.food.size(), 1);
-        testYard.addItemToYard(testToy);
+        testYard.addItemToYard("Spring");
         assertEquals(testYard.toys.size(), 1);
-        assertEquals(testYard.toys.get(0), testToy);
+        assertEquals(testYard.toys.get(0).getName(), "Spring");
+        //assertEquals(testYard.toys.get(0), testToy);
 
 
     }
@@ -125,6 +126,22 @@ class MyYardTest {
     void catsAsArrayStringTest() {
         testYard.cats.add(testCat);
         assertEquals(testYard.catsInYardArray().get(0), "name");
+    }
+
+    @Test
+    void testGetCatPic() {
+        assertEquals(testYard.getCatPic("Moki"), "data/cats/moki.png");
+    }
+
+    @Test
+    void testClearYard() {
+        testYard.cats.add(testCat);
+        testYard.food.add(testFood);
+        testYard.toys.add(testToy);
+        testYard.clearYard(testYard);
+        assertEquals(testYard.cats.size(), 0);
+        assertEquals(testYard.food.size(), 0);
+        assertEquals(testYard.toys.size(), 0);
     }
 
 

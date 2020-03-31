@@ -70,7 +70,7 @@ It is called by the getCatPic method and is created in the GameCats constructor
 
 ##Task 3
 -First major issue was that the Gui class had too much functionality. It was doing both the construction of 
-gui elements and had gameplay elements. The gameplay functionality was giving the Gui too much knowledge 
+gui elements and had game play elements. The game play functionality was giving the Gui too much knowledge 
 about other classes, so I decided to move these functions into better suited model classes. Overall this increased the 
 cohesion of my Gui class.
 
@@ -85,11 +85,10 @@ A second issue was with my JsonWriter class. This class had poor cohesion and wa
 Because of the way my data was structured, I split up the saving function for the yard data and the inventory data. The
 complexity of the yard data caused me to use a manual approach to writing the data and creating the JSON object from each 
 dynamic field in the yard whereas the Inventory class is more
-straightforward, so I was able to use the GSON library. As a result, the JsonWriter class was doing multiple functions. 
-- I created two additional classes, JsonWriterInventory and JsonWriterYard to handle the saving the different data types.
+straightforward, so I was able to use the Gson library. As a result, the JsonWriter class was doing multiple functions. 
+- I split the JsonWriter class into two different classes, JsonWriterInventory and JsonWriterYard to handle the saving the different data types.
 Each respectively handles the writing of Inventory and Yard data.
-- I kept the original JsonWriter class, which takes all of the necessary parameters from the call in the Gui class
-but calls the appropriate classes/methods.
+
 
 
 

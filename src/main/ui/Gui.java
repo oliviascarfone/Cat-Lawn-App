@@ -159,9 +159,8 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         shopList.setLayoutOrientation(JList.VERTICAL_WRAP);
         shopList.setVisibleRowCount(-1);
         shopList.addListSelectionListener(this);
-        //JScrollPane listScroller = new JScrollPane(myShop);
         JButton shopButton = new JButton("Make Purchase");
-        //JList.setPreferredSize(new Dimension(250, 80));
+
         tabbedPane.addTab("Shop", cartIcon, shop,
                 "What would you like to buy?");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
@@ -178,7 +177,6 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         JComponent inventoryPanel = new JPanel();
         listModelInventory = new DefaultListModel();
         makeInventoryInit();
-        //updateInventory();
 
         inventoryList = new JList(listModelInventory);
         inventoryList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -198,7 +196,6 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     //EFFECTS: Creates initial inventory JList
     public void makeInventoryInit() {
-        //listModelInventory = new DefaultListModel();
         for (InventoryEntry i : inventory.inventoryList) {
             String itemName = i.getItem().getName();
             listModelInventory.addElement(itemName);
@@ -221,8 +218,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         yardLabel = new JTextArea("Please select an option");
         yardLabel.setEditable(false);
         yardLabel.setLineWrap(true);
-        //yardLabel = new JLabel("Please select an option");
-        //yardLabel.setMinimumSize(minimumSize);
+
         JComponent buttonsMenu = new JPanel();
         JButton buttonCat = new JButton("See cats in yard");
         JButton buttonFood = new JButton("See food in yard");
@@ -237,11 +233,11 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         buttonsMenu.add(buttonFood);
         buttonsMenu.add(buttonToys);
         yardPanel.add(buttonsMenu);
-        //makeYardImage();
+
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, buttonsMenu, yardLabel);
-        //JSplitPane totalPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitPane, yardImage);
+
         yardPanel.add(splitPane);
-        //yard.add(totalPane);
+
         buttonsMenu.setMinimumSize(minimumSize);
 
     }
@@ -254,9 +250,6 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         picture = new JLabel();
         JComboBox catList = new JComboBox(catStrings);
 
-        //JSplitPane galleryPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, catList, picture);
-        //gallery.add(galleryPane);
-        //gallery.add(holdDropMenu, BorderLayout.PAGE_START);
         gallery.add(catList, BorderLayout.PAGE_START);
         gallery.add(picture, BorderLayout.PAGE_END);
         galleryTab.add(gallery);
@@ -285,13 +278,6 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
 
     }
 
-//    public void makeYardImage() {
-//        try {
-//            BufferedImage picture = ImageIO.read(new File("data/cats/moki.png"));
-//            yardImage = new JLabel(new ImageIcon(picture));
-//        } catch (IOException e) {
-//           //
-//        }
 
 
 
@@ -352,8 +338,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         } else if (action == "Save Game") {
             JsonWriterYard.saveGame(yard, YARD_FILE);
             JsonWriterInventory.saveGame(inventory, INVENTORY_FILE);
-            //new JsonWriter(yard, inventory, YARD_FILE, INVENTORY_FILE);
-            //JsonWriter.saveGame(yard, inventory, YARD_FILE, INVENTORY_FILE);
+
         }
 
     }
@@ -435,28 +420,7 @@ public class Gui extends JPanel implements ActionListener, ListSelectionListener
         yard.addItemToYard(item);
         inventory.removeItemFromInventory(item, inventory);
     }
-//        if (item.equals("Kibble")) {
-//            yard.addItemToYard(new Food("Kibble", 0));
-//            inventory.removeItemFromInventory("Kibble", inventory);
-//            //updateInventory();
-//        } else if (item.equals("Spring")) {
-//            yard.addItemToYard(new Toy("Spring", 0));
-//            inventory.removeItemFromInventory("Spring", inventory);
-//            //updateInventory();
-//        }
-//    }
-    //WORKING ON THIS
-    //EFFECTS: removes item from inventory has the same name as the given string
-//    public void removeItemFromInventory(String selection) {
-//        for (InventoryEntry e : inventory.inventoryList) {
-//            String itemName = e.getItem().getName();
-//            if (itemName == selection) {
-//                inventory.inventoryList.remove(e);
-//                break;
-//
-//            }
-//        }
-//    }
+
 
     //class to help with the 'Purchase Item' functionality
     class PurchaseItem implements ActionListener {

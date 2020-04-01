@@ -19,13 +19,6 @@ public class Inventory {
     }
 
 
-    //
-//    //EFFECTS: creates an Inventory from saved data
-//    public Inventory(ArrayList<InventoryEntry> inventoryList, int balance) {
-//        this.inventoryList = inventoryList;
-//        this.balance = balance;
-//    }
-//
     public int getBalance() {
         return balance;
     }
@@ -129,11 +122,6 @@ public class Inventory {
         return inventoryEntryQuantityNames;
     }
 
-//    public Inventory clearInventory(Inventory inventoryObj) {
-//        inventoryObj.inventoryList.clear();
-//        inventoryObj.setBalance(0);
-//        return inventoryObj;
-//    }
 
     //EFFECTS: removes item from inventory has the same name as the given string
     public void removeItemFromInventory(String selection, Inventory gameInventory) {

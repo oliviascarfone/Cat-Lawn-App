@@ -83,12 +83,7 @@ public class Yard  {
             toys.add(new Toy("Spring", 0));
         }
     }
-//        if (item.getClass() == Food.class) {
-//            food.add(item);
-//        } else {
-//            toys.add(item);
-//        }
-//    }
+
 
 
     //EFFECTS: returns a message containing the names of all items currently in the yard.
@@ -116,13 +111,11 @@ public class Yard  {
         Cat cc = gameCats.generateCommonCat();
         Cat uc = gameCats.generateUncommonCat();
         if (food.size() >= 1) {
-            //cc = gameCats.generateCommonCat();
             if ((!cats.contains(cc)) && (food.size() > cats.size())) {
                 cats.add(cc);
             }
         }
         if (toys.size() >= 1) {
-            //uc = gameCats.generateUncommonCat();
             if ((!cats.contains(uc)) && (toys.size() >= cats.size())) {
                 cats.add(uc);
 
@@ -138,17 +131,11 @@ public class Yard  {
 
     public String getCatPic(String selection) {
         return gameCats.retrieveCatPath(selection);
-        //return gameCats.catPics.get(selection);
+
     }
 
 
 
-    // to compare the fields of the objects
-    // Yard Extends Object (this is implicit)
-    // generate --> equals() and hashcode()
-    // uncheck options
-    //include the fields you want (Cat)
-    // cast to Cat (since Object class won't have the same fields
 
 
 

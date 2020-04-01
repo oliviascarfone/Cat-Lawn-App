@@ -1,7 +1,7 @@
-# Cat-ch Them All 
+# Cat Lawn
 
 
-***Cat-ch Them All*** is an application that allows users to collect cats in their back yard. Users create an account and will be able to
+***Cat Lawn*** is an application that allows users to collect cats in their back yard. Users will be able to
  buy and place items, such as toys and food, in their yard in order to attract cats to visit. 
 The game contains many different cats, with each cat in the game having certain items and food that they like. Cats have varying levels 
 of rarity, so users will need build up their yard in order to collect the rarest cats.
@@ -66,7 +66,8 @@ load an older game. You can create a new game by clicking the 'New game' button 
 
 - For this requirement I created a Hashmap within the GameCats class. 
 It is used in the Gallery Tab of the Gui and uses the cat names as keys and the path way to their pictures as the values. 
-It is called by the getCatPic method and is created in the GameCats constructor
+It is called by the catPicture method in Gui, which will call the getCatPic method in Yard. The Hashmap is created in the GameCats constructor.
+-Hashmap is used in the Gui via the Gallery tab, where you can check out all of the cats in the game
 
 ##Task 3
 -First major issue was that the Gui class had too much functionality. It was doing both the construction of 

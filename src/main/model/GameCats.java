@@ -19,13 +19,11 @@ public class GameCats {
     Random random;
     HashMap<String, String> catPics = new HashMap<>();
 
-    //ArrayList<String> catNames;
 
     public GameCats() {
         commonGameCats = new ArrayList<>();
         uncommonGameCats = new ArrayList<>();
         random = new Random();
-        //catNames = catNamesAsStrings();
         catPics.put("Moki", "data/cats/moki.png");
         catPics.put("Sesame", "data/cats/sesame.png");
         catPics.put("Zeus", "data/cats/zeus.png");
@@ -102,18 +100,6 @@ public class GameCats {
         int x = random.nextInt(uncommonGameCats.size());
         return uncommonGameCats.get(x);
     }
-//
-//    //EFFECTS: returns the cats names in a list
-//    public ArrayList<String> catNamesAsStrings() {
-//        for (int i = 0; i < commonGameCats.size(); i++) {
-//            catNames.add(commonGameCats.get(i).getName());
-//
-//        }
-//        for (int i = 0; i < uncommonGameCats.size(); i++) {
-//            catNames.add(uncommonGameCats.get(i).getName());
-//        }
-//        return catNames;
-//    }
 
     public String retrieveCatPath(String selection) {
         return catPics.get(selection);
